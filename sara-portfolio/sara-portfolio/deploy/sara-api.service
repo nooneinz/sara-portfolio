@@ -1,0 +1,13 @@
+[Unit]
+Description=Sara portfolio API
+After=network.target
+
+[Service]
+User=www-data
+WorkingDirectory=/var/www/sara-portfolio/backend
+EnvironmentFile=/var/www/sara-portfolio/backend/.env
+ExecStart=/var/www/sara-portfolio/backend/.venv/bin/uvicorn main:app --host 127.0.0.1 --port 8000
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
