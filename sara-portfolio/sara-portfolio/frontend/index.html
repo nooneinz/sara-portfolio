@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>سارة الحربي | Sara Alharbi — Software Engineer & AI Specialist</title>
+  <meta name="description" content="سارة الحربي — مهندسة برمجيات وأخصائية ذكاء اصطناعي. مشاريع في الـ Agentic AI، تطوير الويب، وتحليل البيانات." />
+  <meta name="theme-color" content="#D7C3AA" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 fill=%22%23241914%22/%3E%3Ctext x=%2232%22 y=%2244%22 font-size=%2236%22 text-anchor=%22middle%22 fill=%22%23D7C3AA%22 font-family=%22serif%22%3ES%3C/text%3E%3C/svg%3E" />
+
+  <meta property="og:title" content="سارة الحربي | Sara Alharbi" />
+  <meta property="og:description" content="مهندسة برمجيات وأخصائية ذكاء اصطناعي — اسأل المساعد الذكي عن مشاريعي ومهاراتي." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="logo" aria-label="سارة الحربي — الصفحة الرئيسية">
+        <span class="logo-ar">سارة الحربي</span>
+        <span class="logo-sep">|</span>
+        <span class="logo-en" lang="en">Sara Alharbi</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">القائمة</button>
+
+      <nav id="site-nav" class="site-nav" aria-label="التنقل الرئيسي">
+        <a href="#services">الخدمات</a>
+        <a href="#projects">المشاريع</a>
+        <a href="#achievements">الإنجازات</a>
+        <a href="#ask">اسأل سارة</a>
+        <a href="#contact">التواصل</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ================= HERO + CHAT ================= -->
+    <section id="top" class="hero">
+      <div class="container">
+        <p class="eyebrow" lang="en">Software Engineer &amp; AI Specialist — Muscat, Oman</p>
+        <h1 class="hero-title">وش حابة تعرف عني؟</h1>
+        <p class="hero-subtitle">
+          أنا سارة الحربي — مهندسة برمجيات وأخصائية ذكاء اصطناعي.
+          اسأل المساعد الذكي لمعرفة المزيد عن مشاريعي ومهاراتي.
+        </p>
+
+        <div id="ask" class="chat" aria-label="المساعد الذكي">
+          <div class="chat-head">
+            <span class="chat-label">اسأل سارة</span>
+            <span class="chat-status" id="chat-status">متصل</span>
+          </div>
+
+          <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-relevant="additions">
+            <div class="msg msg-bot">
+              <span class="msg-who">المساعد</span>
+              <p class="msg-text">أهلاً بك. اسألني عن مشاريع سارة، مهاراتها، أو طريقة التواصل معها — بالعربية أو بالإنجليزية.</p>
+            </div>
+          </div>
+
+          <div class="chat-suggestions" id="chat-suggestions">
+            <button type="button" class="chip">ما هي أبرز مشاريع سارة؟</button>
+            <button type="button" class="chip">ما هو مشروع Baseera؟</button>
+            <button type="button" class="chip">ما هي مهارات وتخصص سارة؟</button>
+            <button type="button" class="chip">كيف أتواصل مع سارة؟</button>
+          </div>
+
+          <form class="chat-form" id="chat-form" autocomplete="off">
+            <label for="chat-input" class="visually-hidden">اكتب سؤالك</label>
+            <input
+              id="chat-input"
+              name="question"
+              type="text"
+              maxlength="600"
+              placeholder="اكتب سؤالك هنا…"
+              required
+            />
+            <button type="submit" class="btn btn-primary" id="chat-send">إرسال</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SERVICES ================= -->
+    <section id="services" class="section">
+      <div class="container">
+        <header class="section-head">
+          <span class="section-num" lang="en">01</span>
+          <h2 class="section-title">الخدمات</h2>
+          <p class="section-lead">ما أقدّمه من حلول، من الفكرة حتى النشر.</p>
+        </header>
+
+        <ol class="services">
+          <li class="service">
+            <span class="service-index" lang="en">01</span>
+            <div>
+              <h3 class="service-title">تطوير حلول الذكاء الاصطناعي والـ Agentic AI</h3>
+              <p class="service-en" lang="en">AI &amp; Machine Learning Solutions</p>
+              <p class="service-desc">بناء وكلاء ذكيين وأنظمة تعلّم آلي تحوّل البيانات إلى قرارات، ودمجها في منتجات حقيقية جاهزة للإنتاج.</p>
+            </div>
+          </li>
+          <li class="service">
+            <span class="service-index" lang="en">02</span>
+            <div>
+              <h3 class="service-title">تطوير تطبيقات الويب والـ RESTful APIs</h3>
+              <p class="service-en" lang="en">Full-Stack Web &amp; API Development</p>
+              <p class="service-desc">تطبيقات ويب متكاملة بمعمارية MVC باستخدام Django وASP.NET Core، مع واجهات برمجية آمنة وخطوط CI/CD.</p>
+            </div>
+          </li>
+          <li class="service">
+            <span class="service-index" lang="en">03</span>
+            <div>
+              <h3 class="service-title">تحليل البيانات وبناء النماذج التنبؤية</h3>
+              <p class="service-en" lang="en">Data Analysis &amp; Predictive Analytics</p>
+              <p class="service-desc">استكشاف البيانات وتنظيفها وبناء نماذج تنبؤية دقيقة، مع لوحات تحليل واضحة لاتخاذ القرار.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section id="projects" class="section">
+      <div class="container">
+        <header class="section-head">
+          <span class="section-num" lang="en">02</span>
+          <h2 class="section-title">المشاريع</h2>
+          <p class="section-lead">مختارات من أعمالي في الذكاء الاصطناعي وهندسة البرمجيات.</p>
+        </header>
+
+        <!-- Featured -->
+        <div class="projects-featured">
+          <article class="project project-lg">
+            <div class="project-meta">
+              <span class="project-kind">مشروع رئيسي</span>
+              <span class="project-repo" lang="en">baseera-app</span>
+            </div>
+            <h3 class="project-title" lang="en">Baseera</h3>
+            <p class="project-desc">
+              منصة B2B SaaS ذكية لذكاء الأعمال، تعتمد على Agentic AI لتحويل بيانات المالية والمبيعات والمخزون إلى توصيات استراتيجية فورية.
+              شاركت بها في مسابقة <span lang="en">“Engineer It with AI”</span> التابعة لمؤسسة مدار.
+            </p>
+            <ul class="tags" lang="en">
+              <li>Django</li><li>Agentic AI</li><li>PostgreSQL</li><li>Render</li>
+            </ul>
+            <div class="project-links">
+              <a href="https://github.com/nooneinz/baseera-app" target="_blank" rel="noopener">المستودع</a>
+            </div>
+          </article>
+
+          <article class="project project-lg">
+            <div class="project-meta">
+              <span class="project-kind">مشروع رئيسي</span>
+              <span class="project-repo" lang="en">RetentionAI-Project</span>
+            </div>
+            <h3 class="project-title" lang="en">RetentionAI</h3>
+            <p class="project-desc">
+              نظام للتنبؤ بخطر تسرّب الطلاب باستخدام نموذج CNN-LSTM هجين بدقة <strong>94.5%</strong>،
+              مع لوحات تحليل لحظية وثلاثة أدوار للمستخدمين.
+            </p>
+            <ul class="tags" lang="en">
+              <li>Python</li><li>Flask</li><li>MySQL</li><li>TensorFlow</li>
+            </ul>
+            <div class="project-links">
+              <a href="https://github.com/nooneinz/RetentionAI-Project" target="_blank" rel="noopener">المستودع</a>
+            </div>
+          </article>
+        </div>
+
+        <article class="project project-wide">
+          <div class="project-meta">
+            <span class="project-kind">هندسة خلفية</span>
+          </div>
+          <h3 class="project-title" lang="en">Multi-Tier Ticketing &amp; CRM Architecture</h3>
+          <p class="project-desc">
+            نظام خلفي لإدارة علاقات العملاء وتتبّع التذاكر مع صلاحيات قائمة على الأدوار (RBAC)،
+            وتحسين لفهارس SQL خفّض زمن الاستعلام بنسبة 25%.
+          </p>
+          <ul class="tags" lang="en">
+            <li>RBAC</li><li>SQL Optimization</li><li>REST APIs</li>
+          </ul>
+        </article>
+
+        <!-- Smaller repos -->
+        <div class="project-groups">
+          <div class="project-group">
+            <h3 class="group-title">مستودعات علم البيانات</h3>
+            <ul class="repo-list">
+              <li>
+                <a href="https://github.com/nooneinz/NYC-Taxi-Tip-Prediction" target="_blank" rel="noopener">
+                  <span class="repo-name" lang="en">NYC Taxi Tip Prediction</span>
+                  <span class="repo-slug" lang="en">NYC-Taxi-Tip-Prediction</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/nooneinz/predictive-car-features-eda" target="_blank" rel="noopener">
+                  <span class="repo-name" lang="en">Predictive Car Features EDA</span>
+                  <span class="repo-slug" lang="en">predictive-car-features-eda</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/nooneinz/Online-Shoppers-Purchase-Prediction" target="_blank" rel="noopener">
+                  <span class="repo-name" lang="en">Online Shoppers Purchase Prediction</span>
+                  <span class="repo-slug" lang="en">Online-Shoppers-Purchase-Prediction</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="project-group">
+            <h3 class="group-title">أدوات وتطبيقات</h3>
+            <ul class="repo-list">
+              <li>
+                <a href="https://github.com/nooneinz/gold-price-tracker-omam" target="_blank" rel="noopener">
+                  <span class="repo-name" lang="en">Gold Price Tracker Oman</span>
+                  <span class="repo-slug" lang="en">gold-price-tracker-omam</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/nooneinz/mini-saas-task-manager" target="_blank" rel="noopener">
+                  <span class="repo-name" lang="en">Mini SaaS Task Manager</span>
+                  <span class="repo-slug" lang="en">mini-saas-task-manager</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ACHIEVEMENTS ================= -->
+    <section id="achievements" class="section">
+      <div class="container">
+        <header class="section-head">
+          <span class="section-num" lang="en">03</span>
+          <h2 class="section-title">الإنجازات والشهادات</h2>
+          <p class="section-lead">التعليم الأكاديمي والتطوير المستمر.</p>
+        </header>
+
+        <div class="degree">
+          <p class="degree-years" lang="en">2021 — 2026</p>
+          <h3 class="degree-title">بكالوريوس علوم الحاسوب والذكاء الاصطناعي</h3>
+          <p class="degree-en" lang="en">B.Sc. Computer Science &amp; Artificial Intelligence</p>
+          <p class="degree-school">كلية الخليج — جامعة كارديف متروبوليتان</p>
+          <p class="degree-honor">مرتبة الشرف الأولى <span lang="en">— First Class Honors</span></p>
+        </div>
+
+        <div class="certs">
+          <div class="cert-col">
+            <h3 class="cert-issuer" lang="en">IBM</h3>
+            <ul lang="en">
+              <li>Make Agentic AI Work for You</li>
+              <li>Data Analysis with Python</li>
+              <li>Getting Started with Generative AI</li>
+              <li>Machine Learning with Python</li>
+            </ul>
+          </div>
+          <div class="cert-col">
+            <h3 class="cert-issuer" lang="en">Google</h3>
+            <ul lang="en">
+              <li>Google AI Essentials</li>
+              <li>5-Day AI Agents Intensive</li>
+              <li>Discover the Art of Prompting</li>
+            </ul>
+          </div>
+          <div class="cert-col">
+            <h3 class="cert-issuer" lang="en">Kaggle</h3>
+            <ul lang="en">
+              <li>Machine Learning</li>
+              <li>Pandas</li>
+              <li>Python</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="section contact">
+      <div class="container">
+        <header class="section-head">
+          <span class="section-num" lang="en">04</span>
+          <h2 class="section-title">التواصل</h2>
+          <p class="section-lead">لنبنِ شيئاً مفيداً معاً.</p>
+        </header>
+
+        <ul class="contact-list">
+          <li>
+            <span class="contact-label">البريد الإلكتروني</span>
+            <a class="contact-value" lang="en" href="mailto:Saraalharbi0031@gmail.com">Saraalharbi0031@gmail.com</a>
+          </li>
+          <li>
+            <span class="contact-label" lang="en">LinkedIn</span>
+            <a class="contact-value" lang="en" href="https://www.linkedin.com/in/sara-alharbi-1b53263a2" target="_blank" rel="noopener">linkedin.com/in/sara-alharbi-1b53263a2</a>
+          </li>
+          <li>
+            <span class="contact-label" lang="en">GitHub</span>
+            <a class="contact-value" lang="en" href="https://github.com/nooneinz" target="_blank" rel="noopener">github.com/nooneinz</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="footer-name">سارة الحربي</span>
+      <span class="footer-copy" lang="en">© <span id="year">2026</span> Sara Alharbi. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
