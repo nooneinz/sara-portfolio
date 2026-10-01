@@ -16,7 +16,7 @@ TOPICS = [
     {
         "name": "contact",
         "keys": ["تواصل", "اتواصل", "ايميل", "بريد", "رقم", "linkedin", "لينكد", "قيت", "github", "contact", "email", "reach", "hire", "توظيف", "اوظف"],
-        "answer": f"تقدر تتواصل مع سارة عبر:\n- البريد: {EMAIL}\n- LinkedIn: {LINKEDIN}\n- GitHub: {GITHUB}",
+        "answer": f"تقدر تتواصل مع سارة عبر:\n- البريد: {EMAIL}\n- رقم التواصل: {PHONE}\n- LinkedIn: {LINKEDIN}\n- GitHub: {GITHUB}",
     },
     {
         "name": "baseera",
@@ -120,7 +120,7 @@ def answer(question: str) -> str:
 # English answers (used when the question contains no Arabic letters)
 # ---------------------------------------------------------------------------
 ANSWERS_EN = {
-    "contact": f"You can reach Sara at:\n- Email: {EMAIL}\n- LinkedIn: {LINKEDIN}\n- GitHub: {GITHUB}",
+    "contact": f"You can reach Sara at:\n- Email: {EMAIL}\n- Phone: {PHONE}\n- LinkedIn: {LINKEDIN}\n- GitHub: {GITHUB}",
     "baseera": "Baseera (June 2026 – present): a B2B SaaS platform powered by Agentic AI that turns finance, sales and inventory data into instant strategic recommendations. Built with Django (MVC) with a hybrid mobile wrapper, secure REST APIs for multi-agent communication, and deployed via GitHub, Render and Cloudflare. Entered in Madaar's \"Engineer It with AI\" competition.",
     "retention": "RetentionAI: a student-dropout risk prediction system with 94.5% accuracy using a hybrid CNN-LSTM model (TensorFlow), a Flask backend with 3 roles (admin, lecturer, student), a MySQL database, real-time analytics dashboards via an async API, and automated CI/CD on Render with Gunicorn.",
     "crm": "Multi-Tier Ticketing & CRM Architecture: a backend system for customer relationship management and ticketing with RBAC permissions. SQL index optimization cut query time by 25%, and it handled 1,000+ support requests with no routing errors.",
