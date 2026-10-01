@@ -7,6 +7,7 @@ Add or edit topics in TOPICS below to "train" it.
 import re
 
 EMAIL = "Saraalharbi0031@gmail.com"
+PHONE = "+968 9453 5520"
 LINKEDIN = "linkedin.com/in/sara-alharbi-1b53263a2"
 GITHUB = "github.com/nooneinz"
 
@@ -75,12 +76,12 @@ TOPICS = [
     {
         "name": "experience",
         "keys": ["خبره", "خبرة", "وظيف", "تعمل", "عمل", "شغل", "منصب", "experience", "job", "role", "position", "مهندسه", "مهندسة"],
-        "answer": "تدرّبت سارة (Internship) في وزارة النقل والاتصالات وتقنية المعلومات (يوليو–سبتمبر 2026). وتعمل حالياً كمهندسة برمجيات على مشروع Baseera (منذ يونيو 2026)، وهي منصة B2B SaaS تعتمد على Agentic AI. كما بنت RetentionAI ونظام Multi-Tier Ticketing & CRM.",
+        "answer": "تدرّبت سارة (Internship) في وزارة النقل والاتصالات وتقنية المعلومات (يوليو–سبتمبر 2026). وتعمل حالياً على مشروع Baseera (منذ يونيو 2026)، وهي منصة B2B SaaS تعتمد على Agentic AI. كما بنت RetentionAI ونظام Multi-Tier Ticketing & CRM.",
     },
     {
         "name": "who",
         "keys": ["من هي", "من هى", "مين", "عرفني", "نبذه", "نبذة", "عنها", "about", "who", "introduce", "سارة", "sara", "سارا"],
-        "answer": "سارة صالح الحربي، متخصصة في تقنية المعلومات مع تركيز على الذكاء الاصطناعي وتعلّم الآلة وتحليل البيانات بـ Python، وشغوفة بتحويل البيانات إلى حلول ذكية واستكشاف مستقبل الذكاء الاصطناعي. أبرز مهاراتها: Data Analysis, Machine Learning, AI, Data Visualization, Pandas & NumPy. وهي مهندسة برمجيات ومتخصصة في الذكاء الاصطناعي، مقيمة في مسقط – عُمان. خريجة علوم الحاسوب والذكاء الاصطناعي بمرتبة الشرف الأولى، وتعمل على Baseera منصة B2B SaaS بـ Agentic AI. اسأليني عن مشاريعها أو مهاراتها أو شهاداتها.",
+        "answer": "سارة صالح الحربي، متخصصة في تقنية المعلومات مع تركيز على الذكاء الاصطناعي وتعلّم الآلة وتحليل البيانات بـ Python، وشغوفة بتحويل البيانات إلى حلول ذكية واستكشاف مستقبل الذكاء الاصطناعي. أبرز مهاراتها: Data Analysis, Machine Learning, AI, Data Visualization, Pandas & NumPy. وتخصصها الذكاء الاصطناعي، ومقيمة في مسقط – عُمان. خريجة علوم الحاسوب والذكاء الاصطناعي بمرتبة الشرف الأولى، وتعمل على Baseera منصة B2B SaaS بـ Agentic AI. اسأليني عن مشاريعها أو مهاراتها أو شهاداتها.",
     },
 ]
 
@@ -131,8 +132,8 @@ ANSWERS_EN = {
     "programs": "Sara took part in: Madaar's \"Engineer It with Agentic AI 2026\" competition (intensive Agentic AI bootcamp), the Entrepreneurship Camp for Innovators (University Track, 5 days), and the Majan Programmers program (Angular fundamentals). She also interned at the Ministry of Transport, Communications and Information Technology (Jul–Sep 2026) in IT and AI.",
     "ai": "Sara specializes in AI: Agentic AI (Baseera), and Machine Learning / Deep Learning with TensorFlow (RetentionAI, a CNN-LSTM model with 94.5% accuracy), plus IBM and Google certifications in the field.",
     "location": "Sara is based in Muscat, Sultanate of Oman.",
-    "experience": "Sara interned at the Ministry of Transport, Communications and Information Technology (Jul–Sep 2026). She currently works as a software engineer on Baseera (since June 2026), a B2B SaaS platform powered by Agentic AI, and has also built RetentionAI and a Multi-Tier Ticketing & CRM system.",
-    "who": "Sara Saleh Alharbi is a software engineer and AI specialist based in Muscat, Oman, focused on AI, machine learning and data analysis with Python. She graduated in Computer Science & AI with First Class Honors and works on Baseera, a B2B SaaS platform with Agentic AI. Ask me about her projects, skills or certifications.",
+    "experience": "Sara interned at the Ministry of Transport, Communications and Information Technology (Jul–Sep 2026). She currently works on Baseera (since June 2026), a B2B SaaS platform powered by Agentic AI, and has also built RetentionAI and a Multi-Tier Ticketing & CRM system.",
+    "who": "Sara Saleh Alharbi is based in Muscat, Oman, and her specialty is artificial intelligence, focused on AI, machine learning and data analysis with Python. She graduated in Computer Science & AI with First Class Honors and works on Baseera, a B2B SaaS platform with Agentic AI. Ask me about her projects, skills or certifications.",
 }
 GREETING_EN = "Hello! I'm Sara Alharbi's assistant. Ask me about her projects, skills, certifications, or how to contact her."
 FALLBACK_EN = "Sorry, I only answer questions about Sara — her projects, skills and achievements. Try: \"What are Sara's projects?\" or \"How can I contact her?\""
