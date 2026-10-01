@@ -516,6 +516,22 @@ ul, ol { padding: 0; list-style: none; }
 }
 .project-links a:hover { color: var(--accent-walnut); border-color: var(--accent-walnut); }
 
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-inline-start: var(--line);
+  border-top: var(--line);
+}
+.proj-grid .project {
+  border-inline-end: var(--line);
+  border-bottom: var(--line);
+}
+.proj-grid .project-title { font-size: clamp(1.5rem, 3vw, 2rem); }
+.project-field { display: flex; flex-direction: column; gap: .25rem; }
+.project-field p { font-weight: 300; margin: 0; }
+.field-label { font-size: .78rem; font-weight: 600; letter-spacing: .06em; color: var(--text-muted); }
+@media (max-width: 760px) { .proj-grid { grid-template-columns: 1fr; } }
+
 .project-groups {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
