@@ -235,7 +235,12 @@ async def ask(payload: AskRequest, request: Request):
     _check_rate_limit(_client_ip(request))
 
     if GEMINI_API_KEY:
-        return AskResponse(answer=await _ask_gemini(payload.question))
+        try:
+            return AskResponse(answer=await _ask_gemini(payload.question))
+        except HTTPException as e:
+            # Keep the assistant useful if Gemini fails (bad key, model name, quota).
+            logger.warning("Gemini failed (%s); answering with the local assistant.", e.status_code)
+            return AskResponse(answer=local_bot.answer(payload.question))
 
     if client is None:
         return AskResponse(answer=local_bot.answer(payload.question))
