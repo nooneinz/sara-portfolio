@@ -1,0 +1,24 @@
+[
+  {
+    "id": "hasba",
+    "title": "Hasba (حَسبة)",
+    "repo": "hasba",
+    "kind_ar": "تطبيق متكامل",
+    "kind_en": "Full-stack application",
+    "desc_ar": "متتبّع اشتراكات بواجهة عربية أولاً لمستخدمي عُمان. يعرض المبلغ الذي سينسحب قبل الراتب، ويحفظ الاشتراكات في محفظة مع طابور مراجعة، ويدعم الحسابات وسجل الموافقات وتصدير البيانات وحذف الحساب. مُغلَّف كحاوية Docker. نسخة أولية: الربط مع الإيميل والواتساب والذكاء الاصطناعي قيد التخطيط.",
+    "desc_en": "An Arabic-first subscription tracker for users in Oman. It shows what will be charged before payday, keeps a wallet of subscriptions with a review queue, and includes accounts with consent records, data export and account deletion. Packaged as a Docker container. An early build: email, WhatsApp and AI integrations are planned.",
+    "tags": [
+      "Node.js",
+      "SQLite",
+      "Docker",
+      "RTL UI"
+    ],
+    "links": [
+      {
+        "label_ar": "المستودع",
+        "label_en": "Repository",
+        "url": "https://github.com/nooneinz/hasba"
+      }
+    ]
+  }
+]
