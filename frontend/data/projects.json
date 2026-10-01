@@ -47,7 +47,10 @@
         "label_en": "Repository",
         "url": "https://github.com/nooneinz/RetentionAI-Project"
       }
-    ]
+    ],
+    "metric": "94.5%",
+    "metric_ar": "دقة التنبؤ",
+    "metric_en": "Prediction accuracy"
   },
   {
     "id": "hasba",
@@ -146,7 +149,10 @@
         "label_en": "Repository",
         "url": "https://github.com/nooneinz/Online-Shoppers-Purchase-Prediction"
       }
-    ]
+    ],
+    "metric": "88–89%",
+    "metric_ar": "دقة النموذج",
+    "metric_en": "Model accuracy"
   },
   {
     "id": "nyc-taxi",
@@ -212,6 +218,9 @@
       "SQL Optimization",
       "REST APIs"
     ],
-    "links": []
+    "links": [],
+    "metric": "25%",
+    "metric_ar": "استعلامات أسرع",
+    "metric_en": "Faster queries"
   }
 ]
