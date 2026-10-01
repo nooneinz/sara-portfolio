@@ -292,6 +292,35 @@
 
   chips.forEach((chip) => chip.addEventListener("click", () => ask(chip.textContent)));
 
+  /* Projects from data/projects.json (add new entries there) */
+  const escHtml = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  async function renderProjects() {
+    const box = document.getElementById("more-projects");
+    if (!box) return;
+    try {
+      const res = await fetch("data/projects.json", { cache: "no-cache" });
+      if (!res.ok) return;
+      const items = await res.json();
+      box.innerHTML = items.map((p) => {
+        const safeUrl = (u) => (/^https?:\/\//.test(u) ? escHtml(u) : "#");
+        const links = (p.links || []).map((l) =>
+          `<a href="${safeUrl(l.url)}" target="_blank" rel="noopener" data-en="${escHtml(l.label_en || "Link")}">${escHtml(l.label_ar || "رابط")}</a>`).join("");
+        return `<article class="project project-wide">
+          <div class="project-meta">
+            <span class="project-kind" data-en="${escHtml(p.kind_en)}">${escHtml(p.kind_ar)}</span>
+            ${p.repo ? `<span class="project-repo" lang="en">${escHtml(p.repo)}</span>` : ""}
+          </div>
+          <h3 class="project-title" lang="en">${escHtml(p.title)}</h3>
+          <p class="project-desc" data-en="${escHtml(p.desc_en)}">${escHtml(p.desc_ar)}</p>
+          <ul class="tags" lang="en">${(p.tags || []).map((t) => `<li>${escHtml(t)}</li>`).join("")}</ul>
+          ${links ? `<div class="project-links">${links}</div>` : ""}
+        </article>`;
+      }).join("");
+    } catch { /* keep the static projects */ }
+    if (lang === "en") applyLang("en");
+  }
+  renderProjects();
+
   applyTheme(root.getAttribute("data-theme") === "dark" ? "dark" : "light");
   if (lang === "en") applyLang("en");
 })();
