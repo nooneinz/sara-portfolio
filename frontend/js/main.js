@@ -116,7 +116,7 @@
     /* Reveal on scroll */
     if (!reduceMotion) {
       const revealables = document.querySelectorAll(
-        ".section-head, .service, .project, .project-group, .degree, .cert-col"
+        ".section-head, .stat, .proj-card, .service-card, .edu-grid .degree, .cert-tile, .chat, .cta-inner"
       );
       const revealer = new IntersectionObserver(
         (entries, obs) => {
@@ -130,6 +130,7 @@
         { rootMargin: "0px 0px -8% 0px" }
       );
       revealables.forEach((el) => {
+        el.style.setProperty("--i", String([...el.parentElement.children].indexOf(el)));
         el.classList.add("reveal");
         revealer.observe(el);
       });
@@ -294,33 +295,72 @@
 
   /* Projects from data/projects.json (add new entries there) */
   const escHtml = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const safeUrl = (u) => (/^https?:\/\//.test(u) ? escHtml(u) : "#");
+
+  function projectCard(p, featured) {
+    const links = (p.links || []).map((l) =>
+      `<a href="${safeUrl(l.url)}" target="_blank" rel="noopener" data-en="${escHtml(l.label_en || "Link")}">${escHtml(l.label_ar || "رابط")}</a>`).join("");
+    const metric = p.metric
+      ? `<div class="proj-metric"><span class="proj-metric-num" lang="en">${escHtml(p.metric)}</span><span data-en="${escHtml(p.metric_en)}">${escHtml(p.metric_ar)}</span></div>`
+      : "";
+    const problem = featured && p.problem_ar
+      ? `<details class="proj-more"><summary data-en="The problem it solves">المشكلة التي يحلّها</summary><p data-en="${escHtml(p.problem_en)}">${escHtml(p.problem_ar)}</p></details>`
+      : "";
+    return `<article class="proj-card${featured ? " is-featured" : ""}">
+      <div class="proj-top">
+        <span class="project-kind" data-en="${escHtml(p.kind_en)}">${escHtml(p.kind_ar)}</span>
+        ${metric}
+      </div>
+      <h3 class="project-title" lang="en">${escHtml(p.title)}</h3>
+      <p class="proj-text" data-en="${escHtml(p.solution_en)}">${escHtml(p.solution_ar)}</p>
+      ${problem}
+      <ul class="tags" lang="en">${(p.tags || []).map((t) => `<li>${escHtml(t)}</li>`).join("")}</ul>
+      ${links ? `<div class="project-links">${links}</div>` : ""}
+    </article>`;
+  }
+
   async function renderProjects() {
-    const box = document.getElementById("more-projects");
-    if (!box) return;
+    const top = document.getElementById("featured-projects");
+    const rest = document.getElementById("more-projects");
+    if (!top || !rest) return;
     try {
       const res = await fetch("data/projects.json", { cache: "no-cache" });
       if (!res.ok) return;
       const items = await res.json();
-      box.innerHTML = items.map((p) => {
-        const safeUrl = (u) => (/^https?:\/\//.test(u) ? escHtml(u) : "#");
-        const links = (p.links || []).map((l) =>
-          `<a href="${safeUrl(l.url)}" target="_blank" rel="noopener" data-en="${escHtml(l.label_en || "Link")}">${escHtml(l.label_ar || "رابط")}</a>`).join("");
-        return `<article class="project">
-          <div class="project-meta">
-            <span class="project-kind" data-en="${escHtml(p.kind_en)}">${escHtml(p.kind_ar)}</span>
-            ${p.repo ? `<span class="project-repo" lang="en">${escHtml(p.repo.replace(/\.$/, ""))}</span>` : ""}
-          </div>
-          <h3 class="project-title" lang="en">${escHtml(p.title)}</h3>
-          ${p.problem_ar ? `<div class="project-field"><span class="field-label" data-en="The problem">المشكلة</span><p data-en="${escHtml(p.problem_en)}">${escHtml(p.problem_ar)}</p></div>` : ""}
-          ${p.solution_ar ? `<div class="project-field"><span class="field-label" data-en="The solution">الحل</span><p data-en="${escHtml(p.solution_en)}">${escHtml(p.solution_ar)}</p></div>` : ""}
-          <ul class="tags" lang="en">${(p.tags || []).map((t) => `<li>${escHtml(t)}</li>`).join("")}</ul>
-          ${links ? `<div class="project-links">${links}</div>` : ""}
-        </article>`;
-      }).join("");
-    } catch { /* keep the static projects */ }
+      top.innerHTML = items.filter((p) => p.featured).map((p) => projectCard(p, true)).join("");
+      rest.innerHTML = items.filter((p) => !p.featured).map((p) => projectCard(p, false)).join("");
+      document.querySelectorAll(".proj-card").forEach((el) => {
+        el.style.setProperty("--i", String([...el.parentElement.children].indexOf(el)));
+      });
+    } catch { /* keep empty */ }
     if (lang === "en") applyLang("en");
   }
   renderProjects();
+
+  /* ---------------- Count-up numbers ---------------- */
+  function countUp(el) {
+    const target = parseFloat(el.dataset.count);
+    const dec = Number(el.dataset.decimals || 0);
+    const suffix = el.dataset.suffix || "";
+    if (reduceMotion || !isFinite(target)) return;
+    const start = performance.now();
+    const dur = 1400;
+    const tick = (now) => {
+      const k = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - k, 3);
+      el.textContent = (target * eased).toFixed(dec) + suffix;
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+  if ("IntersectionObserver" in window) {
+    const counter = new IntersectionObserver((entries, obs) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { countUp(e.target); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll("[data-count]").forEach((el) => counter.observe(el));
+  }
 
   applyTheme(root.getAttribute("data-theme") === "dark" ? "dark" : "light");
   if (lang === "en") applyLang("en");
