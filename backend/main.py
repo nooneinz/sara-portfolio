@@ -36,7 +36,9 @@ import local_bot
 load_dotenv()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
+# Tried in order when a model returns 404 (retired or not available to this key).
+GEMINI_FALLBACK_MODELS = ["gemini-flash-latest"]
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 
@@ -207,14 +209,17 @@ async def _ask_gemini(question: str) -> str:
         "contents": [{"role": "user", "parts": [{"text": question}]}],
         "generationConfig": {
             "temperature": 0.4,
-            "maxOutputTokens": 700,
-            "thinkingConfig": {"thinkingBudget": 0},
+            "maxOutputTokens": 1500,
         },
     }
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
     try:
         async with httpx.AsyncClient(timeout=20.0) as http:
-            r = await http.post(url, json=body, headers={"x-goog-api-key": GEMINI_API_KEY})
+            for model in [GEMINI_MODEL, *GEMINI_FALLBACK_MODELS]:
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+                r = await http.post(url, json=body, headers={"x-goog-api-key": GEMINI_API_KEY})
+                if r.status_code != 404:
+                    break
+                logger.warning("Gemini model %s returned 404, trying next", model)
     except httpx.TimeoutException:
         raise HTTPException(status_code=504, detail="استغرق الرد وقتاً أطول من المتوقع. حاول مرة أخرى.")
     except httpx.HTTPError as e:
