@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: sara-portfolio
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      # Add your custom domain here once you own it, e.g. https://yourname.com,https://www.yourname.com
+      - key: ALLOWED_ORIGINS
+        sync: false
