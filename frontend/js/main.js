@@ -116,7 +116,7 @@
     /* Reveal on scroll */
     if (!reduceMotion) {
       const revealables = document.querySelectorAll(
-        ".section-head, .service, .project, .project-group, .degree, .cert-col, .contact-list li"
+        ".section-head, .service, .project, .project-group, .degree, .cert-col"
       );
       const revealer = new IntersectionObserver(
         (entries, obs) => {
