@@ -73,7 +73,11 @@ ul, ol { padding: 0; list-style: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { transition: none !important; animation: none !important; }
+  /* The hero illustration is the point of the page, so it keeps moving; it has a pause button. */
+  *:not(.hero-visual, .hero-visual *), *:not(.hero-visual, .hero-visual *)::before, *:not(.hero-visual, .hero-visual *)::after {
+    transition: none !important;
+    animation: none !important;
+  }
 }
 
 .visually-hidden {
@@ -210,7 +214,7 @@ ul, ol { padding: 0; list-style: none; }
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
+  grid-template-columns: 1fr 1.15fr;
   align-items: center;
   gap: clamp(2rem, 6vw, 5rem);
 }
@@ -255,16 +259,36 @@ ul, ol { padding: 0; list-style: none; }
 .btn-ghost { background: none; color: var(--text-dark); }
 .btn-ghost:hover { background: var(--text-dark); color: var(--bg-primary); transform: translateY(-2px); }
 
-/* Hero visual — animated neural network drawn in SVG */
-.hero-visual { justify-self: center; width: min(100%, 26rem); }
-.net { width: 100%; height: auto; overflow: visible; }
-.net-lines line { stroke: var(--accent-walnut); stroke-width: 1; opacity: .25; animation: net-flow 4s ease-in-out infinite; animation-delay: var(--d, 0s); }
-.net-nodes circle { fill: var(--text-dark); animation: net-node 3.2s ease-in-out infinite; animation-delay: var(--d, 0s); transform-box: fill-box; transform-origin: center; }
-@keyframes net-flow { 0%, 100% { opacity: .12; } 50% { opacity: .7; } }
-@keyframes net-node { 0%, 100% { transform: scale(1); opacity: .85; } 50% { transform: scale(1.35); opacity: 1; } }
+/* Hero visual — neural networks drawn on a canvas (js/neural.js) */
+.page-canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+main, .site-footer { position: relative; z-index: 1; }
+.hero-visual { width: 100%; }
+.net-slot { position: relative; min-height: clamp(18rem, 34vw, 26rem); }
+
+
+/* journey: data -> models -> prediction, lights up in turn */
+.journey { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin-top: .9rem; }
+.journey li {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .55rem .8rem;
+  border: var(--line);
+  border-radius: var(--radius);
+  font-size: .85rem;
+  color: var(--text-muted);
+  animation: step-lit 9s infinite;
+}
+.journey .j2 { animation-delay: -6s; }
+.journey .j3 { animation-delay: -3s; }
+.j-n { font-size: .7rem; letter-spacing: .1em; opacity: .7; }
+@keyframes step-lit {
+  0%, 30% { background: var(--text-dark); color: var(--bg-primary); border-color: var(--text-dark); }
+  34%, 100% { background: transparent; color: var(--text-muted); border-color: var(--border-color); }
+}
 
 /* ---------- Stats ---------- */
-.stats { border-block: var(--line); background: var(--surface); }
+.stats { border-block: var(--line); background: color-mix(in srgb, var(--surface) 80%, transparent); }
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
 .stat {
   display: flex;
@@ -584,7 +608,7 @@ ul, ol { padding: 0; list-style: none; }
 .cert-col li:last-child { border-bottom: 0; }
 
 /* ---------- CTA ---------- */
-.cta { padding-block: clamp(3.5rem, 8vw, 6rem); background: var(--surface); border-bottom: var(--line); }
+.cta { padding-block: clamp(3.5rem, 8vw, 6rem); background: color-mix(in srgb, var(--surface) 80%, transparent); border-bottom: var(--line); }
 .cta-inner { text-align: center; }
 .cta-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.35; color: var(--text-dark); }
 .cta .hero-cta { justify-content: center; }
@@ -635,7 +659,8 @@ ul, ol { padding: 0; list-style: none; }
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; }
-  .hero-visual { width: min(70%, 18rem); order: -1; }
+  .hero-visual { order: -1; }
+  .net-slot { min-height: 16rem; }
   .proj-featured, .proj-grid, .service-grid { grid-template-columns: 1fr 1fr; }
   .cert-tiles { grid-template-columns: repeat(3, 1fr); }
   .certs { grid-template-columns: 1fr; }
@@ -665,6 +690,7 @@ ul, ol { padding: 0; list-style: none; }
   .logo-sep { display: none; }
 
   .proj-featured, .proj-grid, .service-grid, .edu-grid { grid-template-columns: 1fr; }
+  .journey { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .stat:nth-child(3) { border-inline-start: 0; }
   .stat:nth-child(n+3) { border-top: var(--line); }

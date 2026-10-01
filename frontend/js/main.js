@@ -112,6 +112,10 @@
       { rootMargin: "-45% 0px -50% 0px" }
     );
     targets.forEach((t) => spy.observe(t));
+    // back at the hero: nothing in the nav should stay highlighted
+    window.addEventListener("scroll", () => {
+      if (window.scrollY < 200) links.forEach((l) => l.classList.remove("is-active"));
+    }, { passive: true });
 
     /* Reveal on scroll */
     if (!reduceMotion) {
@@ -361,7 +365,6 @@
     }, { threshold: 0.6 });
     document.querySelectorAll("[data-count]").forEach((el) => counter.observe(el));
   }
-
   applyTheme(root.getAttribute("data-theme") === "dark" ? "dark" : "light");
   if (lang === "en") applyLang("en");
 })();
