@@ -8,7 +8,7 @@
   /* ---------------- Language + theme ---------------- */
   const STR = {
     ar: {
-      title: "سارة الحربي | Sara Alharbi — Software Engineer & AI Specialist",
+      title: "سارة الحربي | Sara Alharbi — Artificial Intelligence",
       menu: "القائمة", close: "إغلاق", langBtn: "EN",
       online: "متصل", typing: "يكتب…", offline: "غير متصل",
       you: "أنت", bot: "المساعد", thinking: "جارٍ الكتابة",
@@ -17,7 +17,7 @@
       net: "تعذّر الاتصال بالمساعد حالياً. يمكنك التواصل مع سارة مباشرة عبر Saraalharbi0031@gmail.com",
     },
     en: {
-      title: "Sara Alharbi | سارة الحربي — Software Engineer & AI Specialist",
+      title: "Sara Alharbi | سارة الحربي — Artificial Intelligence",
       menu: "Menu", close: "Close", langBtn: "عربي",
       online: "Online", typing: "Typing…", offline: "Offline",
       you: "You", bot: "Assistant", thinking: "Typing",
