@@ -118,12 +118,15 @@ def _projects_context() -> str:
         return ""
     lines = []
     for p in items:
-        links = ", ".join(l.get("url", "") for l in p.get("links", []))
-        lines.append(f"  - {p.get('title','')}: {p.get('desc_ar','')} (التقنيات: {', '.join(p.get('tags', []))}) {links}")
+        links = ", ".join(l.get("url", "") for l in p.get("links", [])) or "المستودع غير منشور"
+        lines.append(
+            f"  - {p.get('title','')}: المشكلة: {p.get('problem_ar','')} الحل: {p.get('solution_ar','')} "
+            f"(التقنيات: {', '.join(p.get('tags', []))}) المستودع: {links}"
+        )
     if not lines:
         return ""
     nl = chr(10)
-    return nl + nl + "مشاريع إضافية حديثة:" + nl + nl.join(lines)
+    return nl + nl + "تفاصيل المشاريع (المشكلة والحل والمستودع):" + nl + nl.join(lines)
 
 
 SYSTEM_PROMPT = SYSTEM_PROMPT + _projects_context()

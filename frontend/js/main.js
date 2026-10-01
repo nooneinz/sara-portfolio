@@ -305,13 +305,14 @@
         const safeUrl = (u) => (/^https?:\/\//.test(u) ? escHtml(u) : "#");
         const links = (p.links || []).map((l) =>
           `<a href="${safeUrl(l.url)}" target="_blank" rel="noopener" data-en="${escHtml(l.label_en || "Link")}">${escHtml(l.label_ar || "رابط")}</a>`).join("");
-        return `<article class="project project-wide">
+        return `<article class="project">
           <div class="project-meta">
             <span class="project-kind" data-en="${escHtml(p.kind_en)}">${escHtml(p.kind_ar)}</span>
-            ${p.repo ? `<span class="project-repo" lang="en">${escHtml(p.repo)}</span>` : ""}
+            ${p.repo ? `<span class="project-repo" lang="en">${escHtml(p.repo.replace(/\.$/, ""))}</span>` : ""}
           </div>
           <h3 class="project-title" lang="en">${escHtml(p.title)}</h3>
-          <p class="project-desc" data-en="${escHtml(p.desc_en)}">${escHtml(p.desc_ar)}</p>
+          ${p.problem_ar ? `<div class="project-field"><span class="field-label" data-en="The problem">المشكلة</span><p data-en="${escHtml(p.problem_en)}">${escHtml(p.problem_ar)}</p></div>` : ""}
+          ${p.solution_ar ? `<div class="project-field"><span class="field-label" data-en="The solution">الحل</span><p data-en="${escHtml(p.solution_en)}">${escHtml(p.solution_ar)}</p></div>` : ""}
           <ul class="tags" lang="en">${(p.tags || []).map((t) => `<li>${escHtml(t)}</li>`).join("")}</ul>
           ${links ? `<div class="project-links">${links}</div>` : ""}
         </article>`;

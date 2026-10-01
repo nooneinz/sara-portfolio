@@ -1,12 +1,65 @@
 [
   {
+    "id": "baseera",
+    "title": "Baseera",
+    "repo": "baseera-app",
+    "featured": true,
+    "kind_ar": "مشروع رئيسي",
+    "kind_en": "Featured project",
+    "problem_ar": "الشركات عندها بيانات مالية ومبيعات ومخزون، لكن تحويلها إلى قرار يأخذ وقتاً، ويضيع معه الهدر والفرص.",
+    "problem_en": "Companies hold finance, sales and inventory data, but turning it into a decision is slow, so waste and opportunities go unnoticed.",
+    "solution_ar": "منصة B2B SaaS تعتمد على Agentic AI تحلّل البيانات وتقدّم توصيات استراتيجية فورية وتقارير تفاعلية. شاركت بها في مسابقة “Engineer It with AI” التابعة لمؤسسة مدار.",
+    "solution_en": "A B2B SaaS platform that uses Agentic AI to analyze the data and give instant strategic recommendations and interactive reports. Entered in the “Engineer It with AI” competition by Madaar.",
+    "tags": [
+      "Django",
+      "Agentic AI",
+      "PostgreSQL",
+      "Render"
+    ],
+    "links": [
+      {
+        "label_ar": "المستودع",
+        "label_en": "Repository",
+        "url": "https://github.com/nooneinz/baseera-app"
+      }
+    ]
+  },
+  {
+    "id": "retentionai",
+    "title": "RetentionAI",
+    "repo": "RetentionAI-Project",
+    "featured": true,
+    "kind_ar": "مشروع رئيسي",
+    "kind_en": "Featured project",
+    "problem_ar": "تسرّب الطلاب يُكتشف متأخراً، فيصعب على الإدارة والمحاضرين التدخل في الوقت المناسب.",
+    "problem_en": "Student dropout is detected late, so administrators and instructors struggle to step in on time.",
+    "solution_ar": "نظام يتنبأ بخطر التسرّب بنموذج CNN-LSTM هجين بدقة 94.5%، مع لوحات تحليل لحظية وثلاثة أدوار (مدير، محاضر، طالب) وتنبيهات تدخّل سريعة.",
+    "solution_en": "A system that predicts dropout risk with a hybrid CNN-LSTM model at 94.5% accuracy, with real-time dashboards, three roles (admin, instructor, student) and quick intervention alerts.",
+    "tags": [
+      "Python",
+      "Flask",
+      "MySQL",
+      "TensorFlow"
+    ],
+    "links": [
+      {
+        "label_ar": "المستودع",
+        "label_en": "Repository",
+        "url": "https://github.com/nooneinz/RetentionAI-Project"
+      }
+    ]
+  },
+  {
     "id": "hasba",
     "title": "Hasba (حَسبة)",
     "repo": "hasba",
+    "featured": true,
     "kind_ar": "تطبيق متكامل",
     "kind_en": "Full-stack application",
-    "desc_ar": "متتبّع اشتراكات بواجهة عربية أولاً لمستخدمي عُمان. يعرض المبلغ الذي سينسحب قبل الراتب، ويحفظ الاشتراكات في محفظة مع طابور مراجعة، ويدعم الحسابات وسجل الموافقات وتصدير البيانات وحذف الحساب. مُغلَّف كحاوية Docker. نسخة أولية: الربط مع الإيميل والواتساب والذكاء الاصطناعي قيد التخطيط.",
-    "desc_en": "An Arabic-first subscription tracker for users in Oman. It shows what will be charged before payday, keeps a wallet of subscriptions with a review queue, and includes accounts with consent records, data export and account deletion. Packaged as a Docker container. An early build: email, WhatsApp and AI integrations are planned.",
+    "problem_ar": "الناس تشترك في خدمات وتنساها، فتفاجئهم المبالغ المسحوبة قبل الراتب.",
+    "problem_en": "People subscribe to services and forget them, then get surprised by charges right before payday.",
+    "solution_ar": "تطبيق بواجهة عربية أولاً يعرض المبلغ الذي سينسحب قبل الراتب، ويحفظ الاشتراكات في محفظة مع طابور مراجعة، ويدعم الحسابات وتصدير البيانات وحذف الحساب. مُغلَّف بـ Docker. نسخة أولية: الربط مع الإيميل والواتساب والذكاء الاصطناعي قيد التخطيط.",
+    "solution_en": "An Arabic-first app that shows what will be charged before payday, keeps subscriptions in a wallet with a review queue, and supports accounts, data export and account deletion. Packaged with Docker. An early build: email, WhatsApp and AI integrations are planned.",
     "tags": [
       "Node.js",
       "SQLite",
@@ -20,5 +73,145 @@
         "url": "https://github.com/nooneinz/hasba"
       }
     ]
+  },
+  {
+    "id": "task-manager",
+    "title": "Mini SaaS Task Manager",
+    "repo": "mini-saas-task-manager",
+    "featured": false,
+    "kind_ar": "تطبيق ويب",
+    "kind_en": "Web application",
+    "problem_ar": "كل شركة تحتاج مساحة عمل ومهام معزولة عن غيرها، بدون أن تتأخر الواجهة عند كل تعديل.",
+    "problem_en": "Each company needs a workspace and tasks isolated from the others, without the interface lagging on every change.",
+    "solution_ar": "لوحة كانبان بثلاثة أعمدة (للتنفيذ، قيد العمل، منجز) مع عزل مساحات العمل بتسجيل JWT، وتحديث فوري متفائل للواجهة، وخدمات مصغّرة تعمل بـ Docker وNginx.",
+    "solution_en": "A three-column Kanban board with workspace isolation through JWT auth, instant optimistic UI updates, and microservices running on Docker and Nginx.",
+    "tags": [
+      "React",
+      "Node.js",
+      "PostgreSQL",
+      "Docker"
+    ],
+    "links": [
+      {
+        "label_ar": "المستودع",
+        "label_en": "Repository",
+        "url": "https://github.com/nooneinz/mini-saas-task-manager"
+      }
+    ]
+  },
+  {
+    "id": "gold-tracker",
+    "title": "Gold Price Tracker Oman",
+    "repo": "gold-price-tracker-omam",
+    "featured": false,
+    "kind_ar": "تطبيق ويب",
+    "kind_en": "Web application",
+    "problem_ar": "من الصعب تقدير قيمة الذهب بحسب العيار والوزن بسرعة في عُمان.",
+    "problem_en": "It is hard to quickly estimate the value of gold by karat and weight in Oman.",
+    "solution_ar": "تطبيق يعرض سعر الجرام لعيارات 18 و21 و22 و24، ويقدّر قيمة القطعة، ويعرض مخططاً وسجلاً لـ 30 يوماً. الأسعار بيانات تجريبية ثابتة وليست أسعار سوق مباشرة.",
+    "solution_en": "An app that shows the per-gram price for 18K, 21K, 22K and 24K, estimates an item's value, and shows a 30-day chart and history. Prices are static sample data, not live market prices.",
+    "tags": [
+      "Angular",
+      "TypeScript",
+      "Tailwind CSS"
+    ],
+    "links": [
+      {
+        "label_ar": "المستودع",
+        "label_en": "Repository",
+        "url": "https://github.com/nooneinz/gold-price-tracker-omam"
+      }
+    ]
+  },
+  {
+    "id": "online-shoppers",
+    "title": "Online Shoppers Purchase Prediction",
+    "repo": "Online-Shoppers-Purchase-Prediction",
+    "featured": false,
+    "kind_ar": "علم البيانات",
+    "kind_en": "Data science",
+    "problem_ar": "المتاجر الإلكترونية تحتاج معرفة الزوار الذين ينوون الشراء فعلاً لتحسين التسويق ونسبة التحويل.",
+    "problem_en": "Online stores need to know which visitors genuinely intend to buy, to improve marketing and conversion rate.",
+    "solution_ar": "شبكة عصبية (ANN) بدقة تقارب 88-89% تتنبأ بنية الشراء، مع تفسير القرارات بـ SHAP وتطبيق Streamlit تفاعلي.",
+    "solution_en": "An artificial neural network (ANN) at roughly 88-89% accuracy that predicts purchase intent, with SHAP explanations and an interactive Streamlit app.",
+    "tags": [
+      "Python",
+      "TensorFlow",
+      "Streamlit",
+      "SHAP"
+    ],
+    "links": [
+      {
+        "label_ar": "المستودع",
+        "label_en": "Repository",
+        "url": "https://github.com/nooneinz/Online-Shoppers-Purchase-Prediction"
+      }
+    ]
+  },
+  {
+    "id": "nyc-taxi",
+    "title": "NYC Taxi Tip Prediction",
+    "repo": "NYC-Taxi-Tip-Prediction.",
+    "featured": false,
+    "kind_ar": "علم البيانات",
+    "kind_en": "Data science",
+    "problem_ar": "تدريب نماذج التعلّم الآلي على أكثر من مليون سجل يستغرق وقتاً طويلاً.",
+    "problem_en": "Training machine learning models on more than a million records takes a long time.",
+    "solution_ar": "نموذج يتنبأ بإكراميات سيارات الأجرة في نيويورك، ويقارن IBM Snap ML مع Scikit-Learn في سرعة التدريب ودقة الخطأ (MSE)، مع معالجة البيانات وهندسة الخصائص.",
+    "solution_en": "A model that predicts NYC taxi tips and benchmarks IBM Snap ML against Scikit-Learn on training speed and error (MSE), including data preprocessing and feature engineering.",
+    "tags": [
+      "Python",
+      "Snap ML",
+      "Scikit-Learn"
+    ],
+    "links": [
+      {
+        "label_ar": "المستودع",
+        "label_en": "Repository",
+        "url": "https://github.com/nooneinz/NYC-Taxi-Tip-Prediction."
+      }
+    ]
+  },
+  {
+    "id": "car-eda",
+    "title": "Predictive Car Features EDA",
+    "repo": "predictive-car-features-eda.",
+    "featured": false,
+    "kind_ar": "علم البيانات",
+    "kind_en": "Data science",
+    "problem_ar": "ما الخصائص التي تؤثر فعلاً في سعر السيارة؟",
+    "problem_en": "Which features actually drive a car's price?",
+    "solution_ar": "تحليل استكشافي للبيانات (EDA) يحدّد أهم الخصائص المؤثرة في سعر السيارة باستخدام Pandas وSeaborn.",
+    "solution_en": "An exploratory data analysis (EDA) that identifies the key features impacting car prices using Pandas and Seaborn.",
+    "tags": [
+      "Python",
+      "Pandas",
+      "Seaborn"
+    ],
+    "links": [
+      {
+        "label_ar": "المستودع",
+        "label_en": "Repository",
+        "url": "https://github.com/nooneinz/predictive-car-features-eda."
+      }
+    ]
+  },
+  {
+    "id": "crm",
+    "title": "Multi-Tier Ticketing & CRM Architecture",
+    "repo": "",
+    "featured": false,
+    "kind_ar": "هندسة خلفية",
+    "kind_en": "Backend engineering",
+    "problem_ar": "إدارة علاقات العملاء وتتبّع التذاكر تحتاج صلاحيات دقيقة، واستعلامات بطيئة تعطّل الدعم.",
+    "problem_en": "Managing customers and tracking tickets needs fine-grained permissions, and slow queries hold support back.",
+    "solution_ar": "نظام خلفي بصلاحيات قائمة على الأدوار (RBAC) وتحسين فهارس SQL خفّض زمن الاستعلام 25%، وعالج أكثر من 1,000 طلب دعم دون أخطاء توجيه. المستودع غير منشور.",
+    "solution_en": "A backend with role-based access control (RBAC) and SQL index optimization that cut query time by 25%, handling over 1,000 support requests without routing errors. The repository is not public.",
+    "tags": [
+      "RBAC",
+      "SQL Optimization",
+      "REST APIs"
+    ],
+    "links": []
   }
 ]

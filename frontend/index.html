@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=3" />
+  <link rel="stylesheet" href="css/styles.css?v=4" />
   <script>
     try {
       var t = localStorage.getItem("theme");
@@ -157,106 +157,8 @@
           <p class="section-lead" data-en="Selected work in artificial intelligence and software engineering.">مختارات من أعمالي في الذكاء الاصطناعي وهندسة البرمجيات.</p>
         </header>
 
-        <!-- Featured -->
-        <div class="projects-featured">
-          <article class="project project-lg">
-            <div class="project-meta">
-              <span class="project-kind" data-en="Featured project">مشروع رئيسي</span>
-              <span class="project-repo" lang="en">baseera-app</span>
-            </div>
-            <h3 class="project-title" lang="en">Baseera</h3>
-            <p class="project-desc" data-en="A smart B2B SaaS business-intelligence platform that uses Agentic AI to turn finance, sales and inventory data into instant strategic recommendations. Entered in the “Engineer It with AI” competition by Madaar.">
-              منصة B2B SaaS ذكية لذكاء الأعمال، تعتمد على Agentic AI لتحويل بيانات المالية والمبيعات والمخزون إلى توصيات استراتيجية فورية.
-              شاركت بها في مسابقة <span lang="en">“Engineer It with AI”</span> التابعة لمؤسسة مدار.
-            </p>
-            <ul class="tags" lang="en">
-              <li>Django</li><li>Agentic AI</li><li>PostgreSQL</li><li>Render</li>
-            </ul>
-            <div class="project-links">
-              <a href="https://github.com/nooneinz/baseera-app" target="_blank" rel="noopener" data-en="Repository">المستودع</a>
-            </div>
-          </article>
-
-          <article class="project project-lg">
-            <div class="project-meta">
-              <span class="project-kind" data-en="Featured project">مشروع رئيسي</span>
-              <span class="project-repo" lang="en">RetentionAI-Project</span>
-            </div>
-            <h3 class="project-title" lang="en">RetentionAI</h3>
-            <p class="project-desc" data-en="A system that predicts student dropout risk using a hybrid CNN-LSTM model with <strong>94.5%</strong> accuracy, with real-time analytics dashboards and three user roles.">
-              نظام للتنبؤ بخطر تسرّب الطلاب باستخدام نموذج CNN-LSTM هجين بدقة <strong>94.5%</strong>،
-              مع لوحات تحليل لحظية وثلاثة أدوار للمستخدمين.
-            </p>
-            <ul class="tags" lang="en">
-              <li>Python</li><li>Flask</li><li>MySQL</li><li>TensorFlow</li>
-            </ul>
-            <div class="project-links">
-              <a href="https://github.com/nooneinz/RetentionAI-Project" target="_blank" rel="noopener" data-en="Repository">المستودع</a>
-            </div>
-          </article>
-        </div>
-
-        <!-- Projects added via frontend/data/projects.json are rendered here -->
-        <div id="more-projects" class="more-projects"></div>
-
-        <article class="project project-wide">
-          <div class="project-meta">
-            <span class="project-kind" data-en="Backend engineering">هندسة خلفية</span>
-          </div>
-          <h3 class="project-title" lang="en">Multi-Tier Ticketing &amp; CRM Architecture</h3>
-          <p class="project-desc" data-en="A backend system for customer relationship management and ticket tracking with role-based access control (RBAC), and SQL index optimization that cut query time by 25%.">
-            نظام خلفي لإدارة علاقات العملاء وتتبّع التذاكر مع صلاحيات قائمة على الأدوار (RBAC)،
-            وتحسين لفهارس SQL خفّض زمن الاستعلام بنسبة 25%.
-          </p>
-          <ul class="tags" lang="en">
-            <li>RBAC</li><li>SQL Optimization</li><li>REST APIs</li>
-          </ul>
-        </article>
-
-        <!-- Smaller repos -->
-        <div class="project-groups">
-          <div class="project-group">
-            <h3 class="group-title" data-en="Data science repositories">مستودعات علم البيانات</h3>
-            <ul class="repo-list">
-              <li>
-                <a href="https://github.com/nooneinz/NYC-Taxi-Tip-Prediction" target="_blank" rel="noopener">
-                  <span class="repo-name" lang="en">NYC Taxi Tip Prediction</span>
-                  <span class="repo-slug" lang="en">NYC-Taxi-Tip-Prediction</span>
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/nooneinz/predictive-car-features-eda" target="_blank" rel="noopener">
-                  <span class="repo-name" lang="en">Predictive Car Features EDA</span>
-                  <span class="repo-slug" lang="en">predictive-car-features-eda</span>
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/nooneinz/Online-Shoppers-Purchase-Prediction" target="_blank" rel="noopener">
-                  <span class="repo-name" lang="en">Online Shoppers Purchase Prediction</span>
-                  <span class="repo-slug" lang="en">Online-Shoppers-Purchase-Prediction</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="project-group">
-            <h3 class="group-title" data-en="Tools &amp;amp; applications">أدوات وتطبيقات</h3>
-            <ul class="repo-list">
-              <li>
-                <a href="https://github.com/nooneinz/gold-price-tracker-omam" target="_blank" rel="noopener">
-                  <span class="repo-name" lang="en">Gold Price Tracker Oman</span>
-                  <span class="repo-slug" lang="en">gold-price-tracker-omam</span>
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/nooneinz/mini-saas-task-manager" target="_blank" rel="noopener">
-                  <span class="repo-name" lang="en">Mini SaaS Task Manager</span>
-                  <span class="repo-slug" lang="en">mini-saas-task-manager</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <!-- All projects are rendered from frontend/data/projects.json -->
+        <div id="more-projects" class="proj-grid" aria-live="polite"></div>
       </div>
     </section>
 
@@ -387,7 +289,7 @@
     </div>
   </footer>
 
-  <script src="js/config.js?v=3"></script>
-  <script src="js/main.js?v=3"></script>
+  <script src="js/config.js?v=4"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
 </html>
