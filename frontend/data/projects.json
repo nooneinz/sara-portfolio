@@ -78,6 +78,31 @@
     ]
   },
   {
+    "id": "masar-ai",
+    "title": "Masar AI (مسار AI)",
+    "repo": "masar-ai",
+    "featured": false,
+    "kind_ar": "منصة ذكاء اصطناعي",
+    "kind_en": "AI platform",
+    "problem_ar": "الشركات تجد صعوبة في مطابقة السير الذاتية بالمهارات الفعلية، والخريجون الجدد لا يعرفون كيف يوجّهون مهاراتهم نحو احتياجات القطاع الخاص.",
+    "problem_en": "Employers struggle to match résumés to the skills they actually need, and new graduates struggle to aim their skills at real private-sector demand.",
+    "solution_ar": "منصة مطابقة بوكيلين: وكيل الشركة يحلل احتياجات المشروع وسجلات الفريق ليصيغ الوصف الوظيفي ويحدد الفجوات، ووكيل الخريج يحلل مشاريعه وسجله ويقترح خطة لسدّ الفجوة، مع بحث دلالي ونموذج تنبؤ بالأداء وواجهة عربية.",
+    "solution_en": "A matching platform with two agents: the company agent analyzes project needs and team records to draft the job description and skill gaps, and the graduate agent analyzes projects and records to propose a plan to close the gap, with semantic search, a performance-prediction model and an Arabic UI.",
+    "tags": [
+      "Python",
+      "FastAPI",
+      "Scikit-Learn",
+      "Vector Search"
+    ],
+    "links": [
+      {
+        "label_ar": "المستودع",
+        "label_en": "Repository",
+        "url": "https://github.com/nooneinz/masar-ai"
+      }
+    ]
+  },
+  {
     "id": "task-manager",
     "title": "Mini SaaS Task Manager",
     "repo": "mini-saas-task-manager",
