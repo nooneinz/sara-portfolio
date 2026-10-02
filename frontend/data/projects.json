@@ -54,6 +54,7 @@
   },
   {
     "id": "hasba",
+    "image": "img/projects/hasba.png",
     "title": "Hasba (حَسبة)",
     "repo": "hasba",
     "featured": true,
@@ -79,6 +80,7 @@
   },
   {
     "id": "masar-ai",
+    "image": "img/projects/masar-ai.png",
     "title": "Masar AI (مسار AI)",
     "repo": "masar-ai",
     "featured": false,
@@ -129,6 +131,7 @@
   },
   {
     "id": "gold-tracker",
+    "image": "img/projects/gold-tracker.png",
     "title": "Gold Price Tracker Oman",
     "repo": "gold-price-tracker-omam",
     "featured": false,

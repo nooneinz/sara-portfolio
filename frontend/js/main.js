@@ -310,7 +310,11 @@
     const problem = featured && p.problem_ar
       ? `<details class="proj-more"><summary data-en="The problem it solves">المشكلة التي يحلّها</summary><p data-en="${escHtml(p.problem_en)}">${escHtml(p.problem_ar)}</p></details>`
       : "";
+    const shot = p.image
+      ? `<div class="proj-shot"><img src="${escHtml(p.image)}" alt="${escHtml(p.title)}" loading="lazy" width="1280" height="800"></div>`
+      : "";
     return `<article class="proj-card${featured ? " is-featured" : ""}">
+      ${shot}
       <div class="proj-top">
         <span class="project-kind" data-en="${escHtml(p.kind_en)}">${escHtml(p.kind_ar)}</span>
         ${metric}
