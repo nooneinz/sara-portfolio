@@ -1,6 +1,7 @@
 [
   {
     "id": "baseera",
+    "image": "img/projects/baseera.png",
     "title": "Baseera",
     "repo": "baseera-app",
     "featured": true,
@@ -26,6 +27,7 @@
   },
   {
     "id": "retentionai",
+    "image": "img/projects/retentionai.png",
     "title": "RetentionAI",
     "repo": "RetentionAI-Project",
     "featured": true,
@@ -106,6 +108,7 @@
   },
   {
     "id": "task-manager",
+    "image": "img/projects/task-manager.png",
     "title": "Mini SaaS Task Manager",
     "repo": "mini-saas-task-manager",
     "featured": false,
