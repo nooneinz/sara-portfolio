@@ -7,7 +7,7 @@
   /* Palette */
   --bg-primary: #D7C3AA;     /* Warm Beige — main background */
   --bg-secondary: #A49384;   /* Mushroom — cards / subtle containers */
-  --accent: #7F3418;         /* Rust — the one bold accent: hover, active, key numbers (5.1:1 on bg) */
+  --accent: #1F4D3A;         /* Deep olive-green: the one accent. 5.6:1 on bg, 5.1:1 on surface */
   --text-muted: #574338;     /* Cocoa — subtitles & secondary text */
   --text-main: #3F2D24;      /* Espresso — body text */
   --text-dark: #241914;      /* Deep Brown — headings & logo */
@@ -35,7 +35,7 @@
 :root[data-theme="dark"] {
   --bg-primary: #1C1510;
   --bg-secondary: #4A3B30;
-  --accent: #E8946A;
+  --accent: #8FCFAE;
   --text-muted: #B7A38F;
   --text-main: #E4D5C1;
   --text-dark: #F4EADB;
@@ -67,8 +67,22 @@ ul, ol { padding: 0; list-style: none; }
 ::selection { background: var(--text-dark); color: var(--bg-primary); }
 
 :focus-visible {
-  outline: 1px solid var(--text-dark);
-  outline-offset: 4px;
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Arabic typography rules (web-design-pro-2026 / rtl-arabic.md): joined letters must not be
+   tracked, uppercased or slanted, and small Arabic text must not drop below 15px. Elements marked
+   lang="en" (logo, project titles, tags) keep their Latin styling. */
+:lang(ar) {
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  font-style: normal !important;
+}
+:lang(ar) :is(.tool-btn, .msg-who, .project-kind, .proj-metric, .degree-years, .cert-name, .chat-head,
+  .eyebrow, .ai-label, .footer-title, .stat-label, .tags li, .proj-more summary) {
+  font-size: .9375rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
