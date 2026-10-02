@@ -797,3 +797,18 @@ main, .site-footer { position: relative; z-index: 1; }
 }
 .tool-btn { min-width: 44px; height: 44px; }
 .nav-toggle { min-height: 44px; }
+
+/* ---------- Motion toggle (pauses every animation on the page) ---------- */
+.motion-toggle svg { fill: currentColor; stroke: none; }
+.motion-toggle .i-play { display: none; }
+.motion-paused .motion-toggle .i-play { display: block; }
+.motion-paused .motion-toggle .i-pause { display: none; }
+.motion-paused *, .motion-paused *::before, .motion-paused *::after { animation-play-state: paused !important; }
+
+/* Keep the header on one line: nav links never wrap, and the English wordmark steps aside on mid-size screens */
+.site-nav a { white-space: nowrap; }
+@media (max-width: 1180px) and (min-width: 761px) {
+  .logo-en, .logo-sep { display: none; }
+  .site-nav { gap: 1.1rem; }
+  .header-inner { gap: 1rem; }
+}

@@ -54,6 +54,10 @@
       if (el.dataset.arPlaceholder === undefined) el.dataset.arPlaceholder = el.getAttribute("placeholder") || "";
       el.setAttribute("placeholder", l === "en" ? el.dataset.enPlaceholder : el.dataset.arPlaceholder);
     });
+    document.querySelectorAll("img[data-alt-en]").forEach((img) => {
+      if (img.dataset.altAr === undefined) img.dataset.altAr = img.getAttribute("alt") || "";
+      img.setAttribute("alt", l === "en" ? img.dataset.altEn : img.dataset.altAr);
+    });
     if (langBtn) langBtn.textContent = t("langBtn");
     const navToggle = document.querySelector(".nav-toggle");
     if (navToggle) navToggle.textContent = document.getElementById("site-nav")?.classList.contains("is-open") ? t("close") : t("menu");
@@ -67,6 +71,15 @@
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", th === "dark" ? "#1C1510" : "#D7C3AA");
     store.set("theme", th);
   }
+
+  const motionBtn = document.getElementById("motion-toggle");
+  function applyMotion(paused) {
+    root.classList.toggle("motion-paused", paused);
+    motionBtn?.setAttribute("aria-pressed", String(paused));
+    window.__setNetPaused?.(paused);
+    store.set("motion", paused ? "paused" : "on");
+  }
+  motionBtn?.addEventListener("click", () => applyMotion(!root.classList.contains("motion-paused")));
 
   langBtn?.addEventListener("click", () => applyLang(lang === "ar" ? "en" : "ar"));
   themeBtn?.addEventListener("click", () =>
@@ -311,7 +324,7 @@
       ? `<details class="proj-more"><summary data-en="The problem it solves">المشكلة التي يحلّها</summary><p data-en="${escHtml(p.problem_en)}">${escHtml(p.problem_ar)}</p></details>`
       : "";
     const shot = p.image
-      ? `<div class="proj-shot"><img src="${escHtml(p.image)}" alt="${escHtml(p.title)}" loading="lazy" width="1280" height="800"></div>`
+      ? `<div class="proj-shot"><img src="${escHtml(p.image)}" alt="لقطة شاشة لمشروع ${escHtml(p.title)}" data-alt-en="Screenshot of the ${escHtml(p.title)} project" loading="lazy" width="1280" height="800"></div>`
       : "";
     return `<article class="proj-card${featured ? " is-featured" : ""}">
       ${shot}
@@ -371,4 +384,5 @@
   }
   applyTheme(root.getAttribute("data-theme") === "dark" ? "dark" : "light");
   if (lang === "en") applyLang("en");
+  if (store.get("motion") === "paused") applyMotion(true);
 })();
