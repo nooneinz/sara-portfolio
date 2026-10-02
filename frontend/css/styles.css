@@ -785,3 +785,15 @@ main, .site-footer { position: relative; z-index: 1; }
   .btn { padding: 0 1.25rem; }
 
 }
+
+/* ---------- Touch targets: every link/button gets a >= 44px hit area without changing how it looks ---------- */
+.logo, .footer-col a, .project-links a, .proj-more summary, .cert-more summary { position: relative; }
+.site-nav a::before, .logo::before, .footer-col a::before, .project-links a::before,
+.proj-more summary::before, .cert-more summary::before {
+  content: "";
+  position: absolute;
+  inset-block: -10px;
+  inset-inline: -6px;
+}
+.tool-btn { min-width: 44px; height: 44px; }
+.nav-toggle { min-height: 44px; }
