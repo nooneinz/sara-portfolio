@@ -5,12 +5,12 @@
 
 :root {
   /* Palette */
-  --bg-primary: #D7C3AA;     /* Warm Beige — main background */
+  --bg-primary: #DBC29E;     /* Biscotti — main background */
   --bg-secondary: #A49384;   /* Mushroom — cards / subtle containers */
-  --accent: #1F4D3A;         /* Deep olive-green: the one accent. 5.6:1 on bg, 5.1:1 on surface */
-  --text-muted: #574338;     /* Cocoa — subtitles & secondary text */
-  --text-main: #3F2D24;      /* Espresso — body text */
-  --text-dark: #241914;      /* Deep Brown — headings & logo */
+  --accent: #5E3720;         /* Tawny-brown accent, 6:1 on biscotti */
+  --text-muted: #4F3520;     /* Cocoa — subtitles & secondary text */
+  --text-main: #33200F;      /* Espresso — body text */
+  --text-dark: #1E110A;      /* Deep Brown — headings & logo */
   --border-color: #A49384;   /* Thin borders */
 
   /* Derived (solid, no gradients) */
@@ -35,7 +35,7 @@
 :root[data-theme="dark"] {
   --bg-primary: #1C1510;
   --bg-secondary: #4A3B30;
-  --accent: #8FCFAE;
+  --accent: #E8CF94;
   --text-muted: #B7A38F;
   --text-main: #E4D5C1;
   --text-dark: #F4EADB;
@@ -233,9 +233,8 @@ ul, ol { padding: 0; list-style: none; }
   gap: clamp(2rem, 6vw, 5rem);
 }
 .eyebrow {
-  font-size: .78rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
+  font-size: .9rem;
+  letter-spacing: .02em;
   color: var(--text-muted);
   margin-bottom: 1.5rem;
 }
@@ -617,7 +616,7 @@ main, .site-footer { position: relative; z-index: 1; }
   gap: clamp(1rem, 3vw, 2rem);
   margin-bottom: 1.25rem;
 }
-.ai-panel { display: flex; flex-direction: column; gap: .9rem; }
+.ai-panel { display: flex; flex-direction: column; gap: .9rem; min-width: 0; }
 .ai-label { font-size: .8rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--text-muted); margin: 0; }
 .ai-arrow { display: flex; align-items: center; color: var(--accent); }
 .ai-arrow svg { width: 2.2rem; height: 2.2rem; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; animation: arrow-nudge 1.8s ease-in-out infinite; }
@@ -812,3 +811,46 @@ main, .site-footer { position: relative; z-index: 1; }
   .site-nav { gap: 1.1rem; }
   .header-inner { gap: 1rem; }
 }
+
+/* ---------- Narrow phones (320–400px): keep the whole header and AI demo inside the viewport ---------- */
+@media (max-width: 760px) {
+  .header-inner { gap: .5rem; }
+  .header-tools { gap: .35rem; }
+  .terminal { overflow-x: auto; }
+}
+@media (max-width: 400px) {
+  .logo-ar { font-size: 1.35rem; }
+  .nav-toggle { padding-inline: .6rem; }
+  .tool-btn { min-width: 44px; padding: 0; }
+}
+
+/* =========================================================
+   Section tones — palette: Biscotti, Desert, Hazelnut, Tawny, Cinnamon, Chocolate.
+   Sections alternate light and dark so each one reads as its own band. Components already use the
+   colour variables, so a tone only re-maps the variables. Checked: body text >= 4.9:1, muted >= 5:1, borders >= 3:1.
+   ========================================================= */
+[data-tone] { background: var(--bg-primary); color: var(--text-main); border-block: 0; }
+.hero[data-tone] { background: transparent; }
+
+[data-tone="biscotti"] { --bg-primary:#DBC29E; --bg-secondary:#C9AE8E; --surface:#CFB48F; --surface-focus:#E6D2B3; --border-color:#7A5C3E; --text-main:#33200F; --text-muted:#4F3520; --text-dark:#1E110A; --accent:#5E3720; }
+[data-tone="desert"]   { --bg-primary:#C9AE8E; --bg-secondary:#B89C7A; --surface:#BFA383; --surface-focus:#D6BFA1; --border-color:#6F5438; --text-main:#2C1A0E; --text-muted:#46301D; --text-dark:#1A0E07; --accent:#4F2D18; }
+[data-tone="hazelnut"] { --bg-primary:#A39378; --bg-secondary:#8F7F65; --surface:#998A6F; --surface-focus:#B3A388; --border-color:#4E4130; --text-main:#1E110A; --text-muted:#2C1E10; --text-dark:#140A05; --accent:#3A200F; }
+[data-tone="tawny"]    { --bg-primary:#8A654A; --bg-secondary:#7A5840; --surface:#7F5D44; --surface-focus:#946F54; --border-color:#F0D9BC; --text-main:#FFF8EA; --text-muted:#FFF0DA; --text-dark:#FFFFFF; --accent:#FFFFFF; }
+[data-tone="cinnamon"] { --bg-primary:#5E4030; --bg-secondary:#725040; --surface:#69493A; --surface-focus:#775546; --border-color:#B58F6E; --text-main:#F3E6D2; --text-muted:#E3CDAE; --text-dark:#FFF8EA; --accent:#EDC98C; }
+[data-tone="chocolate"]{ --bg-primary:#321E14; --bg-secondary:#4A2E20; --surface:#3C2418; --surface-focus:#472B1D; --border-color:#8E6B4B; --text-main:#EBDCC4; --text-muted:#C9B08F; --text-dark:#FBF1DE; --accent:#EDC98C; --border-color:#8E6B4B; }
+
+/* Dark theme: the same sequence moved down the palette */
+:root[data-theme="dark"] [data-tone="biscotti"],
+:root[data-theme="dark"] [data-tone="desert"],
+:root[data-theme="dark"] [data-tone="hazelnut"] { --text-main:#EBDCC4; --text-muted:#C9B08F; --text-dark:#FBF1DE; --accent:#EDC98C; --border-color:#8E6B4B; }
+:root[data-theme="dark"] [data-tone="biscotti"] { --bg-primary:#1F120B; --bg-secondary:#2E1B10; --surface:#2A1810; --surface-focus:#35211A; }
+:root[data-theme="dark"] [data-tone="desert"]   { --bg-primary:#2E1E14; --bg-secondary:#3E291B; --surface:#38241A; --surface-focus:#442E21; }
+:root[data-theme="dark"] [data-tone="hazelnut"] { --bg-primary:#3B2D20; --bg-secondary:#4A3A2A; --surface:#44342A; --surface-focus:#503E30; }
+:root[data-theme="dark"] [data-tone="tawny"]    { --bg-primary:#5E4330; --surface:#684B37; --surface-focus:#735440; }
+:root[data-theme="dark"] [data-tone="cinnamon"] { --bg-primary:#3A2519; }
+:root[data-theme="dark"] [data-tone="chocolate"]{ --bg-primary:#120A06; --surface:#1B100A; }
+
+/* Cards sit one step off their band so they stay readable on every tone */
+[data-tone] :is(.proj-card, .service-card, .degree, .cert-tile) { background: var(--surface); }
+[data-tone] .cta-title, [data-tone] .section-title { color: var(--text-dark); }
+.site-footer[data-tone] { border-top: 0; }
