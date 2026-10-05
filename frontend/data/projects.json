@@ -107,6 +107,32 @@
     ]
   },
   {
+    "id": "leave-attendance",
+    "title": "Employee Leave & Attendance System",
+    "repo": "leave-attendance-system",
+    "featured": true,
+    "kind_ar": "نظام موارد بشرية",
+    "kind_en": "HR system",
+    "problem_ar": "صعوبة تتبع الحضور والانصراف، وأخطاء احتساب أرصدة الإجازات يدوياً، وتداخل طلبات الإجازة مع جداول العمل في أقسام الشركة.",
+    "problem_en": "Attendance is hard to track, leave balances are miscalculated by hand, and leave requests collide with department work schedules.",
+    "solution_ar": "نظام HR لشركات سلطنة عُمان بتوقيت مسقط: بصمة من الويب أو من جهاز عبر API بمفتاح لكل جهاز، وأرصدة بدفتر قيود لا يُعدَّل، وموافقات حسب الصلاحية (JWT)، ومهام مجدولة تغلق الحضور يومياً وتستحق الإجازة شهرياً. وكيل التغطية يفحص أثر الإجازة على القسم ويقترح موعداً بديلاً أو يوافق تلقائياً، ووكيل تحليل الغياب يصدر تقارير تنبؤية بخصم تقديري بالريال العماني.",
+    "solution_en": "An HR system for companies in Oman on Muscat time: web or biometric-device punches through a per-device API key, an immutable leave ledger, role-based approvals (JWT), and scheduled jobs that close attendance daily and accrue leave monthly. A coverage agent checks a leave request's impact on the department and proposes another date or auto-approves, and an absence-analytics agent produces predictive reports with an estimated deduction in Omani rials.",
+    "tags": [
+      "FastAPI",
+      "React",
+      "PostgreSQL",
+      "Agentic AI",
+      "Docker"
+    ],
+    "links": [
+      {
+        "label_ar": "المستودع",
+        "label_en": "Repository",
+        "url": "https://github.com/nooneinz/leave-attendance-system"
+      }
+    ]
+  },
+  {
     "id": "masar-ai",
     "image": "img/projects/masar-ai.webp",
     "title": "Masar AI (مسار AI)",
