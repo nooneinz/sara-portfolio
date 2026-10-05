@@ -72,15 +72,6 @@
     store.set("theme", th);
   }
 
-  const motionBtn = document.getElementById("motion-toggle");
-  function applyMotion(paused) {
-    root.classList.toggle("motion-paused", paused);
-    motionBtn?.setAttribute("aria-pressed", String(paused));
-    window.__setNetPaused?.(paused);
-    store.set("motion", paused ? "paused" : "on");
-  }
-  motionBtn?.addEventListener("click", () => applyMotion(!root.classList.contains("motion-paused")));
-
   langBtn?.addEventListener("click", () => applyLang(lang === "ar" ? "en" : "ar"));
   themeBtn?.addEventListener("click", () =>
     applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark")
@@ -380,5 +371,4 @@
   }
   applyTheme(root.getAttribute("data-theme") === "dark" ? "dark" : "light");
   if (lang === "en") applyLang("en");
-  if (store.get("motion") === "paused") applyMotion(true);
 })();

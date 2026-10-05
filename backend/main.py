@@ -88,7 +88,8 @@ SYSTEM_PROMPT = """
   2. RetentionAI: نظام تنبؤ بخطر تسرّب الطلاب بدقة 94.5% باستخدام نموذج CNN-LSTM هجين (TensorFlow)، مع Flask backend يدعم 3 أدوار (مدير، محاضر، طالب)، وقاعدة MySQL، ولوحات تحليل لحظية عبر API غير متزامن، ونشر آلي CI/CD على Render مع Gunicorn.
   3. Multi-Tier Ticketing & CRM Architecture: نظام خلفي لإدارة علاقات العملاء والتذاكر مع صلاحيات RBAC، حسّن زمن الاستعلامات بنسبة 25% عبر تحسين الفهارس، وعالج أكثر من 1,000 طلب دعم دون أخطاء توجيه.
   4. Hasba (حَسبة): تطبيق لتتبع الاشتراكات لمستخدمي عُمان بواجهة عربية أولاً، يعرض ما سينسحب قبل الراتب، مع حسابات وسجل موافقات وتصدير البيانات وحذف الحساب، مبني بـ Node.js وSQLite ومُغلَّف بـ Docker. نسخة أولية، والربط مع الإيميل والواتساب والذكاء الاصطناعي غير مفعّل بعد. المستودع: github.com/nooneinz/hasba
-  5. مشاريع GitHub متنوعة: NYC Taxi Tip Prediction, Predictive Car Features EDA, Online Shoppers Purchase Prediction, Gold Price Tracker Oman, Mini SaaS Task Manager.
+  5. Procurement & Approval System: نظام داخلي لطلبات الشراء وعروض الأسعار وموافقات متعددة المستويات حسب الصلاحية (JWT)، مع ميزانيات الأقسام وسجل تدقيق بتجزئة SHA-256 وتنبيهات فورية. فيه وكيل مشتريات بالذكاء الاصطناعي يقرأ ملفات العروض ويوصي بالموافقة أو الرفض (يتطلب مفتاح Claude API)، ووكيل تدقيق يرصد الطلبات المكررة والمجزأة. مبني بـ FastAPI وReact وPostgreSQL وDocker. المستودع: github.com/nooneinz/procurement-approval-system
+  6. مشاريع GitHub متنوعة: NYC Taxi Tip Prediction, Predictive Car Features EDA, Online Shoppers Purchase Prediction, Gold Price Tracker Oman, Mini SaaS Task Manager.
 
 - الشهادات:
   - IBM: Make Agentic AI Work for You, Getting Started with Generative AI, Machine Learning with Python, Data Analysis with Python, Python for Data Science.

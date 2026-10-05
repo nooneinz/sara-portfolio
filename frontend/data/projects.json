@@ -81,6 +81,32 @@
     ]
   },
   {
+    "id": "procurement",
+    "title": "Procurement & Approval System",
+    "repo": "procurement-approval-system",
+    "featured": true,
+    "kind_ar": "نظام مؤسسي",
+    "kind_en": "Enterprise system",
+    "problem_ar": "غياب الشفافية في طلبات الشراء، وعشوائية اختيار الموردين وعروض الأسعار، وتأخر الموافقات؛ مما يؤدي إلى تجاوز الميزانيات أو الاحتيال.",
+    "problem_en": "Purchase requests lack transparency, vendors and quotes are chosen haphazardly, and approvals lag, leading to budget overruns or fraud.",
+    "solution_ar": "نظام داخلي يضبط طلبات الشراء وعروض الأسعار ومسار موافقات متعدد المستويات حسب الصلاحية (JWT)، مع ميزانيات الأقسام وسجل تدقيق تتسلسل حركاته بالتجزئة SHA-256 وتنبيهات فورية. وكيل مشتريات بالذكاء الاصطناعي يقرأ ملفات العروض ويوصي بالموافقة أو الرفض، ووكيل تدقيق يرصد الطلبات المكررة والمجزأة والمشبوهة. وكيل المشتريات يتطلب مفتاح Claude API لقراءة الملفات.",
+    "solution_en": "An internal system that controls purchase requests, quotes and a multi-level approval flow by role (JWT), with department budgets, an audit log chained by SHA-256 hashes, and instant notifications. A procurement AI agent reads quote files and recommends approval or rejection, and an audit agent flags duplicate, split and suspicious requests. The procurement agent needs a Claude API key to read files.",
+    "tags": [
+      "FastAPI",
+      "React",
+      "PostgreSQL",
+      "Agentic AI",
+      "Docker"
+    ],
+    "links": [
+      {
+        "label_ar": "المستودع",
+        "label_en": "Repository",
+        "url": "https://github.com/nooneinz/procurement-approval-system"
+      }
+    ]
+  },
+  {
     "id": "masar-ai",
     "image": "img/projects/masar-ai.webp",
     "title": "Masar AI (مسار AI)",

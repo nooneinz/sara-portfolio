@@ -364,6 +364,4 @@
   window.addEventListener("pointermove", (e) => { mouse.x = e.clientX; mouse.y = e.clientY + window.scrollY; }, { passive: true });
   document.addEventListener("pointerleave", () => { mouse.x = mouse.y = -9999; });
 
-  // Pause / play from the header motion toggle
-  window.__setNetPaused = (state) => { paused = state; state ? stop() : start(); };
 })();
