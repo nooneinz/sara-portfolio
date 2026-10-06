@@ -159,6 +159,58 @@
     ]
   },
   {
+    "id": "crm",
+    "title": "CRM for Sales Teams",
+    "repo": "crm-sales-system",
+    "featured": true,
+    "kind_ar": "نظام مبيعات",
+    "kind_en": "Sales system",
+    "problem_ar": "تشتت العملاء المحتملين، وصعوبة متابعة مراحل الصفقة، وضياع سجل التواصل والملاحظات بين أفراد فريق المبيعات.",
+    "problem_en": "Leads are scattered, deal stages are hard to follow, and contact history and notes get lost between sales team members.",
+    "solution_ar": "CRM بالريال العماني: مسار مبيعات Kanban بالسحب والإفلات (dnd-kit)، وسجل أنشطة ومهام، وبحث موحّد بالعربية، وصلاحيات بحيث يرى المندوب صفقاته فقط. وكيل التقييم يعطي كل صفقة درجة وأولوية واحتمال إغلاق مع أسباب مكتوبة، ووكيل المتابعة يرصد الصفقات الخاملة ويكتب مسودات متابعة مخصصة ويجهّز ملخصاً قبل الاجتماع. الوكلاء يتحاورون بالعربية بأدوات قراءة فقط. لا يوجد ربط Twilio.",
+    "solution_en": "A CRM in Omani rials: a drag-and-drop Kanban pipeline (dnd-kit), an activity and task log, unified Arabic search, and permissions so reps see only their own deals. A scoring agent gives each deal a score, priority and win probability with written reasons, and a copilot agent spots idle deals, drafts personalised follow-ups and prepares a brief before meetings. The agents converse in Arabic using read-only tools. No Twilio integration.",
+    "tags": [
+      "FastAPI",
+      "React",
+      "dnd-kit",
+      "Agentic AI",
+      "Docker"
+    ],
+    "links": [
+      {
+        "label_ar": "المستودع",
+        "label_en": "Repository",
+        "url": "https://github.com/nooneinz/crm-sales-system"
+      }
+    ]
+  },
+  {
+    "id": "delivery-ops",
+    "title": "Delivery Operations Dashboard",
+    "repo": "delivery-ops-dashboard",
+    "featured": true,
+    "kind_ar": "عمليات لوجستية",
+    "kind_en": "Logistics operations",
+    "problem_ar": "عدم القدرة على تتبع السائقين والشحنات لحظياً، وارتفاع نسبة التوصيل الفاشل، وصعوبة إدارة المبالغ المحصّلة عند الاستلام والأداء الجغرافي.",
+    "problem_en": "Drivers and shipments can't be tracked in real time, failed deliveries run high, and cash-on-delivery and geographic performance are hard to manage.",
+    "solution_ar": "لوحة تشغيل لمسقط: خريطة حيّة عبر WebSocket، وواجهة ويب للسائق تشارك موقعه وتسجّل التسليم، وسجل للنقد عند الاستلام، وتحليلات حسب المنطقة. وكيل المسارات يُسند الشحنات ويرتّب المحطات ويقارن المسافة والزمن والوقود، ووكيل التوصيل الفاشل يراسل العميل ويفهم ردّه ويعيد الجدولة وتوجيه السائق. الوكلاء يتحاورون بالعربية. لا ربط بمرور حيّ؛ الزمن بنموذج وقت اليوم ومعاملات يدوية.",
+    "solution_en": "An operations dashboard for Muscat: a live map over WebSocket, a driver web app that shares location and logs deliveries, a cash-on-delivery ledger, and per-zone analytics. A route agent assigns shipments, sequences stops and compares distance, time and fuel, and a failed-delivery agent messages the customer, understands the reply, reschedules and re-routes a driver. The agents converse in Arabic. No live traffic feed; timing uses a time-of-day model with manual congestion factors.",
+    "tags": [
+      "FastAPI",
+      "React",
+      "WebSocket",
+      "Agentic AI",
+      "Docker"
+    ],
+    "links": [
+      {
+        "label_ar": "المستودع",
+        "label_en": "Repository",
+        "url": "https://github.com/nooneinz/delivery-ops-dashboard"
+      }
+    ]
+  },
+  {
     "id": "masar-ai",
     "image": "img/projects/masar-ai.webp",
     "title": "Masar AI (مسار AI)",
