@@ -335,8 +335,10 @@
       const res = await fetch("data/projects.json", { cache: "no-cache" });
       if (!res.ok) return;
       const items = await res.json();
-      top.innerHTML = items.filter((p) => p.featured).map((p) => projectCard(p, true)).join("");
-      rest.innerHTML = items.filter((p) => !p.featured).map((p) => projectCard(p, false)).join("");
+      // One continuous 3-column grid (15 cards = 5 rows of 3); featured ones come first.
+      top.innerHTML = [...items.filter((p) => p.featured), ...items.filter((p) => !p.featured)]
+        .map((p) => projectCard(p, !!p.featured)).join("");
+      rest.innerHTML = "";
       document.querySelectorAll(".proj-card").forEach((el) => {
         el.style.setProperty("--i", String([...el.parentElement.children].indexOf(el)));
       });

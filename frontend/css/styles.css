@@ -467,6 +467,13 @@ main, .site-footer { position: relative; z-index: 1; }
   gap: 1.25rem;
   margin-top: 1.25rem;
 }
+.proj-grid:empty { display: none; }
+.proj-featured .proj-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 .proj-card {
   display: flex;
   flex-direction: column;
