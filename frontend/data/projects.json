@@ -133,6 +133,32 @@
     ]
   },
   {
+    "id": "invoice-tracking",
+    "title": "B2B Invoice & Payment Tracking",
+    "repo": "invoice-tracking-system",
+    "featured": true,
+    "kind_ar": "نظام مالي",
+    "kind_en": "Finance system",
+    "problem_ar": "تأخر تحصيل الديون بين الشركات، وضياع تتبع الدفعات الجزئية، وغياب تنبيهات آلية للفواتير المتأخرة.",
+    "problem_en": "B2B debts are collected late, partial payments get lost, and there are no automatic alerts for overdue invoices.",
+    "solution_ar": "لوحة مالية للريال العماني: فواتير بمعاينة مباشرة وPDF عربي، ودفعات جزئية بمعاملات ACID وبالبيسة كأعداد صحيحة، وتقادم الذمم، وwebhook موقّع لبوابات الدفع. وكيل التحصيل يكتب تذكيرات بنبرة تتكيّف مع سجل كل عميل ويقترح خطط تسوية، ووكيل المطابقة يطابق كشف البنك ويغلق المسدّد آلياً. الوكلاء يتحاورون بالعربية بأدوات قراءة فقط. لا يوجد ربط مباشر مع Stripe.",
+    "solution_en": "A finance dashboard in Omani rials: invoices with a live preview and Arabic PDF, partial payments in ACID transactions with amounts as integer baisa, receivables aging, and a signed webhook for payment gateways. A dunning agent writes reminders in a tone adapted to each customer's history and proposes settlement plans, and a reconciliation agent matches bank statements and closes paid invoices automatically. The agents converse in Arabic using read-only tools. No direct Stripe integration.",
+    "tags": [
+      "FastAPI",
+      "React",
+      "PostgreSQL",
+      "Agentic AI",
+      "Docker"
+    ],
+    "links": [
+      {
+        "label_ar": "المستودع",
+        "label_en": "Repository",
+        "url": "https://github.com/nooneinz/invoice-tracking-system"
+      }
+    ]
+  },
+  {
     "id": "masar-ai",
     "image": "img/projects/masar-ai.webp",
     "title": "Masar AI (مسار AI)",
