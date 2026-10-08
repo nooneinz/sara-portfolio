@@ -856,3 +856,17 @@ html[lang="en"] .hero-title { font-weight: 400; line-height: 1.1; }
   .certs, .skills-grid { grid-template-columns: 1fr; }
   .lang-toggle { height: 2rem; }
 }
+
+/* ---------- Section colour rhythm (stronger contrast between bands) ---------- */
+.stats { background: var(--chestnut); border-block: 0; --fg-soft: #F0DECE; }
+.stats .stat strong { color: var(--ivory); }
+.stats .stat span { color: var(--ivory); opacity: .85; }
+.manifesto { background: var(--ivory); }
+.section-projects { background: var(--taupe); border-top: 0; --fg-soft: #4B4A3B; }
+.section-projects .proj-card:not(.is-featured) { background: var(--ivory); }
+.section-skills .skill-group { background: var(--sage-3); }
+.section-skills .skill-title { color: var(--ivory); }
+.section-skills .tags li { border-color: rgba(240, 222, 206, .55); color: var(--ivory); }
+.section-skills .section-num, .section-skills .section-lead { color: var(--taupe); }
+.section-blush { background: var(--blush); }
+.site-footer { border-top: 1px solid rgba(240, 222, 206, .15); }
