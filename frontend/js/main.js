@@ -240,4 +240,41 @@
   });
 
   chips.forEach((chip) => chip.addEventListener("click", () => ask(chip.textContent)));
+
+  /* ---------------- Projects (data/projects.json: add new entries there) ---------------- */
+  const escHtml = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const safeUrl = (u) => (/^https?:\/\//.test(u) ? escHtml(u) : "#");
+
+  function projectCard(p) {
+    const links = (p.links || []).map((l) =>
+      `<a href="${safeUrl(l.url)}" target="_blank" rel="noopener">${escHtml(l.label_ar || "رابط")}</a>`).join("");
+    const metric = p.metric
+      ? `<p class="proj-metric"><strong lang="en" dir="ltr">${escHtml(p.metric)}</strong><span>${escHtml(p.metric_ar)}</span></p>`
+      : "";
+    const problem = p.featured && p.problem_ar
+      ? `<details class="proj-more"><summary>المشكلة التي يحلّها</summary><p>${escHtml(p.problem_ar)}</p></details>`
+      : "";
+    return `<article class="project proj-card reveal${p.featured ? " is-featured theme-dark" : ""}">
+      <div class="project-meta"><span>${escHtml(p.kind_ar)}</span></div>
+      <h3 class="project-title" lang="en">${escHtml(p.title)}</h3>
+      ${metric}
+      <p class="project-desc">${escHtml(p.solution_ar)}</p>
+      ${problem}
+      <ul class="tags" lang="en" dir="ltr">${(p.tags || []).map((t) => `<li>${escHtml(t)}</li>`).join("")}</ul>
+      ${links ? `<div class="project-links">${links}</div>` : ""}
+    </article>`;
+  }
+
+  async function renderProjects() {
+    const grid = document.getElementById("projects-grid");
+    if (!grid) return;
+    try {
+      const res = await fetch("data/projects.json", { cache: "no-cache" });
+      if (!res.ok) return;
+      const items = await res.json();
+      grid.innerHTML = [...items.filter((p) => p.featured), ...items.filter((p) => !p.featured)].map(projectCard).join("");
+      grid.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+    } catch { /* keep empty */ }
+  }
+  renderProjects();
 })();
