@@ -5,6 +5,45 @@
   const REQUEST_TIMEOUT_MS = 25000;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---------------- Language (AR / EN) ---------------- */
+  const STR = {
+    ar: { menu: "القائمة", close: "إغلاق", you: "أنت", bot: "المساعد", typing: "يكتب…", online: "متصل", offline: "غير متصل",
+      noAnswer: "تعذّر الحصول على إجابة الآن.", none: "لم تصل إجابة.", timeout: "انتهت مهلة الطلب. حاول مرة أخرى.",
+      conn: "تعذّر الاتصال بالمساعد حالياً. يمكنك التواصل مع سارة مباشرة عبر Saraalharbi0031@gmail.com",
+      thinking: "جارٍ الكتابة", problem: "المشكلة التي يحلّها", repo: "المستودع", link: "رابط", sw: "التبديل إلى الإنجليزية" },
+    en: { menu: "Menu", close: "Close", you: "You", bot: "Assistant", typing: "Typing…", online: "Online", offline: "Offline",
+      noAnswer: "Couldn't get an answer right now.", none: "No answer received.", timeout: "The request timed out. Please try again.",
+      conn: "Couldn't reach the assistant right now. You can contact Sara directly at Saraalharbi0031@gmail.com",
+      thinking: "Typing", problem: "The problem it solves", repo: "Repository", link: "Link", sw: "Switch to Arabic" },
+  };
+  let lang = "ar";
+  try { lang = localStorage.getItem("sa-lang") === "en" ? "en" : "ar"; } catch { /* storage unavailable */ }
+  const t = (k) => STR[lang][k];
+  const langBtn = document.getElementById("lang-toggle");
+
+  // Remember the Arabic originals once, so we can switch back and forth.
+  document.querySelectorAll("[data-en]").forEach((el) => { el.dataset.ar = el.innerHTML; });
+  document.querySelectorAll("[data-en-ph]").forEach((el) => { el.dataset.arPh = el.getAttribute("placeholder") || ""; });
+  const arTitle = document.title;
+
+  function applyLang(l) {
+    lang = l;
+    const root = document.documentElement;
+    root.lang = l;
+    root.dir = l === "en" ? "ltr" : "rtl";
+    document.querySelectorAll("[data-en]").forEach((el) => { el.innerHTML = l === "en" ? el.dataset.en : el.dataset.ar; });
+    document.querySelectorAll("[data-en-ph]").forEach((el) => el.setAttribute("placeholder", l === "en" ? el.dataset.enPh : el.dataset.arPh));
+    if (langBtn) { langBtn.textContent = l === "en" ? "عربي" : "EN"; langBtn.setAttribute("aria-label", t("sw")); }
+    const tg = document.querySelector(".nav-toggle");
+    if (tg) tg.textContent = document.getElementById("site-nav")?.classList.contains("is-open") ? t("close") : t("menu");
+    document.querySelectorAll(".msg-user .msg-who").forEach((el) => (el.textContent = t("you")));
+    if (!busy) status.textContent = status.classList.contains("is-error") ? t("offline") : t("online");
+    document.title = l === "en" ? "Sara Alharbi — Software Engineer & AI Specialist" : arTitle;
+    try { localStorage.setItem("sa-lang", l); } catch { /* storage unavailable */ }
+    renderProjects();
+  }
+  langBtn?.addEventListener("click", () => applyLang(lang === "en" ? "ar" : "en"));
+
   /* ---------------- Intro (logo animation) ---------------- */
   const intro = document.getElementById("intro");
   if (intro) {
@@ -37,13 +76,13 @@
   toggle?.addEventListener("click", () => {
     const open = nav.classList.toggle("is-open");
     toggle.setAttribute("aria-expanded", String(open));
-    toggle.textContent = open ? "إغلاق" : "القائمة";
+    toggle.textContent = open ? t("close") : t("menu");
   });
   nav?.querySelectorAll("a").forEach((a) =>
     a.addEventListener("click", () => {
       nav.classList.remove("is-open");
       toggle?.setAttribute("aria-expanded", "false");
-      if (toggle) toggle.textContent = "القائمة";
+      if (toggle) toggle.textContent = t("menu");
     })
   );
 
@@ -69,7 +108,7 @@
     /* Reveal on scroll */
     if (!reduceMotion) {
       const revealables = document.querySelectorAll(
-        ".section-head, .service, .project, .project-group, .degree, .cert-col, .contact-list li"
+        ".section-head, .service, .project, .skill-group, .stat, .cert-group-title, .degree, .cert-col, .contact-list li"
       );
       const revealer = new IntersectionObserver(
         (entries, obs) => {
@@ -131,7 +170,7 @@
     wrap.className = `msg msg-${role}`;
     const who = document.createElement("span");
     who.className = "msg-who";
-    who.textContent = role === "user" ? "أنت" : "المساعد";
+    who.textContent = role === "user" ? t("you") : t("bot");
     const p = document.createElement("p");
     p.className = "msg-text";
     setDir(p, text);
@@ -143,7 +182,7 @@
   }
 
   function showThinking(p) {
-    p.innerHTML = '<span class="thinking" aria-label="جارٍ الكتابة"><span></span><span></span><span></span></span>';
+    p.innerHTML = `<span class="thinking" aria-label="${t("thinking")}"><span></span><span></span><span></span></span>`;
   }
 
   async function typeOut(p, text) {
@@ -178,7 +217,7 @@
     chips.forEach((c) => (c.disabled = state));
     status.classList.toggle("is-busy", state);
     status.classList.remove("is-error");
-    status.textContent = state ? "يكتب…" : "متصل";
+    status.textContent = state ? t("typing") : t("online");
   }
 
   async function ask(question) {
@@ -208,17 +247,17 @@
 
       if (!res.ok) {
         const detail = typeof data.detail === "string" ? data.detail : null;
-        throw new Error(detail || "تعذّر الحصول على إجابة الآن.");
+        throw new Error(detail || t("noAnswer"));
       }
 
-      await typeOut(p, data.answer || "لم تصل إجابة.");
+      await typeOut(p, data.answer || t("none"));
     } catch (err) {
       wrap.classList.add("msg-error");
       const msg =
         err.name === "AbortError"
-          ? "انتهت مهلة الطلب. حاول مرة أخرى."
+          ? t("timeout")
           : err instanceof TypeError
-          ? "تعذّر الاتصال بالمساعد حالياً. يمكنك التواصل مع سارة مباشرة عبر Saraalharbi0031@gmail.com"
+          ? t("conn")
           : err.message;
       p.innerHTML = linkify(msg);
       status.classList.add("is-error");
@@ -228,7 +267,7 @@
       setBusy(false);
       if (hadError) {
         status.classList.add("is-error");
-        status.textContent = "غير متصل";
+        status.textContent = t("offline");
       }
       input.focus({ preventScroll: true });
     }
@@ -247,18 +286,18 @@
 
   function projectCard(p) {
     const links = (p.links || []).map((l) =>
-      `<a href="${safeUrl(l.url)}" target="_blank" rel="noopener">${escHtml(l.label_ar || "رابط")}</a>`).join("");
+      `<a href="${safeUrl(l.url)}" target="_blank" rel="noopener">${escHtml((lang === "en" ? l.label_en : l.label_ar) || t("link"))}</a>`).join("");
     const metric = p.metric
-      ? `<p class="proj-metric"><strong lang="en" dir="ltr">${escHtml(p.metric)}</strong><span>${escHtml(p.metric_ar)}</span></p>`
+      ? `<p class="proj-metric"><strong lang="en" dir="ltr">${escHtml(p.metric)}</strong><span>${escHtml(lang === "en" ? p.metric_en : p.metric_ar)}</span></p>`
       : "";
     const problem = p.featured && p.problem_ar
-      ? `<details class="proj-more"><summary>المشكلة التي يحلّها</summary><p>${escHtml(p.problem_ar)}</p></details>`
+      ? `<details class="proj-more"><summary>${t("problem")}</summary><p>${escHtml(lang === "en" ? p.problem_en : p.problem_ar)}</p></details>`
       : "";
     return `<article class="project proj-card reveal${p.featured ? " is-featured theme-dark" : ""}">
-      <div class="project-meta"><span>${escHtml(p.kind_ar)}</span></div>
+      <div class="project-meta"><span>${escHtml(lang === "en" ? p.kind_en : p.kind_ar)}</span></div>
       <h3 class="project-title" lang="en">${escHtml(p.title)}</h3>
       ${metric}
-      <p class="project-desc">${escHtml(p.solution_ar)}</p>
+      <p class="project-desc">${escHtml(lang === "en" ? p.solution_en : p.solution_ar)}</p>
       ${problem}
       <ul class="tags" lang="en" dir="ltr">${(p.tags || []).map((t) => `<li>${escHtml(t)}</li>`).join("")}</ul>
       ${links ? `<div class="project-links">${links}</div>` : ""}
@@ -276,5 +315,27 @@
       grid.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
     } catch { /* keep empty */ }
   }
-  renderProjects();
+  /* ---------------- Count-up numbers ---------------- */
+  const fmt = (el, v) => `${v.toFixed(Number(el.dataset.decimals || 0))}${el.dataset.suffix || ""}`;
+  function countUp(el) {
+    const target = parseFloat(el.dataset.count);
+    if (reduceMotion || !isFinite(target)) return;
+    const start = performance.now();
+    const tick = (now) => {
+      const k = Math.min(1, (now - start) / 1400);
+      el.textContent = fmt(el, target * (1 - Math.pow(1 - k, 3)));
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    el.textContent = fmt(el, 0);
+    requestAnimationFrame(tick);
+  }
+  const counters = document.querySelectorAll("[data-count]");
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    const co = new IntersectionObserver((entries, obs) => entries.forEach((e) => {
+      if (e.isIntersecting) { countUp(e.target); obs.unobserve(e.target); }
+    }), { threshold: 0.6 });
+    counters.forEach((el) => co.observe(el));
+  }
+
+  if (lang === "en") applyLang("en"); else renderProjects();
 })();

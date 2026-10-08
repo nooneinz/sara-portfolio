@@ -95,11 +95,15 @@ SYSTEM_PROMPT = """
   9. Delivery Operations Dashboard: لوحة عمليات توصيل لمسقط: خريطة حية عبر WebSocket، وواجهة ويب للسائق، وسجل للنقد عند الاستلام، وتحليلات حسب المنطقة. وكيل المسارات يسند الشحنات ويرتب المحطات، ووكيل التوصيل الفاشل يراسل العميل ويفهم رده ويعيد الجدولة والتوجيه، والوكلاء يتحاورون بالعربية. لا ربط بمرور حي. مبني بـ FastAPI وReact وLeaflet. المستودع: github.com/nooneinz/delivery-ops-dashboard
   10. مشاريع GitHub متنوعة: NYC Taxi Tip Prediction, Predictive Car Features EDA, Online Shoppers Purchase Prediction, Gold Price Tracker Oman, Mini SaaS Task Manager.
 
-- الشهادات:
-  - IBM: Make Agentic AI Work for You, Getting Started with Generative AI, Machine Learning with Python, Data Analysis with Python, Python for Data Science.
-  - Google: Google AI Essentials, 5-Day AI Agents Intensive, Discover the Art of Prompting.
-  - Kaggle: Machine Learning, Pandas, Python.
-  - University of Michigan: Python Data Structures, Programming for Everybody.
+- التعليم: بكالوريوس علوم الحاسوب والذكاء الاصطناعي (2021-2026) من كلية الخليج بالشراكة مع جامعة كارديف متروبوليتان، بمرتبة الشرف الأولى ومعدل 3.9.
+- الشهادات (20 شهادة):
+  - IBM: Make Agentic AI Work for You, Getting Started with Generative AI, Machine Learning with Python - Level 1, A Quick Introduction to Machine Learning, Data Analysis with Python, Python for Data Science.
+  - Google: Google AI Essentials, Discover the Art of Prompting, Stay Ahead of the AI Curve.
+  - Cognitive Class & Kaggle: Machine Learning with Python, Intro to Machine Learning.
+  - Skillova: ChatGPT Alternatives Workshop.
+  - University of Michigan: Python Data Structures, Programming for Everybody (Getting Started with Python).
+  - Kaggle: Pandas, Python, Intro to Programming.
+  - Coursera & Google: Data Analysis Foundations using Google Sheets, Introduction to AI, Maximize Productivity With AI Tools.
 
 - التواصل:
   - LinkedIn: linkedin.com/in/sara-alharbi-1b53263a2
