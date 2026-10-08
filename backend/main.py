@@ -289,6 +289,15 @@ async def ask(payload: AskRequest, request: Request):
         raise HTTPException(status_code=502, detail="حدث خطأ في خدمة الذكاء الاصطناعي.")
 
 
+@app.middleware("http")
+async def revalidate_static(request: Request, call_next):
+    """Make browsers/CDNs revalidate the site files so new deploys show up immediately."""
+    response = await call_next(request)
+    if not request.url.path.startswith("/api"):
+        response.headers["Cache-Control"] = "no-cache"
+    return response
+
+
 # Serve the static frontend from the same container (same origin as /api).
 # Mounted last so the /api routes above take priority.
 _FRONTEND = Path(__file__).resolve().parent.parent / "frontend"
