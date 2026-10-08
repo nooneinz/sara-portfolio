@@ -78,6 +78,15 @@
     toggle.setAttribute("aria-expanded", String(open));
     toggle.textContent = open ? t("close") : t("menu");
   });
+  // On mobile the logo doubles as the menu button; on desktop it scrolls to the top.
+  const logo = document.getElementById("logo");
+  logo?.addEventListener("click", (e) => {
+    if (!toggle || !window.matchMedia("(max-width: 760px)").matches) return;
+    e.preventDefault();
+    toggle.click();
+  });
+  const syncLogoState = () => logo?.setAttribute("aria-expanded", String(nav.classList.contains("is-open")));
+  new MutationObserver(syncLogoState).observe(nav, { attributes: true, attributeFilter: ["class"] });
   nav?.querySelectorAll("a").forEach((a) =>
     a.addEventListener("click", () => {
       nav.classList.remove("is-open");

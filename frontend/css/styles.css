@@ -688,7 +688,8 @@ strong { font-weight: 500; }
 }
 
 @media (max-width: 760px) {
-  .nav-toggle { display: inline-block; }
+  /* The logo opens the menu on mobile; the button stays in the DOM for assistive tech only. */
+  .nav-toggle { display: inline-block; position: absolute; width: 1px; height: 1px; padding: 0; border: 0; overflow: hidden; opacity: 0; pointer-events: none; }
   .site-nav {
     position: absolute; top: 100%; inset-inline: 0;
     flex-direction: column; gap: 0;
@@ -809,7 +810,7 @@ strong { font-weight: 500; }
   .intro { display: none; }
 }
 @media (max-width: 760px) {
-  .logo-mark { width: 38px; }
+  .logo-mark { width: 44px; }
 }
 
 /* ---------- Language toggle, actions, stats, skills, cert groups ---------- */
