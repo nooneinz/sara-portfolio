@@ -5,77 +5,26 @@
   const REQUEST_TIMEOUT_MS = 25000;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------------- Language + theme ---------------- */
-  const STR = {
-    ar: {
-      title: "سارة الحربي | Sara Alharbi — Artificial Intelligence",
-      menu: "القائمة", close: "إغلاق", langBtn: "EN",
-      online: "متصل", typing: "يكتب…", offline: "غير متصل",
-      you: "أنت", bot: "المساعد", thinking: "جارٍ الكتابة",
-      noAnswer: "لم تصل إجابة.", fail: "تعذّر الحصول على إجابة الآن.",
-      timeout: "انتهت مهلة الطلب. حاول مرة أخرى.",
-      net: "تعذّر الاتصال بالمساعد حالياً. يمكنك التواصل مع سارة مباشرة عبر Saraalharbi0031@gmail.com",
-    },
-    en: {
-      title: "Sara Alharbi | سارة الحربي — Artificial Intelligence",
-      menu: "Menu", close: "Close", langBtn: "عربي",
-      online: "Online", typing: "Typing…", offline: "Offline",
-      you: "You", bot: "Assistant", thinking: "Typing",
-      noAnswer: "No answer received.", fail: "Couldn't get an answer right now.",
-      timeout: "The request timed out. Please try again.",
-      net: "Couldn't reach the assistant right now. You can contact Sara directly at Saraalharbi0031@gmail.com",
-    },
-  };
-  const root = document.documentElement;
-  const store = {
-    get: (k) => { try { return localStorage.getItem(k); } catch { return null; } },
-    set: (k, v) => { try { localStorage.setItem(k, v); } catch { /* ignore */ } },
-  };
-  let lang = store.get("lang") === "en" ? "en" : "ar";
-  const t = (k) => STR[lang][k];
-
-  const langBtn = document.getElementById("lang-toggle");
-  const themeBtn = document.getElementById("theme-toggle");
-  const statusEl = document.getElementById("chat-status");
-  statusEl?.removeAttribute("data-en");
-  let statusState = "online";
-  const renderStatus = () => { if (statusEl) statusEl.textContent = t(statusState); };
-
-  function applyLang(l) {
-    lang = l;
-    root.setAttribute("lang", l);
-    root.setAttribute("dir", l === "en" ? "ltr" : "rtl");
-    document.title = t("title");
-    document.querySelectorAll("[data-en]").forEach((el) => {
-      if (el.dataset.ar === undefined) el.dataset.ar = el.innerHTML;
-      el.innerHTML = l === "en" ? el.dataset.en : el.dataset.ar;
-    });
-    document.querySelectorAll("[data-en-placeholder]").forEach((el) => {
-      if (el.dataset.arPlaceholder === undefined) el.dataset.arPlaceholder = el.getAttribute("placeholder") || "";
-      el.setAttribute("placeholder", l === "en" ? el.dataset.enPlaceholder : el.dataset.arPlaceholder);
-    });
-    document.querySelectorAll("img[data-alt-en]").forEach((img) => {
-      if (img.dataset.altAr === undefined) img.dataset.altAr = img.getAttribute("alt") || "";
-      img.setAttribute("alt", l === "en" ? img.dataset.altEn : img.dataset.altAr);
-    });
-    if (langBtn) langBtn.textContent = t("langBtn");
-    const navToggle = document.querySelector(".nav-toggle");
-    if (navToggle) navToggle.textContent = document.getElementById("site-nav")?.classList.contains("is-open") ? t("close") : t("menu");
-    renderStatus();
-    store.set("lang", l);
+  /* ---------------- Intro (logo animation) ---------------- */
+  const intro = document.getElementById("intro");
+  if (intro) {
+    let seen = false;
+    try { seen = sessionStorage.getItem("sa-intro") === "1"; } catch { /* storage unavailable */ }
+    if (seen || reduceMotion) {
+      intro.classList.add("is-skipped");
+    } else {
+      document.documentElement.style.overflow = "hidden";
+      const finish = () => {
+        if (intro.classList.contains("is-done")) return;
+        intro.classList.add("is-done");
+        document.documentElement.style.overflow = "";
+        try { sessionStorage.setItem("sa-intro", "1"); } catch { /* ignore */ }
+      };
+      const timer = setTimeout(finish, 3300);
+      intro.addEventListener("click", () => { clearTimeout(timer); finish(); });
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") { clearTimeout(timer); finish(); } }, { once: true });
+    }
   }
-
-  function applyTheme(th) {
-    root.setAttribute("data-theme", th);
-    themeBtn?.setAttribute("aria-pressed", String(th === "dark"));
-    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", th === "dark" ? "#1C1510" : "#D7C3AA");
-    store.set("theme", th);
-  }
-
-  langBtn?.addEventListener("click", () => applyLang(lang === "ar" ? "en" : "ar"));
-  themeBtn?.addEventListener("click", () =>
-    applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark")
-  );
 
   /* ---------------- Footer year ---------------- */
   const yearEl = document.getElementById("year");
@@ -88,13 +37,13 @@
   toggle?.addEventListener("click", () => {
     const open = nav.classList.toggle("is-open");
     toggle.setAttribute("aria-expanded", String(open));
-    toggle.textContent = open ? t("close") : t("menu");
+    toggle.textContent = open ? "إغلاق" : "القائمة";
   });
   nav?.querySelectorAll("a").forEach((a) =>
     a.addEventListener("click", () => {
       nav.classList.remove("is-open");
       toggle?.setAttribute("aria-expanded", "false");
-      if (toggle) toggle.textContent = t("menu");
+      if (toggle) toggle.textContent = "القائمة";
     })
   );
 
@@ -116,15 +65,11 @@
       { rootMargin: "-45% 0px -50% 0px" }
     );
     targets.forEach((t) => spy.observe(t));
-    // back at the hero: nothing in the nav should stay highlighted
-    window.addEventListener("scroll", () => {
-      if (window.scrollY < 200) links.forEach((l) => l.classList.remove("is-active"));
-    }, { passive: true });
 
     /* Reveal on scroll */
     if (!reduceMotion) {
       const revealables = document.querySelectorAll(
-        ".section-head, .stat, .proj-card, .service-card, .edu-grid .degree, .cert-tile, .chat, .cta-inner"
+        ".section-head, .service, .project, .project-group, .degree, .cert-col, .contact-list li"
       );
       const revealer = new IntersectionObserver(
         (entries, obs) => {
@@ -138,7 +83,6 @@
         { rootMargin: "0px 0px -8% 0px" }
       );
       revealables.forEach((el) => {
-        el.style.setProperty("--i", String([...el.parentElement.children].indexOf(el)));
         el.classList.add("reveal");
         revealer.observe(el);
       });
@@ -187,9 +131,7 @@
     wrap.className = `msg msg-${role}`;
     const who = document.createElement("span");
     who.className = "msg-who";
-    who.dataset.ar = role === "user" ? STR.ar.you : STR.ar.bot;
-    who.dataset.en = role === "user" ? STR.en.you : STR.en.bot;
-    who.textContent = t(role === "user" ? "you" : "bot");
+    who.textContent = role === "user" ? "أنت" : "المساعد";
     const p = document.createElement("p");
     p.className = "msg-text";
     setDir(p, text);
@@ -201,7 +143,7 @@
   }
 
   function showThinking(p) {
-    p.innerHTML = '<span class="thinking" aria-label="' + t("thinking") + '"><span></span><span></span><span></span></span>';
+    p.innerHTML = '<span class="thinking" aria-label="جارٍ الكتابة"><span></span><span></span><span></span></span>';
   }
 
   async function typeOut(p, text) {
@@ -236,8 +178,7 @@
     chips.forEach((c) => (c.disabled = state));
     status.classList.toggle("is-busy", state);
     status.classList.remove("is-error");
-    statusState = state ? "typing" : "online";
-    renderStatus();
+    status.textContent = state ? "يكتب…" : "متصل";
   }
 
   async function ask(question) {
@@ -267,17 +208,17 @@
 
       if (!res.ok) {
         const detail = typeof data.detail === "string" ? data.detail : null;
-        throw new Error(detail || t("fail"));
+        throw new Error(detail || "تعذّر الحصول على إجابة الآن.");
       }
 
-      await typeOut(p, data.answer || t("noAnswer"));
+      await typeOut(p, data.answer || "لم تصل إجابة.");
     } catch (err) {
       wrap.classList.add("msg-error");
       const msg =
         err.name === "AbortError"
-          ? t("timeout")
+          ? "انتهت مهلة الطلب. حاول مرة أخرى."
           : err instanceof TypeError
-          ? t("net")
+          ? "تعذّر الاتصال بالمساعد حالياً. يمكنك التواصل مع سارة مباشرة عبر Saraalharbi0031@gmail.com"
           : err.message;
       p.innerHTML = linkify(msg);
       status.classList.add("is-error");
@@ -287,8 +228,7 @@
       setBusy(false);
       if (hadError) {
         status.classList.add("is-error");
-        statusState = "offline";
-        renderStatus();
+        status.textContent = "غير متصل";
       }
       input.focus({ preventScroll: true });
     }
@@ -300,77 +240,4 @@
   });
 
   chips.forEach((chip) => chip.addEventListener("click", () => ask(chip.textContent)));
-
-  /* Projects from data/projects.json (add new entries there) */
-  const escHtml = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const safeUrl = (u) => (/^https?:\/\//.test(u) ? escHtml(u) : "#");
-
-  function projectCard(p, featured) {
-    const links = (p.links || []).map((l) =>
-      `<a href="${safeUrl(l.url)}" target="_blank" rel="noopener" data-en="${escHtml(l.label_en || "Link")}">${escHtml(l.label_ar || "رابط")}</a>`).join("");
-    const metric = p.metric
-      ? `<div class="proj-metric"><span class="proj-metric-num" lang="en">${escHtml(p.metric)}</span><span data-en="${escHtml(p.metric_en)}">${escHtml(p.metric_ar)}</span></div>`
-      : "";
-    const problem = featured && p.problem_ar
-      ? `<details class="proj-more"><summary data-en="The problem it solves">المشكلة التي يحلّها</summary><p data-en="${escHtml(p.problem_en)}">${escHtml(p.problem_ar)}</p></details>`
-      : "";
-    return `<article class="proj-card${featured ? " is-featured" : ""}">
-      <div class="proj-top">
-        <span class="project-kind" data-en="${escHtml(p.kind_en)}">${escHtml(p.kind_ar)}</span>
-        ${metric}
-      </div>
-      <h3 class="project-title" lang="en">${escHtml(p.title)}</h3>
-      <p class="proj-text" data-en="${escHtml(p.solution_en)}">${escHtml(p.solution_ar)}</p>
-      ${problem}
-      <ul class="tags" lang="en">${(p.tags || []).map((t) => `<li>${escHtml(t)}</li>`).join("")}</ul>
-      ${links ? `<div class="project-links">${links}</div>` : ""}
-    </article>`;
-  }
-
-  async function renderProjects() {
-    const top = document.getElementById("featured-projects");
-    const rest = document.getElementById("more-projects");
-    if (!top || !rest) return;
-    try {
-      const res = await fetch("data/projects.json", { cache: "no-cache" });
-      if (!res.ok) return;
-      const items = await res.json();
-      // One continuous 3-column grid (15 cards = 5 rows of 3); featured ones come first.
-      top.innerHTML = [...items.filter((p) => p.featured), ...items.filter((p) => !p.featured)]
-        .map((p) => projectCard(p, !!p.featured)).join("");
-      rest.innerHTML = "";
-      document.querySelectorAll(".proj-card").forEach((el) => {
-        el.style.setProperty("--i", String([...el.parentElement.children].indexOf(el)));
-      });
-    } catch { /* keep empty */ }
-    if (lang === "en") applyLang("en");
-  }
-  renderProjects();
-
-  /* ---------------- Count-up numbers ---------------- */
-  function countUp(el) {
-    const target = parseFloat(el.dataset.count);
-    const dec = Number(el.dataset.decimals || 0);
-    const suffix = el.dataset.suffix || "";
-    if (reduceMotion || !isFinite(target)) return;
-    const start = performance.now();
-    const dur = 1400;
-    const tick = (now) => {
-      const k = Math.min(1, (now - start) / dur);
-      const eased = 1 - Math.pow(1 - k, 3);
-      el.textContent = (target * eased).toFixed(dec) + suffix;
-      if (k < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }
-  if ("IntersectionObserver" in window) {
-    const counter = new IntersectionObserver((entries, obs) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) { countUp(e.target); obs.unobserve(e.target); }
-      });
-    }, { threshold: 0.6 });
-    document.querySelectorAll("[data-count]").forEach((el) => counter.observe(el));
-  }
-  applyTheme(root.getAttribute("data-theme") === "dark" ? "dark" : "light");
-  if (lang === "en") applyLang("en");
 })();
