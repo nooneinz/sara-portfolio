@@ -44,7 +44,7 @@
   const TILT = (26 * Math.PI) / 180;
   const cosT = Math.cos(TILT), sinT = Math.sin(TILT);
   const light = (() => { const l = [-0.45, 0.75, 0.5]; const m = Math.hypot(...l); return l.map((v) => v / m); })();
-  const BASE = [118, 172, 206];
+  const BASE = [214, 214, 210];
 
   let w = 0, h = 0, scale = 1, dpr = 1;
   function resize() {
@@ -91,7 +91,7 @@
       const k = Math.min(1.25, f.lum);
       ctx.globalAlpha = f.a;
       ctx.fillStyle = `rgb(${Math.min(255, BASE[0] * k) | 0},${Math.min(255, BASE[1] * k) | 0},${Math.min(255, BASE[2] * k) | 0})`;
-      ctx.strokeStyle = "rgba(6,18,27,.6)";
+      ctx.strokeStyle = "rgba(11,11,11,.6)";
       ctx.lineWidth = 0.7;
       ctx.beginPath();
       f.pts.forEach((p, n) => { const X = ox + p[0] * scale, Y = oy - p[1] * scale; n ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y); });
