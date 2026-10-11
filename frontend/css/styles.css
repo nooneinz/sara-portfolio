@@ -577,3 +577,80 @@ html[lang="en"] .interlude-text { font-family: var(--f-sans); font-weight: 800; 
 #skills .section-lead { color: #3d3d3d !important; }
 #skills .section-num { background: var(--ink) !important; color: #fff !important; border-color: var(--ink) !important; }
 #skills .skill-group { background: var(--ink) !important; color: #fff; }
+
+
+/* =========================================================
+   Round 4: compact rhythm, merged contact+footer, motion
+   ========================================================= */
+:root { --section-space: clamp(2.4rem, 5vw, 4rem); }
+.section-title { font-size: clamp(1.9rem, 4vw, 2.8rem) !important; }
+.section-head { margin-bottom: clamp(1.4rem, 3vw, 2.2rem); }
+.hero-grid { margin-top: clamp(1.5rem, 4vw, 3.2rem); }
+#top { min-height: min(88vh, 820px); }
+.interlude { min-height: clamp(190px, 32vh, 330px); padding-block: 1.4rem; }
+.interlude-text { font-size: clamp(1.8rem, 5vw, 3.8rem); }
+.insight-services { margin-top: clamp(1.6rem, 4vw, 2.6rem); }
+
+/* merged contact + footer, in the manner of a product company's page */
+#contact.site-end { background: #0B0B0B !important; padding: 0 !important; border-top: 1px solid var(--line); position: relative; overflow: hidden; }
+#contact.site-end::before, #contact.site-end::after { display: none !important; }
+.end-dune {
+  height: clamp(110px, 15vw, 210px); position: relative; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 70%); mask-image: linear-gradient(to bottom, transparent, #000 70%);
+}
+.end-dune::before {
+  content: ""; position: absolute; inset: -20% -6%; background: url("/img/dune-a.jpg") center / cover no-repeat;
+  transform: translate3d(calc((var(--p, .5) - .5) * -60px), 0, 0) scale(1.1); will-change: transform;
+}
+.end-cta { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; padding-block: clamp(1.6rem, 4vw, 2.6rem); }
+.end-title { font-family: var(--f-display); font-weight: 900; font-size: clamp(1.7rem, 3.6vw, 2.7rem); line-height: 1.25; max-width: 22ch; color: #fff; }
+html[lang="en"] .end-title { font-family: var(--f-sans); font-weight: 800; letter-spacing: -.01em; }
+.end-btn { font-size: 1rem; padding: .95rem 1.8rem; }
+.end-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2rem; padding-block: clamp(1.8rem, 4vw, 2.6rem); border-top: 1px solid var(--line); }
+.end-brand p { margin-top: .9rem; color: var(--muted); font-size: .98rem; max-width: 24ch; }
+.end-col { display: flex; flex-direction: column; gap: .55rem; align-items: flex-start; }
+.end-col h3 { font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: .4rem; font-family: var(--f-sans); }
+.end-col a, .end-col p { color: #fff; text-decoration: none; font-size: 1rem; line-height: 1.6; }
+.end-col a { position: relative; }
+.end-col a::after { content: ""; position: absolute; inset-inline: 0; bottom: 0; height: 1px; background: #fff; transform: scaleX(0); transform-origin: left; transition: transform .3s; }
+.end-col a:hover::after { transform: scaleX(1); }
+.end-status { display: inline-flex; align-items: center; gap: .55rem; }
+.end-status i { width: 8px; height: 8px; background: #fff; display: inline-block; animation: blink-soft 2s ease-in-out infinite; }
+@keyframes blink-soft { 50% { opacity: .25; } }
+.end-bar { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-block: 1.2rem 1.6rem; border-top: 1px solid var(--line); font-size: .82rem; color: var(--muted); letter-spacing: .04em; }
+@media (max-width: 800px) { .end-grid { grid-template-columns: 1fr 1fr; } .end-brand { grid-column: 1 / -1; } }
+
+/* ---- motion ---- */
+.dust { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 40; pointer-events: none; mix-blend-mode: screen; opacity: .6; }
+.curtain {
+  position: fixed; inset: 0; z-index: 900; background: #0B0B0B; display: grid; place-items: center; pointer-events: none;
+  transform: translateY(100%); transition: transform .5s cubic-bezier(.7, 0, .2, 1);
+}
+.curtain img { width: min(220px, 50vw); opacity: 0; transition: opacity .3s .2s; }
+.curtain.on { transform: none; pointer-events: all; }
+.curtain.on img { opacity: 1; }
+.curtain.out { transform: translateY(-100%); transition: transform .6s cubic-bezier(.7, 0, .2, 1); }
+
+.js-anim .tx { opacity: 0; transform: translateY(.7em); filter: blur(8px); }
+.js-anim .tx.is-in { opacity: 1; transform: none; filter: none; transition: opacity .9s cubic-bezier(.2, .7, .2, 1) var(--d, 0s), transform .9s cubic-bezier(.2, .7, .2, 1) var(--d, 0s), filter .9s var(--d, 0s); }
+.js-anim .interlude-text.tx { transform: translateY(1.2em); }
+
+/* hero photo: slow drift + zoom into the dunes on scroll */
+#top::before {
+  animation: none !important; transform: translate3d(0, calc(var(--hp, 0) * -6%), 0) scale(calc(1.06 + var(--hp, 0) * .45)); transform-origin: 50% 20%;
+  will-change: transform;
+}
+#top::after { /* a moving light across the sand */
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 78%; z-index: 0; pointer-events: none; display: block !important;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .13) 50%, transparent 70%); background-size: 220% 100%;
+  mix-blend-mode: soft-light; animation: sweep 11s ease-in-out infinite alternate;
+}
+@keyframes sweep { from { background-position: 100% 0; } to { background-position: 0 0; } }
+
+/* interludes: the photo moves as you pass, like walking through */
+.js-anim .interlude { background: #0B0B0B !important; overflow: hidden; isolation: isolate; }
+.js-anim .interlude::before {
+  content: ""; position: absolute; inset: -14% 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(11, 11, 11, .55), rgba(11, 11, 11, 0) 40%, rgba(11, 11, 11, .55)), var(--dune) center / cover no-repeat;
+  transform: translate3d(calc((var(--p, .5) - .5) * -90px), calc((var(--p, .5) - .5) * -80px), 0) scale(calc(1.04 + var(--p, .5) * .2)); will-change: transform;
+}

@@ -353,26 +353,112 @@
 })();
 
 
-/* ---------- Floating chat + project "more" toggles ---------- */
+/* ---------- Project "more" toggles ---------- */
+document.getElementById("projects-grid")?.addEventListener("click", (e) => {
+  const b = e.target.closest(".proj-toggle");
+  if (!b) return;
+  const card = b.closest(".project");
+  const open = card.classList.toggle("is-open");
+  b.setAttribute("aria-expanded", String(open));
+  b.textContent = open ? b.dataset.less : b.dataset.more;
+});
+
+/* ---------- Motion: text reveals, desert parallax, drifting sand, page curtain ---------- */
 (() => {
-  const fab = document.getElementById("chat-fab");
-  const stage = document.querySelector(".chat-stage");
-  if (fab && stage) {
-    const setOpen = (open) => {
-      stage.classList.toggle("is-open", open);
-      fab.setAttribute("aria-expanded", String(open));
-      if (open) document.getElementById("chat-input")?.focus({ preventScroll: true });
-    };
-    fab.addEventListener("click", () => setOpen(!stage.classList.contains("is-open")));
-    document.querySelectorAll('a[href="#ask"]').forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); setOpen(true); }));
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
-  }
-  document.getElementById("projects-grid")?.addEventListener("click", (e) => {
-    const b = e.target.closest(".proj-toggle");
-    if (!b) return;
-    const card = b.closest(".project");
-    const open = card.classList.toggle("is-open");
-    b.setAttribute("aria-expanded", String(open));
-    b.textContent = open ? b.dataset.less : b.dataset.more;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const root = document.documentElement;
+  root.classList.add("js-anim");
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+
+  /* 1. text reveals */
+  const sel = ".hero-title, .hero-tagline, .hero-subtitle, .hero-actions, .meta-strip, .section-num, .section-title, .section-lead, .insight-title, .insight-note, .sub-head, .interlude-text, .end-title, .end-btn, .end-brand, .end-col, .end-bar";
+  const els = [...document.querySelectorAll(sel)];
+  els.forEach((el) => {
+    el.classList.add("tx");
+    const sibs = [...el.parentElement.children].filter((c) => c.classList.contains("tx") || els.includes(c));
+    el.style.setProperty("--d", `${Math.max(0, sibs.indexOf(el)) * 110}ms`);
+  });
+  const txIO = new IntersectionObserver((entries) => entries.forEach((en) => {
+    if (en.isIntersecting) { en.target.classList.add("is-in"); txIO.unobserve(en.target); }
+  }), { rootMargin: "0px 0px -6% 0px", threshold: 0.05 });
+  els.forEach((el) => txIO.observe(el));
+
+  /* 2. scroll-driven desert: hero zooms in, interludes slide + scale */
+  const hero = document.getElementById("top");
+  const inter = [...document.querySelectorAll(".interlude")];
+  const dune = document.querySelector(".end-dune");
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const vh = window.innerHeight;
+    if (hero) root.style.setProperty("--hp", clamp(window.scrollY / hero.offsetHeight).toFixed(3));
+    inter.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > vh + 100) return;
+      el.style.setProperty("--p", clamp((vh - r.top) / (vh + r.height)).toFixed(3));
+    });
+    if (dune) {
+      const r = dune.getBoundingClientRect();
+      dune.style.setProperty("--p", clamp((vh - r.top) / (vh + r.height)).toFixed(3));
+    }
+  };
+  window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+
+  /* 3. drifting sand (wind) */
+  const cv = document.createElement("canvas");
+  cv.className = "dust"; cv.setAttribute("aria-hidden", "true");
+  document.body.appendChild(cv);
+  const ctx = cv.getContext("2d");
+  let W = 0, H = 0, dpr = 1;
+  const size = () => { dpr = Math.min(window.devicePixelRatio || 1, 1.5); W = cv.width = innerWidth * dpr; H = cv.height = innerHeight * dpr; };
+  size(); window.addEventListener("resize", size);
+  const N = innerWidth < 700 ? 45 : 95;
+  const P = Array.from({ length: N }, () => ({
+    x: Math.random(), y: Math.random(), z: 0.3 + Math.random() * 0.9, s: 0.6 + Math.random() * 1.8,
+    a: 0.15 + Math.random() * 0.5, ph: Math.random() * 6.28,
+  }));
+  let lastY = scrollY, t0 = performance.now();
+  const frame = (t) => {
+    const dt = Math.min(50, t - t0) / 16.7; t0 = t;
+    const dy = (scrollY - lastY) / innerHeight; lastY = scrollY;
+    ctx.clearRect(0, 0, W, H);
+    for (const p of P) {
+      p.x += (0.0009 * p.z + Math.abs(dy) * 0.05) * dt;          // wind to the right, gusting on scroll
+      p.y += Math.sin(t / 1600 + p.ph) * 0.00035 * dt - dy * 0.35 * p.z;
+      if (p.x > 1.02) p.x = -0.02;
+      if (p.y > 1.02) p.y = -0.02; else if (p.y < -0.02) p.y = 1.02;
+      ctx.globalAlpha = p.a;
+      ctx.fillStyle = "#f2f2ee";
+      ctx.fillRect(p.x * W, p.y * H, p.s * dpr * p.z * 1.4, p.s * dpr * p.z * 0.9);
+    }
+    requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+
+  /* 4. page curtain when jumping between sections */
+  const cur = document.createElement("div");
+  cur.className = "curtain"; cur.setAttribute("aria-hidden", "true");
+  cur.innerHTML = '<img src="img/logo-letters-white.png" alt="" />';
+  document.body.appendChild(cur);
+  let busy = false;
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || busy || e.defaultPrevented || e.metaKey || e.ctrlKey) return;
+    const id = a.getAttribute("href");
+    const target = id.length > 1 ? document.querySelector(id) : null;
+    if (!target) return;
+    e.preventDefault();
+    busy = true;
+    cur.className = "curtain on";
+    setTimeout(() => {
+      root.style.scrollBehavior = "auto";
+      target.scrollIntoView({ block: "start" });
+      history.replaceState(null, "", id);
+      update();
+      cur.className = "curtain out";
+      setTimeout(() => { root.style.scrollBehavior = ""; cur.className = "curtain"; busy = false; }, 650);
+    }, 520);
   });
 })();
