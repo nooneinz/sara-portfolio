@@ -692,3 +692,28 @@ header.site-header, main, footer { position: relative; z-index: 1; }
 /* reduced-motion visitors still get the calm version: fades only */
 .soft.js-anim .tx { transform: none; filter: none; }
 .soft.js-anim .tx.is-in { transition: opacity 1s ease var(--d, 0s); }
+
+
+/* =========================================================
+   Round 6: sticky header, one seamless dune scene, logo-like Arabic face
+   ========================================================= */
+header.site-header { position: sticky !important; top: 0; z-index: 100 !important; background: rgba(11, 11, 11, .88); }
+main, footer { position: relative; z-index: 1; }
+
+/* the single fixed scene; each section only tints it a little differently */
+.blue-card, .blue-card.soft, #projects, #skills {
+  background: linear-gradient(180deg, rgba(11, 11, 11, .62), rgba(11, 11, 11, .74) 50%, rgba(11, 11, 11, .62)) !important;
+}
+#projects { background: linear-gradient(180deg, rgba(11, 11, 11, .62), rgba(11, 11, 11, .8) 55%, rgba(11, 11, 11, .62)) !important; }
+#achievements { background: linear-gradient(180deg, rgba(11, 11, 11, .62), rgba(11, 11, 11, .7) 50%, rgba(11, 11, 11, .62)) !important; }
+#top { background: linear-gradient(180deg, rgba(11, 11, 11, .5), rgba(11, 11, 11, .62)) !important; }
+#top::before, #top::after { display: none !important; }
+#contact.site-end { background: linear-gradient(180deg, rgba(11, 11, 11, .62), rgba(11, 11, 11, .9)) !important; border-top: 0; }
+.blue-card + .blue-card, .blue-card + .site-end { border-top: 0 !important; }
+.end-dune { display: none !important; }
+
+/* Arabic headings: a calligraphic, high-contrast display face closest to the logo lettering */
+:root { --f-display: "El Messiri", "Cairo", system-ui, sans-serif; }
+html[lang="ar"] .hero-title, html[lang="ar"] .insight-title, html[lang="ar"] .section-title, html[lang="ar"] .project-title,
+html[lang="ar"] .degree-title, html[lang="ar"] .service-title, html[lang="ar"] .end-title, html[lang="ar"] .sub-head { font-family: var(--f-display); font-weight: 700; letter-spacing: 0; }
+html[lang="ar"] .hero-title { font-size: clamp(3rem, 7vw, 5.6rem); line-height: 1.15; }

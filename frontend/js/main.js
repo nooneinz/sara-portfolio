@@ -414,7 +414,7 @@ document.getElementById("projects-grid")?.addEventListener("click", (e) => {
     const mid = window.innerHeight * 0.5;
     let idx = 0;
     secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top <= mid) idx = i; });
-    layers.forEach((l, i) => l.classList.toggle("on", i === idx));
+    if (layers.length > 1) layers.forEach((l, i) => l.classList.toggle("on", i === idx));
   };
   window.addEventListener("scroll", showLayer, { passive: true });
   showLayer();
