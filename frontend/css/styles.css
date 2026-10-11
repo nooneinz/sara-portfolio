@@ -735,3 +735,10 @@ html[lang="ar"] .hero-title { font-size: clamp(3rem, 7vw, 5.6rem); line-height: 
 /* soft mode keeps a gentle rise (no blur, no zoom, no curtain) */
 .soft.js-anim .tx { transform: translateY(.6em); filter: none; }
 .soft.js-anim .tx.is-in { transform: none; transition: opacity .9s ease var(--d, 0s), transform .9s cubic-bezier(.2, .7, .2, 1) var(--d, 0s); }
+
+/* Arabic and English heroes share the same footprint: two-line title, same block height, chat raised to the headline */
+.hero-grid { align-items: start !important; margin-top: clamp(1rem, 2.5vw, 2rem) !important; }
+.hero-copy { padding-block: 0 !important; }
+html[lang="ar"] .hero-title { font-size: clamp(3.2rem, 6vw, 5rem) !important; line-height: 1.2 !important; }
+html[lang="en"] .hero-title { font-size: clamp(2.6rem, 5.2vw, 4.4rem) !important; line-height: 1.08 !important; }
+html[lang="en"] .hero-subtitle, html[lang="ar"] .hero-subtitle { font-size: clamp(1rem, 1.4vw, 1.12rem) !important; }
