@@ -406,31 +406,6 @@ document.getElementById("projects-grid")?.addEventListener("click", (e) => {
   window.addEventListener("resize", update);
   update();
 
-  /* 2b. dunes behind the sections: cross-fade per section, drift with the mouse and scroll */
-  const layers = [...document.querySelectorAll(".dune-bg i")];
-  const secs = [".insight", "#projects", "#skills", "#achievements", "#contact"].map((s) => document.querySelector(s));
-  const showLayer = () => {
-    const mid = window.innerHeight * 0.5;
-    let idx = 0;
-    secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top <= mid) idx = i; });
-    layers.forEach((l, i) => l.classList.toggle("on", i === idx));
-  };
-  window.addEventListener("scroll", showLayer, { passive: true });
-  showLayer();
-  const mouse = { x: 0, y: 0, tx: 0, ty: 0, px: -999, py: -999, moved: 0 };
-  window.addEventListener("pointermove", (e) => {
-    mouse.tx = e.clientX / innerWidth - 0.5; mouse.ty = e.clientY / innerHeight - 0.5;
-    mouse.moved = Math.hypot(e.clientX - mouse.px, e.clientY - mouse.py); mouse.px = e.clientX; mouse.py = e.clientY;
-  }, { passive: true });
-  const glide = () => {
-    mouse.x += (mouse.tx - mouse.x) * 0.06; mouse.y += (mouse.ty - mouse.y) * 0.06;
-    root.style.setProperty("--mx", mouse.x.toFixed(4));
-    root.style.setProperty("--my", mouse.y.toFixed(4));
-    root.style.setProperty("--sy", String(Math.round(scrollY * 0.06)));
-    requestAnimationFrame(glide);
-  };
-  requestAnimationFrame(glide);
-
   /* 3. drifting sand (wind) */
   const cv = document.createElement("canvas");
   cv.className = "dust"; cv.setAttribute("aria-hidden", "true");
@@ -442,23 +417,17 @@ document.getElementById("projects-grid")?.addEventListener("click", (e) => {
   const N = innerWidth < 700 ? 45 : 95;
   const P = Array.from({ length: N }, () => ({
     x: Math.random(), y: Math.random(), z: 0.3 + Math.random() * 0.9, s: 0.6 + Math.random() * 1.8,
-    a: 0.15 + Math.random() * 0.5, ph: Math.random() * 6.28, vx: 0, vy: 0,
+    a: 0.15 + Math.random() * 0.5, ph: Math.random() * 6.28,
   }));
   let lastY = scrollY, t0 = performance.now();
   const frame = (t) => {
-    const dt = Math.min(50, t - t0) / 16.7; t0 = t; mouse.moved *= 0.9;
+    const dt = Math.min(50, t - t0) / 16.7; t0 = t;
     const dy = (scrollY - lastY) / innerHeight; lastY = scrollY;
     ctx.clearRect(0, 0, W, H);
     for (const p of P) {
       p.x += (0.0009 * p.z + Math.abs(dy) * 0.05) * dt;          // wind to the right, gusting on scroll
       p.y += Math.sin(t / 1600 + p.ph) * 0.00035 * dt - dy * 0.35 * p.z;
-      const ddx = p.x * innerWidth - mouse.px, ddy = p.y * innerHeight - mouse.py, d2 = ddx * ddx + ddy * ddy;
-      if (d2 < 22500) {                                           // within ~150px of the cursor: blown away
-        const f = (1 - Math.sqrt(d2) / 150) * Math.min(1, 0.25 + mouse.moved / 40) * 0.0045;
-        p.vx += (ddx / (Math.sqrt(d2) + 1)) * f; p.vy += (ddy / (Math.sqrt(d2) + 1)) * f;
-      }
-      p.x += p.vx * dt; p.y += p.vy * dt; p.vx *= 0.96; p.vy *= 0.96;
-      if (p.x > 1.02) p.x = -0.02; else if (p.x < -0.02) p.x = 1.02;
+      if (p.x > 1.02) p.x = -0.02;
       if (p.y > 1.02) p.y = -0.02; else if (p.y < -0.02) p.y = 1.02;
       ctx.globalAlpha = p.a;
       ctx.fillStyle = "#f2f2ee";
