@@ -10,11 +10,11 @@
     ar: { menu: "القائمة", close: "إغلاق", you: "أنت", bot: "المساعد", typing: "يكتب…", online: "متصل", offline: "غير متصل",
       noAnswer: "تعذّر الحصول على إجابة الآن.", none: "لم تصل إجابة.", timeout: "انتهت مهلة الطلب. حاول مرة أخرى.",
       conn: "تعذّر الاتصال بالمساعد حالياً. يمكنك التواصل مع سارة مباشرة عبر Saraalharbi0031@gmail.com",
-      thinking: "جارٍ الكتابة", problem: "المشكلة التي يحلّها", repo: "المستودع", link: "رابط", sw: "التبديل إلى الإنجليزية" },
+      thinking: "جارٍ الكتابة", problem: "المشكلة التي يحلّها", repo: "المستودع", link: "رابط", more: "المزيد", less: "أقل", sw: "التبديل إلى الإنجليزية" },
     en: { menu: "Menu", close: "Close", you: "You", bot: "Assistant", typing: "Typing…", online: "Online", offline: "Offline",
       noAnswer: "Couldn't get an answer right now.", none: "No answer received.", timeout: "The request timed out. Please try again.",
       conn: "Couldn't reach the assistant right now. You can contact Sara directly at Saraalharbi0031@gmail.com",
-      thinking: "Typing", problem: "The problem it solves", repo: "Repository", link: "Link", sw: "Switch to Arabic" },
+      thinking: "Typing", problem: "The problem it solves", repo: "Repository", link: "Link", more: "More", less: "Less", sw: "Switch to Arabic" },
   };
   let lang = "ar";
   try { lang = localStorage.getItem("sa-lang") === "en" ? "en" : "ar"; } catch { /* storage unavailable */ }
@@ -41,6 +41,8 @@
     document.title = l === "en" ? "Sara Alharbi — Software Engineer & AI Specialist" : arTitle;
     try { localStorage.setItem("sa-lang", l); } catch { /* storage unavailable */ }
     renderProjects();
+    const fab = document.getElementById("chat-fab");
+    if (fab) fab.textContent = l === "en" ? "Ask Sara" : "اسأل سارة";
   }
   langBtn?.addEventListener("click", () => applyLang(lang === "en" ? "ar" : "en"));
 
@@ -128,7 +130,7 @@
             }
           });
         },
-        { rootMargin: "0px 0px -8% 0px" }
+        { rootMargin: "0px 0px 12% 0px" }
       );
       revealables.forEach((el) => {
         el.classList.add("reveal");
@@ -307,6 +309,7 @@
       <h3 class="project-title" lang="en">${escHtml(p.title)}</h3>
       ${metric}
       <p class="project-desc">${escHtml(lang === "en" ? p.solution_en : p.solution_ar)}</p>
+      <button type="button" class="proj-toggle" aria-expanded="false" data-more="${t("more")}" data-less="${t("less")}">${t("more")}</button>
       ${problem}
       <ul class="tags" lang="en" dir="ltr">${(p.tags || []).map((t) => `<li>${escHtml(t)}</li>`).join("")}</ul>
       ${links ? `<div class="project-links">${links}</div>` : ""}
@@ -347,4 +350,29 @@
   }
 
   if (lang === "en") applyLang("en"); else renderProjects();
+})();
+
+
+/* ---------- Floating chat + project "more" toggles ---------- */
+(() => {
+  const fab = document.getElementById("chat-fab");
+  const stage = document.querySelector(".chat-stage");
+  if (fab && stage) {
+    const setOpen = (open) => {
+      stage.classList.toggle("is-open", open);
+      fab.setAttribute("aria-expanded", String(open));
+      if (open) document.getElementById("chat-input")?.focus({ preventScroll: true });
+    };
+    fab.addEventListener("click", () => setOpen(!stage.classList.contains("is-open")));
+    document.querySelectorAll('a[href="#ask"]').forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); setOpen(true); }));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
+  }
+  document.getElementById("projects-grid")?.addEventListener("click", (e) => {
+    const b = e.target.closest(".proj-toggle");
+    if (!b) return;
+    const card = b.closest(".project");
+    const open = card.classList.toggle("is-open");
+    b.setAttribute("aria-expanded", String(open));
+    b.textContent = open ? b.dataset.less : b.dataset.more;
+  });
 })();

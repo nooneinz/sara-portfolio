@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=20261015" />
+  <link rel="stylesheet" href="css/styles.css?v=20261017" />
 </head>
 <body>
   
@@ -52,7 +52,6 @@
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">القائمة</button>
 
       <nav id="site-nav" class="site-nav" aria-label="التنقل الرئيسي">
-        <a href="#services" data-en="Services">الخدمات</a>
         <a href="#projects" data-en="Projects">المشاريع</a>
         <a href="#achievements" data-en="Credentials">الإنجازات</a>
         <a href="#ask" data-en="Ask Sara">اسأل سارة</a>
@@ -121,6 +120,10 @@
       </div>
     </section>
 
+    <div class="interlude pos-start" style="--dune:url(/img/dune-e.jpg)" aria-hidden="true">
+      <p class="interlude-text"><span class="interlude-n" lang="en">01</span><span data-en="Numbers that tell the story">أرقام تحكي القصة</span></p>
+    </div>
+
     <!-- ================= INSIGHT: headline + stat tiles ================= -->
     <section class="insight blue-card soft" aria-label="أرقام">
       <div class="container insight-grid">
@@ -138,16 +141,8 @@
         <p class="stat"><strong lang="en" dir="ltr" data-count="20" data-suffix="+">20+</strong><span data-en="Professional certificates">شهادة احترافية</span></p>
       </div>
       </div>
-    </section>
-
-    <!-- ================= SERVICES (colour blocks) ================= -->
-    <section id="services" class="section blue-card">
-      <div class="container">
-        <header class="section-head">
-          <span class="section-num" lang="en">01 — Services</span>
-          <h2 class="section-title" data-en="Services">الخدمات</h2>
-          <p class="section-lead" data-en="What I build, from idea to deployment.">ما أبنيه، من الفكرة حتى النشر.</p>
-        </header>
+      <div class="container insight-services">
+        <h3 class="sub-head" data-en="What I build">ما أبنيه</h3>
 
         <ol class="services">
           <li class="service service-sage">
@@ -181,12 +176,16 @@
       </div>
     </section>
 
+    <div class="interlude pos-end" style="--dune:url(/img/dune-a.jpg)" aria-hidden="true">
+      <p class="interlude-text"><span class="interlude-n" lang="en">02</span><span data-en="From idea to production">من الفكرة إلى الإنتاج</span></p>
+    </div>
+
     <!-- ================= PROJECTS ================= -->
     <section id="projects" class="section section-projects blue-card soft">
       <div class="container">
         <header class="section-head has-watermark">
           <span class="watermark" lang="en" aria-hidden="true">Projects</span>
-          <span class="section-num" lang="en">02 — Selected Work</span>
+          <span class="section-num" lang="en">01 — Selected Work</span>
           <h2 class="section-title" data-en="Projects">المشاريع</h2>
           <p class="section-lead" data-en="Selected work in AI and software engineering.">مختارات من أعمالي في الذكاء الاصطناعي وهندسة البرمجيات.</p>
         </header>
@@ -195,11 +194,15 @@
       </div>
     </section>
 
+    <div class="interlude pos-center" style="--dune:url(/img/dune-c.jpg)" aria-hidden="true">
+      <p class="interlude-text"><span class="interlude-n" lang="en">03</span><span data-en="Tools I master">أدوات أتقنها</span></p>
+    </div>
+
     <!-- ================= SKILLS ================= -->
     <section id="skills" class="section section-skills blue-card">
       <div class="container">
         <header class="section-head">
-          <span class="section-num" lang="en">03 — Skills</span>
+          <span class="section-num" lang="en">02 — Skills</span>
           <h2 class="section-title" data-en="Core competencies">المهارات</h2>
           <p class="section-lead" data-en="The tools I use to ship.">الأدوات التي أستخدمها في التنفيذ.</p>
         </header>
@@ -224,11 +227,15 @@
       </div>
     </section>
 
+    <div class="interlude pos-start" style="--dune:url(/img/dune-d.jpg)" aria-hidden="true">
+      <p class="interlude-text"><span class="interlude-n" lang="en">04</span><span data-en="Always learning">تعلّم لا يتوقف</span></p>
+    </div>
+
     <!-- ================= ACHIEVEMENTS ================= -->
     <section id="achievements" class="section section-blush blue-card soft">
       <div class="container">
         <header class="section-head">
-          <span class="section-num" lang="en">04 — Credentials</span>
+          <span class="section-num" lang="en">03 — Credentials</span>
           <h2 class="section-title" data-en="Education &amp; Certificates">التعليم والشهادات</h2>
           <p class="section-lead" data-en="Academic foundation and continuous learning.">الأساس الأكاديمي والتعلّم المستمر.</p>
         </header>
@@ -289,12 +296,16 @@
       </div>
     </section>
 
+    <div class="interlude pos-center" style="--dune:url(/img/dune-b.jpg)" aria-hidden="true">
+      <p class="interlude-text"><span class="interlude-n" lang="en">05</span><span data-en="Let's build something together">لنبنِ شيئاً معاً</span></p>
+    </div>
+
     <!-- ================= CONTACT (Deep Olive closing page) ================= -->
     <section id="contact" class="section contact blue-card">
       <div class="container">
         <header class="section-head section-head-center">
           <img class="contact-mark" src="img/logo-block-white.png" alt="سارة الحربي" />
-          <span class="section-num" lang="en">05 — Contact</span>
+          <span class="section-num" lang="en">04 — Contact</span>
           <h2 class="section-title" data-en="Contact">التواصل</h2>
           <p class="section-lead" data-en="Let’s build something clear, together.">لنبنِ شيئاً واضحاً معاً.</p>
         </header>
@@ -318,6 +329,8 @@
   </main>
 
   <!-- ================= FOOTER ================= -->
+  <button id="chat-fab" class="chat-fab" type="button" aria-expanded="false" aria-controls="ask" data-en="Ask Sara">اسأل سارة</button>
+
   <footer class="site-footer theme-dark">
     <div class="container">
       <p class="footer-sign">
@@ -332,7 +345,7 @@
     </div>
   </footer>
 
-  <script src="js/config.js?v=20261010"></script>
-  <script src="js/main.js?v=20261015"></script>
+  <script src="js/config.js?v=20261017"></script>
+  <script src="js/main.js?v=20261017"></script>
 </body>
 </html>
