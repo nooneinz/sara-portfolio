@@ -365,9 +365,10 @@ document.getElementById("projects-grid")?.addEventListener("click", (e) => {
 
 /* ---------- Motion: text reveals, desert parallax, drifting sand, page curtain ---------- */
 (() => {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const soft = window.matchMedia("(prefers-reduced-motion: reduce)").matches; // gentler version, never off
   const root = document.documentElement;
   root.classList.add("js-anim");
+  if (soft) root.classList.add("soft");
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
   /* 1. text reveals */
@@ -391,7 +392,7 @@ document.getElementById("projects-grid")?.addEventListener("click", (e) => {
   const update = () => {
     ticking = false;
     const vh = window.innerHeight;
-    if (hero) root.style.setProperty("--hp", clamp(window.scrollY / hero.offsetHeight).toFixed(3));
+    if (hero && !soft) root.style.setProperty("--hp", clamp(window.scrollY / hero.offsetHeight).toFixed(3));
     inter.forEach((el) => {
       const r = el.getBoundingClientRect();
       if (r.bottom < -100 || r.top > vh + 100) return;
@@ -429,7 +430,7 @@ document.getElementById("projects-grid")?.addEventListener("click", (e) => {
     root.style.setProperty("--sy", String(Math.round(scrollY * 0.06)));
     requestAnimationFrame(glide);
   };
-  requestAnimationFrame(glide);
+  if (!soft) requestAnimationFrame(glide);
 
   /* 3. drifting sand (wind) */
   const cv = document.createElement("canvas");
@@ -439,14 +440,14 @@ document.getElementById("projects-grid")?.addEventListener("click", (e) => {
   let W = 0, H = 0, dpr = 1;
   const size = () => { dpr = Math.min(window.devicePixelRatio || 1, 1.5); W = cv.width = innerWidth * dpr; H = cv.height = innerHeight * dpr; };
   size(); window.addEventListener("resize", size);
-  const N = innerWidth < 700 ? 45 : 95;
+  const N = soft ? 60 : innerWidth < 700 ? 45 : 95;
   const P = Array.from({ length: N }, () => ({
     x: Math.random(), y: Math.random(), z: 0.3 + Math.random() * 0.9, s: 0.6 + Math.random() * 1.8,
     a: 0.15 + Math.random() * 0.5, ph: Math.random() * 6.28, vx: 0, vy: 0,
   }));
   let lastY = scrollY, t0 = performance.now();
   const frame = (t) => {
-    const dt = Math.min(50, t - t0) / 16.7; t0 = t; mouse.moved *= 0.9;
+    const dt = (Math.min(50, t - t0) / 16.7) * (soft ? 0.55 : 1); t0 = t; mouse.moved *= 0.9;
     const dy = (scrollY - lastY) / innerHeight; lastY = scrollY;
     ctx.clearRect(0, 0, W, H);
     for (const p of P) {
@@ -467,6 +468,8 @@ document.getElementById("projects-grid")?.addEventListener("click", (e) => {
     requestAnimationFrame(frame);
   };
   requestAnimationFrame(frame);
+
+  if (soft) return;
 
   /* 4. page curtain when jumping between sections */
   const cur = document.createElement("div");
