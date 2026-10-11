@@ -326,6 +326,7 @@
       const items = await res.json();
       grid.innerHTML = [...items.filter((p) => p.featured), ...items.filter((p) => !p.featured)].map(projectCard).join("");
       grid.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+      window.__flipCards?.();
     } catch { /* keep empty */ }
   }
   /* ---------------- Count-up numbers ---------------- */
@@ -402,6 +403,39 @@ document.getElementById("projects-grid")?.addEventListener("click", (e) => {
     });
   };
   window.__splitHeads();
+
+  /* GSAP: headlines enter word by word, cards flip in with CSS 3D */
+  const hasGsap = !!(window.gsap && window.ScrollTrigger);
+  if (hasGsap) {
+    gsap.registerPlugin(ScrollTrigger);
+    root.classList.add("gsap-on");
+    const animateWords = (el) => {
+      const spans = el.querySelectorAll(".w > span");
+      if (!spans.length) return;
+      gsap.fromTo(spans, { yPercent: 118, rotate: soft ? 0 : 4 }, {
+        yPercent: 0, rotate: 0, duration: 1.05, ease: "power4.out", stagger: 0.1,
+        scrollTrigger: { trigger: el, start: "top 90%", once: true },
+      });
+    };
+    const prevSplit = window.__splitHeads;
+    window.__splitHeads = () => {
+      prevSplit();
+      document.querySelectorAll(".wd").forEach((el) => { if (!el.dataset.g) { el.dataset.g = "1"; wordIO.unobserve(el); animateWords(el); } });
+    };
+    window.__splitHeads();
+
+    window.__flipCards = () => {
+      const els = [...document.querySelectorAll(".stat, .service, .project, .skill-group, .cert-col, .degree")].filter((e) => !e.dataset.flip);
+      if (!els.length) return;
+      els.forEach((e) => { e.dataset.flip = "1"; e.classList.add("flip3d"); });
+      gsap.set(els, { transformPerspective: 1000, transformOrigin: "50% 0%", rotationX: soft ? -40 : -88, opacity: 0, y: 36 });
+      ScrollTrigger.batch(els, {
+        start: "top 92%", once: true,
+        onEnter: (batch) => gsap.to(batch, { rotationX: 0, opacity: 1, y: 0, duration: 1.1, ease: "power3.out", stagger: 0.12, overwrite: true }),
+      });
+    };
+    window.__flipCards();
+  }
 
   /* 1. text reveals */
   const sel = ".hero-tagline, .hero-subtitle, .hero-actions, .meta-strip, .section-num, .section-lead, .insight-note, .sub-head, .interlude-text, .end-btn, .end-brand, .end-col, .end-bar";
