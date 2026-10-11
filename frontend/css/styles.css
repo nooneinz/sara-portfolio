@@ -456,3 +456,23 @@ html[lang="en"] .project-title, html[lang="en"] .degree-title, html[lang="en"] .
 
 /* no twinkling pixel squares */
 .blue-card::before { display: none !important; }
+
+
+/* ---------- Black canvas + real dune photo strip at the foot of every section ---------- */
+.blue-card, .blue-card.soft, #projects, #skills { background: var(--bg) !important; background-image: none !important; }
+.blue-card { position: relative; padding-bottom: clamp(190px, 26vw, 360px) !important; }
+.blue-card::before {
+  display: block !important; content: ""; position: absolute; inset: auto 0 0 0; height: clamp(190px, 26vw, 360px); z-index: 0; pointer-events: none;
+  background: var(--strip, url("../img/dune-a.jpg")) center / cover no-repeat; opacity: 1;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 55%); mask-image: linear-gradient(to bottom, transparent 0%, #000 55%);
+}
+.blue-card::after { display: none !important; }
+#top { --strip: url("../img/dune-c.jpg"); }
+.insight { --strip: url("../img/dune-a.jpg"); }
+#services { --strip: url("../img/dune-d.jpg"); }
+#projects { --strip: url("../img/dune-b.jpg"); }
+#skills { --strip: url("../img/dune-c.jpg"); }
+#achievements { --strip: url("../img/dune-a.jpg"); }
+#contact { --strip: url("../img/dune-b.jpg"); }
+.contact-mark { fill: none; width: min(150px, 38vw); }
+.footer-mark { display: block; height: 56px; width: auto; }
