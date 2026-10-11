@@ -577,3 +577,15 @@ html[lang="en"] .interlude-text { font-family: var(--f-sans); font-weight: 800; 
 #skills .section-lead { color: #3d3d3d !important; }
 #skills .section-num { background: var(--ink) !important; color: #fff !important; border-color: var(--ink) !important; }
 #skills .skill-group { background: var(--ink) !important; color: #fff; }
+
+
+/* =========================================================
+   Geometric-light style (intro + one interlude)
+   ========================================================= */
+.intro { background: #0B0B0B url("/img/light.jpg") center / cover no-repeat; }
+.intro-name, .intro-meta { color: #0B0B0B; }
+.intro-name { font-weight: 800; }
+.intro-meta { opacity: .75; }
+.interlude-light { background: linear-gradient(#0B0B0B, #0B0B0B) , var(--dune) center / cover no-repeat; background: var(--dune) center / cover no-repeat, #0B0B0B; background-attachment: scroll; min-height: clamp(280px, 52vh, 520px); }
+.interlude-light .interlude-text { color: #0B0B0B; text-shadow: none; max-width: 22ch; }
+.interlude-light .interlude-n { color: #0B0B0B; }
