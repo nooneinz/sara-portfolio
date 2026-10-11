@@ -41,6 +41,7 @@
     document.title = l === "en" ? "Sara Alharbi — Software Engineer & AI Specialist" : arTitle;
     try { localStorage.setItem("sa-lang", l); } catch { /* storage unavailable */ }
     renderProjects();
+    window.__splitHeads?.();
     const fab = document.getElementById("chat-fab");
     if (fab) fab.textContent = l === "en" ? "Ask Sara" : "اسأل سارة";
   }
@@ -371,13 +372,44 @@ document.getElementById("projects-grid")?.addEventListener("click", (e) => {
   if (soft) root.classList.add("soft");
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
+
+  /* 0. headlines: words rise out of a mask, one after another */
+  const heads = ".hero-title, .section-title, .insight-title, .end-title";
+  const wordIO = new IntersectionObserver((entries) => entries.forEach((en) => {
+    if (en.isIntersecting) { en.target.classList.add("is-in"); wordIO.unobserve(en.target); }
+  }), { rootMargin: "0px 0px -6% 0px", threshold: 0.05 });
+  window.__splitHeads = () => {
+    document.querySelectorAll(heads).forEach((el) => {
+      if (el.querySelector(".w")) return;
+      let n = 0;
+      const walk = (node) => [...node.childNodes].forEach((c) => {
+        if (c.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          c.textContent.split(/(\s+)/).forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(" ")); return; }
+            const w = document.createElement("span"); w.className = "w";
+            const i = document.createElement("span"); i.textContent = part; i.style.transitionDelay = `${n++ * 90}ms`;
+            w.appendChild(i); frag.appendChild(w);
+          });
+          c.replaceWith(frag);
+        } else if (c.nodeType === 1 && c.tagName !== "BR") walk(c);
+      });
+      walk(el);
+      el.classList.add("wd");
+      el.classList.remove("is-in");
+      wordIO.observe(el);
+    });
+  };
+  window.__splitHeads();
+
   /* 1. text reveals */
-  const sel = ".hero-title, .hero-tagline, .hero-subtitle, .hero-actions, .meta-strip, .section-num, .section-title, .section-lead, .insight-title, .insight-note, .sub-head, .interlude-text, .end-title, .end-btn, .end-brand, .end-col, .end-bar";
+  const sel = ".hero-tagline, .hero-subtitle, .hero-actions, .meta-strip, .section-num, .section-lead, .insight-note, .sub-head, .interlude-text, .end-btn, .end-brand, .end-col, .end-bar";
   const els = [...document.querySelectorAll(sel)];
   els.forEach((el) => {
     el.classList.add("tx");
     const sibs = [...el.parentElement.children].filter((c) => c.classList.contains("tx") || els.includes(c));
-    el.style.setProperty("--d", `${Math.max(0, sibs.indexOf(el)) * 110}ms`);
+    el.style.setProperty("--d", `${Math.max(0, sibs.indexOf(el)) * 150}ms`);
   });
   const txIO = new IntersectionObserver((entries) => entries.forEach((en) => {
     if (en.isIntersecting) { en.target.classList.add("is-in"); txIO.unobserve(en.target); }

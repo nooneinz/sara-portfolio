@@ -717,3 +717,21 @@ main, footer { position: relative; z-index: 1; }
 html[lang="ar"] .hero-title, html[lang="ar"] .insight-title, html[lang="ar"] .section-title, html[lang="ar"] .project-title,
 html[lang="ar"] .degree-title, html[lang="ar"] .service-title, html[lang="ar"] .end-title, html[lang="ar"] .sub-head { font-family: var(--f-display); font-weight: 700; letter-spacing: 0; }
 html[lang="ar"] .hero-title { font-size: clamp(3rem, 7vw, 5.6rem); line-height: 1.15; }
+
+
+/* =========================================================
+   Round 7: balanced hero, visible text motion on every device
+   ========================================================= */
+.hero-grid { align-items: center !important; }
+.chat-log { height: clamp(190px, 25vh, 250px) !important; }
+.chat-stage { margin-top: 0; }
+.hero-copy { padding-block: 1rem; }
+
+/* word-by-word headlines */
+.js-anim .wd .w { display: inline-block; overflow: hidden; vertical-align: top; padding-block: .12em; margin-block: -.12em; }
+.js-anim .wd .w > span { display: inline-block; transform: translateY(115%); transition: transform .9s cubic-bezier(.2, .8, .2, 1); }
+.js-anim .wd.is-in .w > span { transform: none; }
+
+/* soft mode keeps a gentle rise (no blur, no zoom, no curtain) */
+.soft.js-anim .tx { transform: translateY(.6em); filter: none; }
+.soft.js-anim .tx.is-in { transform: none; transition: opacity .9s ease var(--d, 0s), transform .9s cubic-bezier(.2, .7, .2, 1) var(--d, 0s); }
