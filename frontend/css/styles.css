@@ -742,10 +742,3 @@ html[lang="ar"] .hero-title { font-size: clamp(3rem, 7vw, 5.6rem); line-height: 
 html[lang="ar"] .hero-title { font-size: clamp(3.2rem, 6vw, 5rem) !important; line-height: 1.2 !important; }
 html[lang="en"] .hero-title { font-size: clamp(2.6rem, 5.2vw, 4.4rem) !important; line-height: 1.08 !important; }
 html[lang="en"] .hero-subtitle, html[lang="ar"] .hero-subtitle { font-size: clamp(1rem, 1.4vw, 1.12rem) !important; }
-
-
-/* GSAP drives the headline words and the 3D card flips */
-.gsap-on .wd .w > span { transition: none !important; }
-.gsap-on .reveal, .gsap-on .flip3d { transition: none !important; }
-.flip3d { backface-visibility: hidden; -webkit-backface-visibility: hidden; will-change: transform, opacity; }
-.stats-grid, .services, .projects-grid, .skills-grid, .certs { perspective: 1200px; }
