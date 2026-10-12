@@ -3,7 +3,7 @@
     "id": "baseera",
     "image": "img/projects/baseera.webp",
     "title": "Baseera",
-    "repo": "baseera-app",
+    "repo": "Baseera",
     "featured": true,
     "kind_ar": "مشروع رئيسي",
     "kind_en": "Featured project",
@@ -21,7 +21,7 @@
       {
         "label_ar": "المستودع",
         "label_en": "Repository",
-        "url": "https://github.com/nooneinz/baseera-app"
+        "url": "https://github.com/nooneinz/Baseera"
       }
     ]
   },

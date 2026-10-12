@@ -742,3 +742,37 @@ html[lang="ar"] .hero-title { font-size: clamp(3rem, 7vw, 5.6rem); line-height: 
 html[lang="ar"] .hero-title { font-size: clamp(3.2rem, 6vw, 5rem) !important; line-height: 1.2 !important; }
 html[lang="en"] .hero-title { font-size: clamp(2.6rem, 5.2vw, 4.4rem) !important; line-height: 1.08 !important; }
 html[lang="en"] .hero-subtitle, html[lang="ar"] .hero-subtitle { font-size: clamp(1rem, 1.4vw, 1.12rem) !important; }
+
+
+/* =========================================================
+   Round 8: calmer projects (flip cards), easier reading
+   ========================================================= */
+.projects-grid { gap: 14px; }
+.projects-grid.is-collapsed .project:nth-child(n+7) { display: none; }
+.projects-more { display: flex; margin: 1.8rem auto 0; }
+
+.project.flipcard {
+  perspective: 1200px; background: none !important; border: 0 !important; box-shadow: none !important; padding: 0 !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important; overflow: visible !important; cursor: pointer; transform: none !important;
+  outline-offset: 4px;
+}
+.fc-inner { position: relative; height: 280px; transform-style: preserve-3d; transition: transform .75s cubic-bezier(.3, .7, .2, 1); }
+.flipcard.is-flipped .fc-inner { transform: rotateY(180deg); }
+.fc-face {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden;
+  background: rgba(14, 14, 14, .92); border: 1px solid rgba(255, 255, 255, .16); padding: 1.4rem; display: flex; flex-direction: column; gap: .8rem;
+}
+.flipcard:hover .fc-front { border-color: rgba(255, 255, 255, .4); }
+.fc-back { transform: rotateY(180deg); background: rgba(22, 22, 22, .96); overflow-y: auto; scrollbar-width: thin; }
+.fc-kind { font-size: .82rem; letter-spacing: .08em; color: var(--muted); }
+.fc-front .project-title { font-size: clamp(1.6rem, 2.4vw, 2rem); line-height: 1.2; margin-top: .2rem; }
+.fc-metric { display: flex; align-items: baseline; gap: .6rem; }
+.fc-metric strong { font-family: var(--f-sans); font-size: 1.9rem; font-weight: 700; color: #fff; line-height: 1; }
+.fc-metric span { font-size: .9rem; color: var(--muted); }
+.fc-front .tags { margin-top: auto; }
+.fc-hint { font-size: .92rem; color: #fff; font-weight: 600; letter-spacing: .04em; }
+.fc-back-title { font-family: var(--f-sans); font-size: 1.1rem; font-weight: 700; color: #fff; }
+.fc-back .project-desc { display: block !important; -webkit-line-clamp: unset !important; overflow: visible !important; font-size: 1.02rem !important; line-height: 1.9 !important; max-width: none; color: rgba(245, 245, 245, .96) !important; }
+.fc-back .project-links { margin-top: auto; padding-top: .4rem; }
+@media (max-width: 800px) { .fc-inner { height: 300px; } }
+@media (prefers-reduced-motion: reduce) { .fc-inner { transition-duration: .2s; } }

@@ -10,11 +10,11 @@
     ar: { menu: "القائمة", close: "إغلاق", you: "أنت", bot: "المساعد", typing: "يكتب…", online: "متصل", offline: "غير متصل",
       noAnswer: "تعذّر الحصول على إجابة الآن.", none: "لم تصل إجابة.", timeout: "انتهت مهلة الطلب. حاول مرة أخرى.",
       conn: "تعذّر الاتصال بالمساعد حالياً. يمكنك التواصل مع سارة مباشرة عبر Saraalharbi0031@gmail.com",
-      thinking: "جارٍ الكتابة", problem: "المشكلة التي يحلّها", repo: "المستودع", link: "رابط", more: "المزيد", less: "أقل", sw: "التبديل إلى الإنجليزية" },
+      thinking: "جارٍ الكتابة", problem: "المشكلة التي يحلّها", repo: "المستودع", link: "رابط", more: "المزيد", less: "أقل", details: "التفاصيل", showAll: "عرض كل المشاريع", showLess: "عرض أقل", sw: "التبديل إلى الإنجليزية" },
     en: { menu: "Menu", close: "Close", you: "You", bot: "Assistant", typing: "Typing…", online: "Online", offline: "Offline",
       noAnswer: "Couldn't get an answer right now.", none: "No answer received.", timeout: "The request timed out. Please try again.",
       conn: "Couldn't reach the assistant right now. You can contact Sara directly at Saraalharbi0031@gmail.com",
-      thinking: "Typing", problem: "The problem it solves", repo: "Repository", link: "Link", more: "More", less: "Less", sw: "Switch to Arabic" },
+      thinking: "Typing", problem: "The problem it solves", repo: "Repository", link: "Link", more: "More", less: "Less", details: "Details", showAll: "Show all projects", showLess: "Show fewer", sw: "Switch to Arabic" },
   };
   let lang = "ar";
   try { lang = localStorage.getItem("sa-lang") === "en" ? "en" : "ar"; } catch { /* storage unavailable */ }
@@ -38,7 +38,7 @@
     if (tg) tg.textContent = document.getElementById("site-nav")?.classList.contains("is-open") ? t("close") : t("menu");
     document.querySelectorAll(".msg-user .msg-who").forEach((el) => (el.textContent = t("you")));
     if (!busy) status.textContent = status.classList.contains("is-error") ? t("offline") : t("online");
-    document.title = l === "en" ? "Sara Alharbi — Software Engineer & AI Specialist" : arTitle;
+    document.title = l === "en" ? "Sara Alharbi — Software Engineer" : arTitle;
     try { localStorage.setItem("sa-lang", l); } catch { /* storage unavailable */ }
     renderProjects();
     window.__splitHeads?.();
@@ -300,20 +300,24 @@
     const links = (p.links || []).map((l) =>
       `<a href="${safeUrl(l.url)}" target="_blank" rel="noopener">${escHtml((lang === "en" ? l.label_en : l.label_ar) || t("link"))}</a>`).join("");
     const metric = p.metric
-      ? `<p class="proj-metric"><strong lang="en" dir="ltr">${escHtml(p.metric)}</strong><span>${escHtml(lang === "en" ? p.metric_en : p.metric_ar)}</span></p>`
+      ? `<p class="fc-metric"><strong lang="en" dir="ltr">${escHtml(p.metric)}</strong><span>${escHtml(lang === "en" ? p.metric_en : p.metric_ar)}</span></p>`
       : "";
-    const problem = p.featured && p.problem_ar
-      ? `<details class="proj-more"><summary>${t("problem")}</summary><p>${escHtml(lang === "en" ? p.problem_en : p.problem_ar)}</p></details>`
-      : "";
-    return `<article class="project proj-card reveal${p.featured ? " is-featured theme-dark" : ""}">
-      <div class="project-meta"><span>${escHtml(lang === "en" ? p.kind_en : p.kind_ar)}</span></div>
-      <h3 class="project-title" lang="en">${escHtml(p.title)}</h3>
-      ${metric}
-      <p class="project-desc">${escHtml(lang === "en" ? p.solution_en : p.solution_ar)}</p>
-      <button type="button" class="proj-toggle" aria-expanded="false" data-more="${t("more")}" data-less="${t("less")}">${t("more")}</button>
-      ${problem}
-      <ul class="tags" lang="en" dir="ltr">${(p.tags || []).map((t) => `<li>${escHtml(t)}</li>`).join("")}</ul>
-      ${links ? `<div class="project-links">${links}</div>` : ""}
+    const title = escHtml(p.title);
+    return `<article class="project flipcard reveal" tabindex="0" role="button" aria-expanded="false" aria-label="${title}">
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <span class="fc-kind">${escHtml(lang === "en" ? p.kind_en : p.kind_ar)}</span>
+          <h3 class="project-title" lang="en">${title}</h3>
+          ${metric}
+          <ul class="tags" lang="en" dir="ltr">${(p.tags || []).slice(0, 3).map((x) => `<li>${escHtml(x)}</li>`).join("")}</ul>
+          <span class="fc-hint" aria-hidden="true">+ ${t("details")}</span>
+        </div>
+        <div class="fc-face fc-back">
+          <h3 class="fc-back-title" lang="en">${title}</h3>
+          <p class="project-desc">${escHtml(lang === "en" ? p.solution_en : p.solution_ar)}</p>
+          ${links ? `<div class="project-links">${links}</div>` : ""}
+        </div>
+      </div>
     </article>`;
   }
 
@@ -326,6 +330,15 @@
       const items = await res.json();
       grid.innerHTML = [...items.filter((p) => p.featured), ...items.filter((p) => !p.featured)].map(projectCard).join("");
       grid.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+      let more = document.getElementById("projects-more");
+      if (!more) {
+        more = document.createElement("button");
+        more.id = "projects-more"; more.type = "button"; more.className = "btn btn-ghost projects-more";
+        grid.after(more);
+        grid.classList.add("is-collapsed");
+        more.addEventListener("click", () => { grid.classList.toggle("is-collapsed"); more.textContent = grid.classList.contains("is-collapsed") ? t("showAll") : t("showLess"); });
+      }
+      more.textContent = grid.classList.contains("is-collapsed") ? t("showAll") : t("showLess");
     } catch { /* keep empty */ }
   }
   /* ---------------- Count-up numbers ---------------- */
@@ -354,15 +367,25 @@
 })();
 
 
-/* ---------- Project "more" toggles ---------- */
-document.getElementById("projects-grid")?.addEventListener("click", (e) => {
-  const b = e.target.closest(".proj-toggle");
-  if (!b) return;
-  const card = b.closest(".project");
-  const open = card.classList.toggle("is-open");
-  b.setAttribute("aria-expanded", String(open));
-  b.textContent = open ? b.dataset.less : b.dataset.more;
-});
+/* ---------- Project cards flip on click ---------- */
+(() => {
+  const grid = document.getElementById("projects-grid");
+  if (!grid) return;
+  const flip = (card) => {
+    const on = card.classList.toggle("is-flipped");
+    card.setAttribute("aria-expanded", String(on));
+  };
+  grid.addEventListener("click", (e) => {
+    if (e.target.closest("a")) return;
+    const card = e.target.closest(".flipcard");
+    if (card) flip(card);
+  });
+  grid.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const card = e.target.closest(".flipcard");
+    if (card && e.target === card) { e.preventDefault(); flip(card); }
+  });
+})();
 
 /* ---------- Motion: text reveals, desert parallax, drifting sand, page curtain ---------- */
 (() => {
