@@ -776,3 +776,19 @@ html[lang="en"] .hero-subtitle, html[lang="ar"] .hero-subtitle { font-size: clam
 .fc-back .project-links { margin-top: auto; padding-top: .4rem; }
 @media (max-width: 800px) { .fc-inner { height: 300px; } }
 @media (prefers-reduced-motion: reduce) { .fc-inner { transition-duration: .2s; } }
+
+
+/* certificate cards use the same flip card as the projects */
+.cert-col.flipcard {
+  perspective: 1200px; background: none !important; border: 0 !important; box-shadow: none !important; padding: 0 !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important; border-radius: 0 !important; cursor: pointer; outline-offset: 4px;
+}
+.cert-col .fc-inner { height: 270px; }
+.cert-col .fc-front { justify-content: space-between; }
+.cert-col .fc-front .cert-issuer { border: 0; padding: 0; margin: 0; font-size: 1.5rem !important; font-weight: 700; line-height: 1.25; }
+.cert-col .fc-kind { font-size: .95rem; }
+.cert-col .fc-back { padding: 1.1rem; gap: .5rem; }
+.cert-col .fc-back ul { margin: 0; }
+.cert-col .fc-back li { padding-block: .4rem; font-size: .86rem; line-height: 1.45; }
+.cert-col .fc-back .project-links { margin-top: auto; }
+@media (max-width: 800px) { .cert-col .fc-inner { height: 250px; } }

@@ -367,20 +367,18 @@
 })();
 
 
-/* ---------- Project cards flip on click ---------- */
+/* ---------- Flip cards (projects + certificates) ---------- */
 (() => {
-  const grid = document.getElementById("projects-grid");
-  if (!grid) return;
   const flip = (card) => {
     const on = card.classList.toggle("is-flipped");
     card.setAttribute("aria-expanded", String(on));
   };
-  grid.addEventListener("click", (e) => {
+  document.addEventListener("click", (e) => {
     if (e.target.closest("a")) return;
     const card = e.target.closest(".flipcard");
     if (card) flip(card);
   });
-  grid.addEventListener("keydown", (e) => {
+  document.addEventListener("keydown", (e) => {
     if (e.key !== "Enter" && e.key !== " ") return;
     const card = e.target.closest(".flipcard");
     if (card && e.target === card) { e.preventDefault(); flip(card); }
