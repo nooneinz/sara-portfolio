@@ -96,11 +96,13 @@ SYSTEM_PROMPT = """
   10. مشاريع GitHub متنوعة: NYC Taxi Tip Prediction, Predictive Car Features EDA, Online Shoppers Purchase Prediction, Gold Price Tracker Oman, Mini SaaS Task Manager.
 
 - التعليم: بكالوريوس علوم الحاسوب والذكاء الاصطناعي (2021-2026) من كلية الخليج بالشراكة مع جامعة كارديف متروبوليتان، بمرتبة الشرف الأولى ومعدل 3.9.
-- الشهادات (20 شهادة):
-  - IBM: Make Agentic AI Work for You, Getting Started with Generative AI, Machine Learning with Python - Level 1, A Quick Introduction to Machine Learning, Data Analysis with Python, Python for Data Science.
-  - Google: Google AI Essentials, Discover the Art of Prompting, Stay Ahead of the AI Curve.
+- الشهادات (33 شهادة، وكلها على LinkedIn: linkedin.com/in/sara-alharbi-1b53263a2/details/certifications):
+  - IBM (الوكلاء الذكية والذكاء التوليدي): Build AI Agents using MCP, Agentic AI with LangGraph CrewAI AutoGen and BeeAI, Agentic AI with LangChain and LangGraph, Fundamentals of Building AI Agents, Make Agentic AI Work for You, Advanced RAG with Vector Databases and Retrievers, Build RAG Applications: Get Started, Develop Generative AI Applications: Get Started, Build Multimodal Generative AI Applications, Generative AI Essentials: Using LLMs to Work with Data, Getting Started with Generative AI.
+  - IBM (تعلّم الآلة والبيانات والبرمجة): Machine Learning with Python - Level 1, A Quick Introduction to Machine Learning, Data Analysis with Python, Python for Data Science, Back-End APIs, Cybersecurity Fundamentals.
+  - Google: Google AI Essentials (وبنسخة Coursera V1)، Discover the Art of Prompting, Stay Ahead of the AI Curve.
   - Cognitive Class & Kaggle: Machine Learning with Python, Intro to Machine Learning.
   - Skillova: ChatGPT Alternatives Workshop.
+  - وزارة النقل والاتصالات وتقنية المعلومات (سلطنة عُمان): تكنولوجيا المعلومات والذكاء الاصطناعي.
   - University of Michigan: Python Data Structures, Programming for Everybody (Getting Started with Python).
   - Kaggle: Pandas, Python, Intro to Programming.
   - Coursera & Google: Data Analysis Foundations using Google Sheets, Introduction to AI, Maximize Productivity With AI Tools.
