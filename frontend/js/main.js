@@ -10,11 +10,11 @@
     ar: { menu: "القائمة", close: "إغلاق", you: "أنت", bot: "المساعد", typing: "يكتب…", online: "متصل", offline: "غير متصل",
       noAnswer: "تعذّر الحصول على إجابة الآن.", none: "لم تصل إجابة.", timeout: "انتهت مهلة الطلب. حاول مرة أخرى.",
       conn: "تعذّر الاتصال بالمساعد حالياً. يمكنك التواصل مع سارة مباشرة عبر Saraalharbi0031@gmail.com",
-      thinking: "جارٍ الكتابة", problem: "المشكلة التي يحلّها", repo: "المستودع", link: "رابط", more: "المزيد", less: "أقل", details: "التفاصيل", showAll: "عرض كل المشاريع", showLess: "عرض أقل", sw: "التبديل إلى الإنجليزية" },
+      thinking: "جارٍ الكتابة", problem: "المشكلة التي يحلّها", repo: "المستودع", link: "رابط", more: "المزيد", less: "أقل", details: "التفاصيل", moreWork: "مشاريع أخرى", showLess: "عرض أقل", sw: "التبديل إلى الإنجليزية" },
     en: { menu: "Menu", close: "Close", you: "You", bot: "Assistant", typing: "Typing…", online: "Online", offline: "Offline",
       noAnswer: "Couldn't get an answer right now.", none: "No answer received.", timeout: "The request timed out. Please try again.",
       conn: "Couldn't reach the assistant right now. You can contact Sara directly at Saraalharbi0031@gmail.com",
-      thinking: "Typing", problem: "The problem it solves", repo: "Repository", link: "Link", more: "More", less: "Less", details: "Details", showAll: "Show all projects", showLess: "Show fewer", sw: "Switch to Arabic" },
+      thinking: "Typing", problem: "The problem it solves", repo: "Repository", link: "Link", more: "More", less: "Less", details: "Details", moreWork: "More work", showLess: "Show fewer", sw: "Switch to Arabic" },
   };
   let lang = "ar";
   try { lang = localStorage.getItem("sa-lang") === "en" ? "en" : "ar"; } catch { /* storage unavailable */ }
@@ -296,29 +296,47 @@
   const escHtml = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const safeUrl = (u) => (/^https?:\/\//.test(u) ? escHtml(u) : "#");
 
-  function projectCard(p) {
-    const links = (p.links || []).map((l) =>
-      `<a href="${safeUrl(l.url)}" target="_blank" rel="noopener">${escHtml((lang === "en" ? l.label_en : l.label_ar) || t("link"))}</a>`).join("");
+  const pick = (p, k) => escHtml(lang === "en" ? p[k + "_en"] : p[k + "_ar"]);
+  const linksOf = (p) => (p.links || []).map((l) =>
+    `<a href="${safeUrl(l.url)}" target="_blank" rel="noopener">${escHtml((lang === "en" ? l.label_en : l.label_ar) || t("link"))} ↗</a>`).join("");
+  const tagsOf = (p) => `<ul class="tags" lang="en" dir="ltr">${(p.tags || []).map((x) => `<li>${escHtml(x)}</li>`).join("")}</ul>`;
+  const num = (i) => String(i + 1).padStart(2, "0");
+
+  /* the three lead projects: big alternating rows */
+  function spotlight(p, i) {
     const metric = p.metric
-      ? `<p class="fc-metric"><strong lang="en" dir="ltr">${escHtml(p.metric)}</strong><span>${escHtml(lang === "en" ? p.metric_en : p.metric_ar)}</span></p>`
+      ? `<p class="spot-metric"><strong lang="en" dir="ltr">${escHtml(p.metric)}</strong><span>${pick(p, "metric")}</span></p>`
       : "";
-    const title = escHtml(p.title);
-    return `<article class="project flipcard reveal" tabindex="0" role="button" aria-expanded="false" aria-label="${title}">
-      <div class="fc-inner">
-        <div class="fc-face fc-front">
-          <span class="fc-kind">${escHtml(lang === "en" ? p.kind_en : p.kind_ar)}</span>
-          <h3 class="project-title" lang="en">${title}</h3>
-          ${metric}
-          <ul class="tags" lang="en" dir="ltr">${(p.tags || []).slice(0, 3).map((x) => `<li>${escHtml(x)}</li>`).join("")}</ul>
-          <span class="fc-hint" aria-hidden="true">+ ${t("details")}</span>
-        </div>
-        <div class="fc-face fc-back">
-          <h3 class="fc-back-title" lang="en">${title}</h3>
-          <p class="project-desc">${escHtml(lang === "en" ? p.solution_en : p.solution_ar)}</p>
-          ${links ? `<div class="project-links">${links}</div>` : ""}
-        </div>
+    return `<article class="spot reveal">
+      <div class="spot-art" aria-hidden="true"><span lang="en">${num(i)}</span></div>
+      <div class="spot-body">
+        <p class="spot-kind">${pick(p, "kind")}</p>
+        <h3 class="spot-title" lang="en">${escHtml(p.title)}</h3>
+        <p class="spot-problem">${pick(p, "problem")}</p>
+        ${metric}
+        <p class="spot-solution">${pick(p, "solution")}</p>
+        ${tagsOf(p)}
+        <div class="project-links">${linksOf(p)}</div>
       </div>
     </article>`;
+  }
+
+  /* everything else: one compact line each, opens in place */
+  function row(p, i) {
+    return `<details class="prow reveal">
+      <summary>
+        <span class="prow-n" lang="en">${num(i)}</span>
+        <span class="prow-title" lang="en">${escHtml(p.title)}</span>
+        <span class="prow-kind">${pick(p, "kind")}</span>
+        <span class="prow-plus" aria-hidden="true"></span>
+      </summary>
+      <div class="prow-body">
+        <p class="prow-problem">${pick(p, "problem")}</p>
+        <p>${pick(p, "solution")}</p>
+        ${tagsOf(p)}
+        ${(p.links || []).length ? `<div class="project-links">${linksOf(p)}</div>` : ""}
+      </div>
+    </details>`;
   }
 
   async function renderProjects() {
@@ -328,17 +346,11 @@
       const res = await fetch("data/projects.json", { cache: "no-cache" });
       if (!res.ok) return;
       const items = await res.json();
-      grid.innerHTML = [...items.filter((p) => p.featured), ...items.filter((p) => !p.featured)].map(projectCard).join("");
+      const lead = items.filter((p) => p.spotlight);
+      const rest = items.filter((p) => !p.spotlight);
+      grid.innerHTML = lead.map(spotlight).join("") +
+        `<h3 class="more-head">${t("moreWork")}</h3><div class="prows">${rest.map((p, i) => row(p, i + lead.length)).join("")}</div>`;
       grid.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
-      let more = document.getElementById("projects-more");
-      if (!more) {
-        more = document.createElement("button");
-        more.id = "projects-more"; more.type = "button"; more.className = "btn btn-ghost projects-more";
-        grid.after(more);
-        grid.classList.add("is-collapsed");
-        more.addEventListener("click", () => { grid.classList.toggle("is-collapsed"); more.textContent = grid.classList.contains("is-collapsed") ? t("showAll") : t("showLess"); });
-      }
-      more.textContent = grid.classList.contains("is-collapsed") ? t("showAll") : t("showLess");
     } catch { /* keep empty */ }
   }
   /* ---------------- Count-up numbers ---------------- */
@@ -367,7 +379,7 @@
 })();
 
 
-/* ---------- Flip cards (projects + certificates) ---------- */
+/* ---------- Flip cards (unused now; kept harmless) ---------- */
 (() => {
   const flip = (card) => {
     const on = card.classList.toggle("is-flipped");

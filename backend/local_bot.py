@@ -34,6 +34,11 @@ TOPICS = [
         "answer": "Multi-Tier Ticketing & CRM Architecture: نظام خلفي لإدارة علاقات العملاء والتذاكر مع صلاحيات RBAC، حسّن زمن الاستعلامات بنسبة 25% عبر تحسين الفهارس، وعالج أكثر من 1,000 طلب دعم دون أخطاء توجيه.",
     },
     {
+        "name": "rag",
+        "keys": ["rag", "document rag", "مساعد الوثائق", "الوثائق", "pdf", "chroma", "retrieval", "استرجاع"],
+        "answer": "Document RAG Assistant (مساعد الوثائق الذكي): ترفع ملفات PDF وتسأل بالعربية أو الإنجليزية، فيجيب النموذج من المقاطع المسترجعة فقط مع مصدر لكل إجابة (الملف والصفحة والمقطع)، ويصرّح عند عدم كفاية المعلومات. مبني بـ FastAPI وChromaDB وEmbeddings متعددة اللغات وReact. المستودع: github.com/nooneinz/document-rag-assistant",
+    },
+    {
         "name": "projects",
         "keys": ["مشروع", "مشاريع", "اعمال", "project", "projects", "portfolio", "work", "بنت", "طورت", "taxi", "gold", "shoppers", "task manager"],
         "answer": "أبرز مشاريع سارة:\n- Baseera: منصة B2B SaaS بـ Agentic AI (Django).\n- RetentionAI: تنبؤ بتسرّب الطلاب بدقة 94.5% (CNN-LSTM).\n- Multi-Tier Ticketing & CRM: نظام تذاكر مع RBAC وتحسين استعلامات 25%.\n- مشاريع GitHub: NYC Taxi Tip Prediction, Predictive Car Features EDA, Online Shoppers Purchase Prediction, Gold Price Tracker Oman, Mini SaaS Task Manager.\nاسأليني عن أي مشروع بالتفصيل.",
@@ -124,6 +129,7 @@ ANSWERS_EN = {
     "baseera": "Baseera (June 2026 – present): a B2B SaaS platform powered by Agentic AI that turns finance, sales and inventory data into instant strategic recommendations. Built with Django (MVC) with a hybrid mobile wrapper, secure REST APIs for multi-agent communication, and deployed via GitHub, Render and Cloudflare. Entered in Madaar's \"Engineer It with AI\" competition.",
     "retention": "RetentionAI: a student-dropout risk prediction system with 94.5% accuracy using a hybrid CNN-LSTM model (TensorFlow), a Flask backend with 3 roles (admin, lecturer, student), a MySQL database, real-time analytics dashboards via an async API, and automated CI/CD on Render with Gunicorn.",
     "crm": "Multi-Tier Ticketing & CRM Architecture: a backend system for customer relationship management and ticketing with RBAC permissions. SQL index optimization cut query time by 25%, and it handled 1,000+ support requests with no routing errors.",
+    "rag": "Document RAG Assistant: upload PDFs and ask in Arabic or English; the model answers only from retrieved passages with a source (file, page, passage) for each answer, and says so when the documents lack the information. Built with FastAPI, ChromaDB, multilingual embeddings and React. Repo: github.com/nooneinz/document-rag-assistant",
     "projects": "Sara's main projects:\n- Baseera: B2B SaaS platform with Agentic AI (Django).\n- RetentionAI: student dropout prediction, 94.5% accuracy (CNN-LSTM).\n- Multi-Tier Ticketing & CRM: ticketing system with RBAC and 25% faster queries.\n- GitHub projects: NYC Taxi Tip Prediction, Predictive Car Features EDA, Online Shoppers Purchase Prediction, Gold Price Tracker Oman, Mini SaaS Task Manager.\nAsk me about any project in detail.",
     "skills": "Sara's technical skills:\n- Web & APIs: Python, Django, ASP.NET Core, PHP, JavaScript, REST APIs, HTML5/CSS3.\n- Databases: PostgreSQL, MySQL, relational schema design, index optimization.\n- DevOps: Git, Docker, CI/CD, Render, Cloudflare, Nginx.\n- AI: Agentic AI, Machine Learning, Deep Learning (TensorFlow, CNN-LSTM).\n- Software engineering: MVC, C4 Models, RBAC.\n- Top skills: Data Analysis, Machine Learning, AI, Data Visualization, Pandas & NumPy.",
     "soft": "Soft skills: analytical and critical thinking, complex problem solving, fast learning, working in multidisciplinary teams, technical report writing, and bilingual (Arabic and English).",

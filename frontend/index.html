@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600;700&family=Cairo:wght@700;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=20261032" />
+  <link rel="stylesheet" href="css/styles.css?v=20261035" />
 </head>
 <body>
   <div class="dune-bg" aria-hidden="true"><i class="on" style="--img:url(/img/dune-full.jpg)"></i></div>
@@ -139,35 +139,39 @@
       </div>
       </div>
       <div class="container insight-services">
-        <h3 class="sub-head" data-en="What I build">ما أبنيه</h3>
-
-        <ol class="services">
-          <li class="service service-sage">
-            <span class="service-vertical" lang="en">AI &amp; Machine Learning</span>
-            <div class="service-body">
-              <span class="service-index" lang="en">01</span>
-              <h3 class="service-title" data-en="AI &amp; Agentic AI Solutions">حلول الذكاء الاصطناعي والـ Agentic AI</h3>
-              <p class="service-desc" data-en="Intelligent agents and ML models that turn data into decisions.">وكلاء ذكيون ونماذج تعلّم آلي تحوّل البيانات إلى قرارات.</p>
+        <h3 class="sub-head" data-en="What I build, and with what">ما أبنيه، وبماذا</h3>
+        <ol class="stack">
+          <li class="stack-row">
+            <span class="stack-n" lang="en">01</span>
+            <div class="stack-main">
+              <h3 class="stack-title" data-en="AI &amp; Agentic AI">الذكاء الاصطناعي والـ Agentic AI</h3>
+              <p class="stack-desc" data-en="Agents and ML models that turn data into decisions.">وكلاء ونماذج تعلّم آلي تحوّل البيانات إلى قرارات.</p>
             </div>
-            <span class="swatches" aria-hidden="true"><i></i><i></i><i></i></span>
+            <ul class="tags" lang="en" dir="ltr"><li>Agentic AI</li><li>RAG</li><li>TensorFlow</li><li>CNN-LSTM</li><li>Scikit-Learn</li></ul>
           </li>
-          <li class="service service-olive">
-            <span class="service-vertical" lang="en">Full-Stack &amp; APIs</span>
-            <div class="service-body">
-              <span class="service-index" lang="en">02</span>
-              <h3 class="service-title" data-en="Web Apps &amp; REST APIs">تطبيقات الويب والـ REST APIs</h3>
-              <p class="service-desc" data-en="Django and ASP.NET Core on clean MVC, shipped with CI/CD.">Django و ASP.NET Core بمعمارية MVC نظيفة، مع CI/CD.</p>
+          <li class="stack-row">
+            <span class="stack-n" lang="en">02</span>
+            <div class="stack-main">
+              <h3 class="stack-title" data-en="Web Apps &amp; REST APIs">تطبيقات الويب والـ REST APIs</h3>
+              <p class="stack-desc" data-en="Clean MVC back ends and React front ends, shipped with CI/CD.">واجهات خلفية بمعمارية MVC نظيفة وواجهات React، مع CI/CD.</p>
             </div>
-            <span class="swatches" aria-hidden="true"><i></i><i></i><i></i></span>
+            <ul class="tags" lang="en" dir="ltr"><li>Python</li><li>Django</li><li>FastAPI</li><li>ASP.NET Core</li><li>React</li><li>JavaScript</li></ul>
           </li>
-          <li class="service service-chestnut">
-            <span class="service-vertical" lang="en">Data &amp; Prediction</span>
-            <div class="service-body">
-              <span class="service-index" lang="en">03</span>
-              <h3 class="service-title" data-en="Data Analysis &amp; Predictive Models">تحليل البيانات والنماذج التنبؤية</h3>
-              <p class="service-desc" data-en="From raw data exploration to clear dashboards.">من استكشاف البيانات إلى لوحات تحليل واضحة.</p>
+          <li class="stack-row">
+            <span class="stack-n" lang="en">03</span>
+            <div class="stack-main">
+              <h3 class="stack-title" data-en="Data &amp; Databases">البيانات وقواعد البيانات</h3>
+              <p class="stack-desc" data-en="From exploration to schema design and index tuning.">من استكشاف البيانات إلى تصميم المخططات وتحسين الفهارس.</p>
             </div>
-            <span class="swatches" aria-hidden="true"><i></i><i></i><i></i></span>
+            <ul class="tags" lang="en" dir="ltr"><li>PostgreSQL</li><li>MySQL</li><li>SQL Indexing</li><li>Pandas</li></ul>
+          </li>
+          <li class="stack-row">
+            <span class="stack-n" lang="en">04</span>
+            <div class="stack-main">
+              <h3 class="stack-title" data-en="DevOps &amp; Architecture">DevOps والمعمارية</h3>
+              <p class="stack-desc" data-en="Containers, deployment and access-control design.">الحاويات والنشر وتصميم الصلاحيات.</p>
+            </div>
+            <ul class="tags" lang="en" dir="ltr"><li>Docker</li><li>Git</li><li>CI/CD</li><li>Render</li><li>Nginx</li><li>RBAC</li><li>C4 Models</li></ul>
           </li>
         </ol>
       </div>
@@ -187,40 +191,11 @@
       </div>
     </section>
 
-    <!-- ================= SKILLS ================= -->
-    <section id="skills" class="section section-skills blue-card">
-      <div class="container">
-        <header class="section-head">
-          <span class="section-num" lang="en">02 — Skills</span>
-          <h2 class="section-title" data-en="Core competencies">المهارات</h2>
-          <p class="section-lead" data-en="The tools I use to ship.">الأدوات التي أستخدمها في التنفيذ.</p>
-        </header>
-        <div class="skills-grid">
-          <div class="skill-group">
-            <h3 class="skill-title" data-en="Web & APIs">تطوير الويب والـ APIs</h3>
-            <ul class="tags" lang="en" dir="ltr"><li>JavaScript</li><li>Python</li><li>Django</li><li>ASP.NET Core</li><li>REST APIs</li><li>HTML5 / CSS3</li></ul>
-          </div>
-          <div class="skill-group">
-            <h3 class="skill-title" data-en="Databases">قواعد البيانات</h3>
-            <ul class="tags" lang="en" dir="ltr"><li>PostgreSQL</li><li>MySQL</li><li>Schema Design</li><li>SQL Indexing</li></ul>
-          </div>
-          <div class="skill-group">
-            <h3 class="skill-title" data-en="DevOps & Deployment">DevOps والنشر</h3>
-            <ul class="tags" lang="en" dir="ltr"><li>Git</li><li>CI/CD</li><li>Docker</li><li>Render</li><li>Cloudflare</li><li>Nginx</li></ul>
-          </div>
-          <div class="skill-group">
-            <h3 class="skill-title" data-en="Software Architecture">معمارية البرمجيات</h3>
-            <ul class="tags" lang="en" dir="ltr"><li>MVC</li><li>C4 Models</li><li>RBAC</li><li>Hybrid Wrappers</li></ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ================= ACHIEVEMENTS ================= -->
     <section id="achievements" class="section section-blush blue-card soft">
       <div class="container">
         <header class="section-head">
-          <span class="section-num" lang="en">03 — Credentials</span>
+          <span class="section-num" lang="en">02 — Credentials</span>
           <h2 class="section-title" data-en="Education &amp; Certificates">التعليم والشهادات</h2>
           <p class="section-lead" data-en="Academic foundation and continuous learning.">الأساس الأكاديمي والتعلّم المستمر.</p>
         </header>
@@ -236,181 +211,25 @@
         </div>
 
         <h3 class="cert-group-title"><span data-en="Artificial Intelligence &amp; Machine Learning">الذكاء الاصطناعي وتعلّم الآلة</span><span lang="en">21</span></h3>
-        <div class="certs">
-            <div class="cert-col flipcard" tabindex="0" role="button" aria-expanded="false" aria-label="IBM · Agentic AI">
-              <div class="fc-inner">
-                <div class="fc-face fc-front">
-                  <h4 class="cert-issuer" lang="en">IBM · Agentic AI</h4>
-                  <span class="fc-kind" data-en="3 certificates">3 شهادات</span>
-                  <span class="fc-hint" aria-hidden="true" data-en="+ View list">+ عرض القائمة</span>
-                </div>
-                <div class="fc-face fc-back">
-                  <ul lang="en"><li dir="auto">Build AI Agents using MCP</li><li dir="auto">Agentic AI with LangGraph, CrewAI, AutoGen and BeeAI</li><li dir="auto">Agentic AI with LangChain and LangGraph</li></ul>
-                  <div class="project-links"><a href="https://www.linkedin.com/in/sara-alharbi-1b53263a2/details/certifications/" target="_blank" rel="noopener" data-en="Certificates on LinkedIn">الشهادات على LinkedIn</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="cert-col flipcard" tabindex="0" role="button" aria-expanded="false" aria-label="IBM · AI Agents">
-              <div class="fc-inner">
-                <div class="fc-face fc-front">
-                  <h4 class="cert-issuer" lang="en">IBM · AI Agents</h4>
-                  <span class="fc-kind" data-en="2 certificates">شهادتان</span>
-                  <span class="fc-hint" aria-hidden="true" data-en="+ View list">+ عرض القائمة</span>
-                </div>
-                <div class="fc-face fc-back">
-                  <ul lang="en"><li dir="auto">Fundamentals of Building AI Agents</li><li dir="auto">Make Agentic AI Work for You</li></ul>
-                  <div class="project-links"><a href="https://www.linkedin.com/in/sara-alharbi-1b53263a2/details/certifications/" target="_blank" rel="noopener" data-en="Certificates on LinkedIn">الشهادات على LinkedIn</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="cert-col flipcard" tabindex="0" role="button" aria-expanded="false" aria-label="IBM · RAG">
-              <div class="fc-inner">
-                <div class="fc-face fc-front">
-                  <h4 class="cert-issuer" lang="en">IBM · RAG</h4>
-                  <span class="fc-kind" data-en="3 certificates">3 شهادات</span>
-                  <span class="fc-hint" aria-hidden="true" data-en="+ View list">+ عرض القائمة</span>
-                </div>
-                <div class="fc-face fc-back">
-                  <ul lang="en"><li dir="auto">Advanced RAG with Vector Databases and Retrievers</li><li dir="auto">Build RAG Applications: Get Started</li><li dir="auto">Develop Generative AI Applications: Get Started</li></ul>
-                  <div class="project-links"><a href="https://www.linkedin.com/in/sara-alharbi-1b53263a2/details/certifications/" target="_blank" rel="noopener" data-en="Certificates on LinkedIn">الشهادات على LinkedIn</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="cert-col flipcard" tabindex="0" role="button" aria-expanded="false" aria-label="IBM · Generative AI">
-              <div class="fc-inner">
-                <div class="fc-face fc-front">
-                  <h4 class="cert-issuer" lang="en">IBM · Generative AI</h4>
-                  <span class="fc-kind" data-en="3 certificates">3 شهادات</span>
-                  <span class="fc-hint" aria-hidden="true" data-en="+ View list">+ عرض القائمة</span>
-                </div>
-                <div class="fc-face fc-back">
-                  <ul lang="en"><li dir="auto">Build Multimodal Generative AI Applications</li><li dir="auto">Generative AI Essentials: Using LLMs to Work with Data</li><li dir="auto">Getting Started with Generative AI</li></ul>
-                  <div class="project-links"><a href="https://www.linkedin.com/in/sara-alharbi-1b53263a2/details/certifications/" target="_blank" rel="noopener" data-en="Certificates on LinkedIn">الشهادات على LinkedIn</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="cert-col flipcard" tabindex="0" role="button" aria-expanded="false" aria-label="IBM · Machine Learning">
-              <div class="fc-inner">
-                <div class="fc-face fc-front">
-                  <h4 class="cert-issuer" lang="en">IBM · Machine Learning</h4>
-                  <span class="fc-kind" data-en="2 certificates">شهادتان</span>
-                  <span class="fc-hint" aria-hidden="true" data-en="+ View list">+ عرض القائمة</span>
-                </div>
-                <div class="fc-face fc-back">
-                  <ul lang="en"><li dir="auto">Machine Learning with Python – Level 1</li><li dir="auto">A Quick Introduction to Machine Learning</li></ul>
-                  <div class="project-links"><a href="https://www.linkedin.com/in/sara-alharbi-1b53263a2/details/certifications/" target="_blank" rel="noopener" data-en="Certificates on LinkedIn">الشهادات على LinkedIn</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="cert-col flipcard" tabindex="0" role="button" aria-expanded="false" aria-label="Google">
-              <div class="fc-inner">
-                <div class="fc-face fc-front">
-                  <h4 class="cert-issuer" lang="en">Google</h4>
-                  <span class="fc-kind" data-en="4 certificates">4 شهادات</span>
-                  <span class="fc-hint" aria-hidden="true" data-en="+ View list">+ عرض القائمة</span>
-                </div>
-                <div class="fc-face fc-back">
-                  <ul lang="en"><li dir="auto">Google AI Essentials</li><li dir="auto">Google AI Essentials V1 (Coursera)</li><li dir="auto">Discover the Art of Prompting</li><li dir="auto">Stay Ahead of the AI Curve</li></ul>
-                  <div class="project-links"><a href="https://www.linkedin.com/in/sara-alharbi-1b53263a2/details/certifications/" target="_blank" rel="noopener" data-en="Certificates on LinkedIn">الشهادات على LinkedIn</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="cert-col flipcard" tabindex="0" role="button" aria-expanded="false" aria-label="Cognitive Class &amp; Kaggle">
-              <div class="fc-inner">
-                <div class="fc-face fc-front">
-                  <h4 class="cert-issuer" lang="en">Cognitive Class &amp; Kaggle</h4>
-                  <span class="fc-kind" data-en="2 certificates">شهادتان</span>
-                  <span class="fc-hint" aria-hidden="true" data-en="+ View list">+ عرض القائمة</span>
-                </div>
-                <div class="fc-face fc-back">
-                  <ul lang="en"><li dir="auto">Machine Learning with Python</li><li dir="auto">Intro to Machine Learning</li></ul>
-                  <div class="project-links"><a href="https://www.linkedin.com/in/sara-alharbi-1b53263a2/details/certifications/" target="_blank" rel="noopener" data-en="Certificates on LinkedIn">الشهادات على LinkedIn</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="cert-col flipcard" tabindex="0" role="button" aria-expanded="false" aria-label="Skillova">
-              <div class="fc-inner">
-                <div class="fc-face fc-front">
-                  <h4 class="cert-issuer" lang="en">Skillova</h4>
-                  <span class="fc-kind" data-en="1 certificate">شهادة واحدة</span>
-                  <span class="fc-hint" aria-hidden="true" data-en="+ View list">+ عرض القائمة</span>
-                </div>
-                <div class="fc-face fc-back">
-                  <ul lang="en"><li dir="auto">ChatGPT Alternatives Workshop</li></ul>
-                  <div class="project-links"><a href="https://www.linkedin.com/in/sara-alharbi-1b53263a2/details/certifications/" target="_blank" rel="noopener" data-en="Certificates on LinkedIn">الشهادات على LinkedIn</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="cert-col flipcard" tabindex="0" role="button" aria-expanded="false" aria-label="Oman Ministry of Transport, Communications &amp; IT">
-              <div class="fc-inner">
-                <div class="fc-face fc-front">
-                  <h4 class="cert-issuer" lang="en">Oman Ministry of Transport, Communications &amp; IT</h4>
-                  <span class="fc-kind" data-en="1 certificate">شهادة واحدة</span>
-                  <span class="fc-hint" aria-hidden="true" data-en="+ View list">+ عرض القائمة</span>
-                </div>
-                <div class="fc-face fc-back">
-                  <ul lang="en"><li dir="auto">تكنولوجيا المعلومات والذكاء الاصطناعي</li></ul>
-                  <div class="project-links"><a href="https://www.linkedin.com/in/sara-alharbi-1b53263a2/details/certifications/" target="_blank" rel="noopener" data-en="Certificates on LinkedIn">الشهادات على LinkedIn</a></div>
-                </div>
-              </div>
-            </div>
-        </div>
+        <ul class="certs">
+            <li class="cert-row"><h4 class="cert-issuer" lang="en">IBM · Agentic AI</h4><p class="cert-items" lang="en" dir="ltr">Build AI Agents using MCP · Agentic AI with LangGraph, CrewAI, AutoGen and BeeAI · Agentic AI with LangChain and LangGraph</p><span class="cert-count" data-en="3 certificates">3 شهادات</span></li>
+            <li class="cert-row"><h4 class="cert-issuer" lang="en">IBM · AI Agents</h4><p class="cert-items" lang="en" dir="ltr">Fundamentals of Building AI Agents · Make Agentic AI Work for You</p><span class="cert-count" data-en="2 certificates">شهادتان</span></li>
+            <li class="cert-row"><h4 class="cert-issuer" lang="en">IBM · RAG</h4><p class="cert-items" lang="en" dir="ltr">Advanced RAG with Vector Databases and Retrievers · Build RAG Applications: Get Started · Develop Generative AI Applications: Get Started</p><span class="cert-count" data-en="3 certificates">3 شهادات</span></li>
+            <li class="cert-row"><h4 class="cert-issuer" lang="en">IBM · Generative AI</h4><p class="cert-items" lang="en" dir="ltr">Build Multimodal Generative AI Applications · Generative AI Essentials: Using LLMs to Work with Data · Getting Started with Generative AI</p><span class="cert-count" data-en="3 certificates">3 شهادات</span></li>
+            <li class="cert-row"><h4 class="cert-issuer" lang="en">IBM · Machine Learning</h4><p class="cert-items" lang="en" dir="ltr">Machine Learning with Python – Level 1 · A Quick Introduction to Machine Learning</p><span class="cert-count" data-en="2 certificates">شهادتان</span></li>
+            <li class="cert-row"><h4 class="cert-issuer" lang="en">Google</h4><p class="cert-items" lang="en" dir="ltr">Google AI Essentials · Google AI Essentials V1 (Coursera) · Discover the Art of Prompting · Stay Ahead of the AI Curve</p><span class="cert-count" data-en="4 certificates">4 شهادات</span></li>
+            <li class="cert-row"><h4 class="cert-issuer" lang="en">Cognitive Class &amp; Kaggle</h4><p class="cert-items" lang="en" dir="ltr">Machine Learning with Python · Intro to Machine Learning</p><span class="cert-count" data-en="2 certificates">شهادتان</span></li>
+            <li class="cert-row"><h4 class="cert-issuer" lang="en">Skillova</h4><p class="cert-items" lang="en" dir="ltr">ChatGPT Alternatives Workshop</p><span class="cert-count" data-en="1 certificate">شهادة واحدة</span></li>
+            <li class="cert-row"><h4 class="cert-issuer" lang="en">Oman Ministry of Transport, Communications &amp; IT</h4><p class="cert-items" lang="en" dir="ltr">تكنولوجيا المعلومات والذكاء الاصطناعي</p><span class="cert-count" data-en="1 certificate">شهادة واحدة</span></li>
+        </ul>
 
         <h3 class="cert-group-title"><span data-en="Data, Programming &amp; Security">تحليل البيانات والبرمجة والأمن</span><span lang="en">12</span></h3>
-        <div class="certs">
-            <div class="cert-col flipcard" tabindex="0" role="button" aria-expanded="false" aria-label="IBM · Data &amp; Software">
-              <div class="fc-inner">
-                <div class="fc-face fc-front">
-                  <h4 class="cert-issuer" lang="en">IBM · Data &amp; Software</h4>
-                  <span class="fc-kind" data-en="4 certificates">4 شهادات</span>
-                  <span class="fc-hint" aria-hidden="true" data-en="+ View list">+ عرض القائمة</span>
-                </div>
-                <div class="fc-face fc-back">
-                  <ul lang="en"><li dir="auto">Data Analysis with Python</li><li dir="auto">Python for Data Science</li><li dir="auto">Back-End APIs</li><li dir="auto">Cybersecurity Fundamentals</li></ul>
-                  <div class="project-links"><a href="https://www.linkedin.com/in/sara-alharbi-1b53263a2/details/certifications/" target="_blank" rel="noopener" data-en="Certificates on LinkedIn">الشهادات على LinkedIn</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="cert-col flipcard" tabindex="0" role="button" aria-expanded="false" aria-label="University of Michigan">
-              <div class="fc-inner">
-                <div class="fc-face fc-front">
-                  <h4 class="cert-issuer" lang="en">University of Michigan</h4>
-                  <span class="fc-kind" data-en="2 certificates">شهادتان</span>
-                  <span class="fc-hint" aria-hidden="true" data-en="+ View list">+ عرض القائمة</span>
-                </div>
-                <div class="fc-face fc-back">
-                  <ul lang="en"><li dir="auto">Python Data Structures</li><li dir="auto">Programming for Everybody (Getting Started with Python)</li></ul>
-                  <div class="project-links"><a href="https://www.linkedin.com/in/sara-alharbi-1b53263a2/details/certifications/" target="_blank" rel="noopener" data-en="Certificates on LinkedIn">الشهادات على LinkedIn</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="cert-col flipcard" tabindex="0" role="button" aria-expanded="false" aria-label="Kaggle">
-              <div class="fc-inner">
-                <div class="fc-face fc-front">
-                  <h4 class="cert-issuer" lang="en">Kaggle</h4>
-                  <span class="fc-kind" data-en="3 certificates">3 شهادات</span>
-                  <span class="fc-hint" aria-hidden="true" data-en="+ View list">+ عرض القائمة</span>
-                </div>
-                <div class="fc-face fc-back">
-                  <ul lang="en"><li dir="auto">Pandas</li><li dir="auto">Python</li><li dir="auto">Intro to Programming</li></ul>
-                  <div class="project-links"><a href="https://www.linkedin.com/in/sara-alharbi-1b53263a2/details/certifications/" target="_blank" rel="noopener" data-en="Certificates on LinkedIn">الشهادات على LinkedIn</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="cert-col flipcard" tabindex="0" role="button" aria-expanded="false" aria-label="Coursera &amp; Google">
-              <div class="fc-inner">
-                <div class="fc-face fc-front">
-                  <h4 class="cert-issuer" lang="en">Coursera &amp; Google</h4>
-                  <span class="fc-kind" data-en="3 certificates">3 شهادات</span>
-                  <span class="fc-hint" aria-hidden="true" data-en="+ View list">+ عرض القائمة</span>
-                </div>
-                <div class="fc-face fc-back">
-                  <ul lang="en"><li dir="auto">Data Analysis Foundations using Google Sheets</li><li dir="auto">Introduction to AI</li><li dir="auto">Maximize Productivity With AI Tools</li></ul>
-                  <div class="project-links"><a href="https://www.linkedin.com/in/sara-alharbi-1b53263a2/details/certifications/" target="_blank" rel="noopener" data-en="Certificates on LinkedIn">الشهادات على LinkedIn</a></div>
-                </div>
-              </div>
-            </div>
-        </div>
+        <ul class="certs">
+            <li class="cert-row"><h4 class="cert-issuer" lang="en">IBM · Data &amp; Software</h4><p class="cert-items" lang="en" dir="ltr">Data Analysis with Python · Python for Data Science · Back-End APIs · Cybersecurity Fundamentals</p><span class="cert-count" data-en="4 certificates">4 شهادات</span></li>
+            <li class="cert-row"><h4 class="cert-issuer" lang="en">University of Michigan</h4><p class="cert-items" lang="en" dir="ltr">Python Data Structures · Programming for Everybody (Getting Started with Python)</p><span class="cert-count" data-en="2 certificates">شهادتان</span></li>
+            <li class="cert-row"><h4 class="cert-issuer" lang="en">Kaggle</h4><p class="cert-items" lang="en" dir="ltr">Pandas · Python · Intro to Programming</p><span class="cert-count" data-en="3 certificates">3 شهادات</span></li>
+            <li class="cert-row"><h4 class="cert-issuer" lang="en">Coursera &amp; Google</h4><p class="cert-items" lang="en" dir="ltr">Data Analysis Foundations using Google Sheets · Introduction to AI · Maximize Productivity With AI Tools</p><span class="cert-count" data-en="3 certificates">3 شهادات</span></li>
+        </ul>
 
         <p class="cta-row">
           <a class="btn btn-primary" href="https://www.linkedin.com/in/sara-alharbi-1b53263a2" target="_blank" rel="noopener" data-en="See my full career and experience on LinkedIn">اطّلع على مسيرتي المهنية وتجاربي كاملة على LinkedIn</a>
@@ -458,7 +277,7 @@
     </div>
   </footer>
 
-  <script src="js/config.js?v=20261032"></script>
-  <script src="js/main.js?v=20261032"></script>
+  <script src="js/config.js?v=20261035"></script>
+  <script src="js/main.js?v=20261035"></script>
 </body>
 </html>

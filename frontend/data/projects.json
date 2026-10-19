@@ -23,7 +23,35 @@
         "label_en": "Repository",
         "url": "https://github.com/nooneinz/Baseera"
       }
-    ]
+    ],
+    "spotlight": true
+  },
+  {
+    "id": "document-rag",
+    "title": "Document RAG Assistant",
+    "repo": "document-rag-assistant",
+    "featured": true,
+    "kind_ar": "تطبيق RAG",
+    "kind_en": "RAG application",
+    "problem_ar": "الإجابة من ملفات PDF الطويلة بطيئة، والنماذج اللغوية قد تختلق إجابات لا أصل لها في المستند.",
+    "problem_en": "Finding answers in long PDFs is slow, and language models can invent answers that are not in the document.",
+    "solution_ar": "ترفع ملفات PDF وتسأل بالعربية أو الإنجليزية، فيجيب النموذج من المقاطع المسترجعة فقط، مع مصادر لكل إجابة (الملف والصفحة والمقطع). بوابتان تمنعان الاختلاق: حدّ أدنى للتشابه قبل استدعاء النموذج، وإشارة صريحة من النموذج عند غياب الجواب، فيرد النظام بأنه لا توجد معلومات كافية. تقسيم المقاطع مع تداخل، وEmbeddings متعددة اللغات تعمل محلياً، وقاعدة ChromaDB، وواجهة React ثنائية اللغة تدعم RTL، مع اختبارات وسكربت تقييم. لا يدعم ملفات PDF الممسوحة ضوئياً (بدون OCR) ولا ذاكرة محادثة.",
+    "solution_en": "Upload PDFs and ask in Arabic or English; the model answers only from retrieved passages, with sources for every answer (file, page and passage). Two gates prevent hallucination: a minimum-similarity threshold before the model is called, and an explicit no-answer signal from the model, after which the system replies that there is not enough information. Overlapping chunking, local multilingual embeddings, a ChromaDB store and a bilingual React UI with RTL, plus tests and an evaluation script. No support for scanned PDFs (no OCR) and no chat memory.",
+    "tags": [
+      "Python",
+      "FastAPI",
+      "ChromaDB",
+      "React",
+      "RAG"
+    ],
+    "links": [
+      {
+        "label_ar": "المستودع",
+        "label_en": "Repository",
+        "url": "https://github.com/nooneinz/document-rag-assistant"
+      }
+    ],
+    "spotlight": true
   },
   {
     "id": "retentionai",
@@ -52,7 +80,8 @@
     ],
     "metric": "94.5%",
     "metric_ar": "دقة التنبؤ",
-    "metric_en": "Prediction accuracy"
+    "metric_en": "Prediction accuracy",
+    "spotlight": true
   },
   {
     "id": "hasba",
@@ -364,7 +393,7 @@
     ]
   },
   {
-    "id": "crm",
+    "id": "ticketing-crm",
     "title": "Multi-Tier Ticketing & CRM Architecture",
     "repo": "",
     "featured": false,
