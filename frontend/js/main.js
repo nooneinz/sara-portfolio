@@ -10,11 +10,11 @@
     ar: { menu: "القائمة", close: "إغلاق", you: "أنت", bot: "المساعد", typing: "يكتب…", online: "متصل", offline: "غير متصل",
       noAnswer: "تعذّر الحصول على إجابة الآن.", none: "لم تصل إجابة.", timeout: "انتهت مهلة الطلب. حاول مرة أخرى.",
       conn: "تعذّر الاتصال بالمساعد حالياً. يمكنك التواصل مع سارة مباشرة عبر Saraalharbi0031@gmail.com",
-      thinking: "جارٍ الكتابة", problem: "المشكلة التي يحلّها", repo: "المستودع", link: "رابط", more: "المزيد", less: "أقل", details: "التفاصيل", moreWork: "مشاريع أخرى", showLess: "عرض أقل", sw: "التبديل إلى الإنجليزية" },
+      thinking: "جارٍ الكتابة", problem: "المشكلة التي يحلّها", repo: "المستودع", link: "رابط", more: "المزيد", less: "أقل", details: "التفاصيل", moreWork: "مشاريع أخرى", systems: "أنظمة متكاملة", showLess: "عرض أقل", sw: "التبديل إلى الإنجليزية" },
     en: { menu: "Menu", close: "Close", you: "You", bot: "Assistant", typing: "Typing…", online: "Online", offline: "Offline",
       noAnswer: "Couldn't get an answer right now.", none: "No answer received.", timeout: "The request timed out. Please try again.",
       conn: "Couldn't reach the assistant right now. You can contact Sara directly at Saraalharbi0031@gmail.com",
-      thinking: "Typing", problem: "The problem it solves", repo: "Repository", link: "Link", more: "More", less: "Less", details: "Details", moreWork: "More work", showLess: "Show fewer", sw: "Switch to Arabic" },
+      thinking: "Typing", problem: "The problem it solves", repo: "Repository", link: "Link", more: "More", less: "Less", details: "Details", moreWork: "More work", systems: "Full systems", showLess: "Show fewer", sw: "Switch to Arabic" },
   };
   let lang = "ar";
   try { lang = localStorage.getItem("sa-lang") === "en" ? "en" : "ar"; } catch { /* storage unavailable */ }
@@ -302,13 +302,24 @@
   const tagsOf = (p) => `<ul class="tags" lang="en" dir="ltr">${(p.tags || []).map((x) => `<li>${escHtml(x)}</li>`).join("")}</ul>`;
   const num = (i) => String(i + 1).padStart(2, "0");
 
-  /* the three lead projects: big alternating rows */
+  /* visual for a lead project: a browser-framed screenshot, a pipeline, or a big number */
+  function art(p, i) {
+    if (p.image) {
+      return `<div class="spot-art has-shot" aria-hidden="true"><div class="frame"><div class="frame-bar"><i></i><i></i><i></i></div><img src="${escHtml(p.image)}" alt="" loading="lazy" /></div></div>`;
+    }
+    if (p.flow) {
+      return `<div class="spot-art has-flow" aria-hidden="true" lang="en" dir="ltr"><ol>${p.flow.map((f) => `<li>${escHtml(f)}</li>`).join("")}</ol></div>`;
+    }
+    return `<div class="spot-art has-num" aria-hidden="true"><span lang="en" dir="ltr">${escHtml(p.metric || num(i))}</span>${p.metric ? `<small>${pick(p, "metric")}</small>` : ""}</div>`;
+  }
+
+  /* the lead projects: large alternating rows */
   function spotlight(p, i) {
-    const metric = p.metric
-      ? `<p class="spot-metric"><strong lang="en" dir="ltr">${escHtml(p.metric)}</strong><span>${pick(p, "metric")}</span></p>`
-      : "";
+    const metric = p.metric && !p.image
+      ? ""
+      : p.metric ? `<p class="spot-metric"><strong lang="en" dir="ltr">${escHtml(p.metric)}</strong><span>${pick(p, "metric")}</span></p>` : "";
     return `<article class="spot reveal">
-      <div class="spot-art" aria-hidden="true"><span lang="en">${num(i)}</span></div>
+      ${art(p, i)}
       <div class="spot-body">
         <p class="spot-kind">${pick(p, "kind")}</p>
         <h3 class="spot-title" lang="en">${escHtml(p.title)}</h3>
@@ -317,6 +328,20 @@
         <p class="spot-solution">${pick(p, "solution")}</p>
         ${tagsOf(p)}
         <div class="project-links">${linksOf(p)}</div>
+      </div>
+    </article>`;
+  }
+
+  /* projects with a screenshot: a horizontal rail */
+  function railCard(p) {
+    return `<article class="rail-card">
+      <a class="rail-shot" href="${safeUrl((p.links || [])[0]?.url)}" target="_blank" rel="noopener" aria-label="${escHtml(p.title)}"><img src="${escHtml(p.image)}" alt="" loading="lazy" /></a>
+      <div class="rail-body">
+        <p class="spot-kind">${pick(p, "kind")}</p>
+        <h3 class="rail-title" lang="en">${escHtml(p.title)}</h3>
+        <p class="rail-problem">${pick(p, "problem")}</p>
+        <details class="rail-more"><summary>${t("details")}</summary><p>${pick(p, "solution")}</p></details>
+        ${tagsOf(p)}
       </div>
     </article>`;
   }
@@ -347,9 +372,11 @@
       if (!res.ok) return;
       const items = await res.json();
       const lead = items.filter((p) => p.spotlight);
-      const rest = items.filter((p) => !p.spotlight);
+      const shots = items.filter((p) => !p.spotlight && p.image);
+      const rest = items.filter((p) => !p.spotlight && !p.image);
       grid.innerHTML = lead.map(spotlight).join("") +
-        `<h3 class="more-head">${t("moreWork")}</h3><div class="prows">${rest.map((p, i) => row(p, i + lead.length)).join("")}</div>`;
+        `<h3 class="more-head">${t("systems")}</h3><div class="rail">${shots.map(railCard).join("")}</div>` +
+        `<h3 class="more-head">${t("moreWork")}</h3><div class="prows">${rest.map((p, i) => row(p, i)).join("")}</div>`;
       grid.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
     } catch { /* keep empty */ }
   }

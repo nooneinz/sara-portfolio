@@ -1,7 +1,6 @@
 [
   {
     "id": "baseera",
-    "image": "img/projects/baseera.webp",
     "title": "Baseera",
     "repo": "Baseera",
     "featured": true,
@@ -24,7 +23,8 @@
         "url": "https://github.com/nooneinz/Baseera"
       }
     ],
-    "spotlight": true
+    "spotlight": true,
+    "image": "img/projects/baseera.webp"
   },
   {
     "id": "document-rag",
@@ -51,11 +51,17 @@
         "url": "https://github.com/nooneinz/document-rag-assistant"
       }
     ],
-    "spotlight": true
+    "spotlight": true,
+    "flow": [
+      "PDF",
+      "Chunks",
+      "Embeddings",
+      "ChromaDB",
+      "LLM + sources"
+    ]
   },
   {
     "id": "retentionai",
-    "image": "img/projects/retentionai.webp",
     "title": "RetentionAI",
     "repo": "RetentionAI-Project",
     "featured": true,
@@ -85,7 +91,6 @@
   },
   {
     "id": "hasba",
-    "image": "img/projects/hasba.webp",
     "title": "Hasba (حَسبة)",
     "repo": "hasba",
     "featured": true,
@@ -107,7 +112,8 @@
         "label_en": "Repository",
         "url": "https://github.com/nooneinz/hasba"
       }
-    ]
+    ],
+    "image": "img/projects/hasba.webp"
   },
   {
     "id": "procurement",
@@ -133,7 +139,8 @@
         "label_en": "Repository",
         "url": "https://github.com/nooneinz/procurement-approval-system"
       }
-    ]
+    ],
+    "image": "img/projects/procurement.webp"
   },
   {
     "id": "leave-attendance",
@@ -159,7 +166,8 @@
         "label_en": "Repository",
         "url": "https://github.com/nooneinz/leave-attendance-system"
       }
-    ]
+    ],
+    "image": "img/projects/leave-attendance.webp"
   },
   {
     "id": "invoice-tracking",
@@ -185,7 +193,8 @@
         "label_en": "Repository",
         "url": "https://github.com/nooneinz/invoice-tracking-system"
       }
-    ]
+    ],
+    "image": "img/projects/invoice-tracking.webp"
   },
   {
     "id": "crm",
@@ -211,7 +220,8 @@
         "label_en": "Repository",
         "url": "https://github.com/nooneinz/crm-sales-system"
       }
-    ]
+    ],
+    "image": "img/projects/crm.webp"
   },
   {
     "id": "delivery-ops",
@@ -237,11 +247,11 @@
         "label_en": "Repository",
         "url": "https://github.com/nooneinz/delivery-ops-dashboard"
       }
-    ]
+    ],
+    "image": "img/projects/delivery-ops.webp"
   },
   {
     "id": "masar-ai",
-    "image": "img/projects/masar-ai.webp",
     "title": "Masar AI (مسار AI)",
     "repo": "masar-ai",
     "featured": false,
@@ -267,7 +277,6 @@
   },
   {
     "id": "task-manager",
-    "image": "img/projects/task-manager.webp",
     "title": "Mini SaaS Task Manager",
     "repo": "mini-saas-task-manager",
     "featured": false,
@@ -293,7 +302,6 @@
   },
   {
     "id": "gold-tracker",
-    "image": "img/projects/gold-tracker.webp",
     "title": "Gold Price Tracker Oman",
     "repo": "gold-price-tracker-omam",
     "featured": false,
