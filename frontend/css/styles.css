@@ -966,3 +966,8 @@ main { overflow-x: clip; }
 
 /* the strip keeps moving even when the OS asks for reduced motion (slow, horizontal only) */
 .marquee-track { animation: marquee 45s linear infinite !important; }
+
+/* marquee: text only, same glass-and-rule language as the rest of the page */
+.marquee { background: rgba(11, 11, 11, .55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: var(--text); border-block: 1px solid rgba(255, 255, 255, .22); box-shadow: none; padding: 1rem 0; margin: 0; }
+.marquee span { padding-inline: 2.2rem; font-weight: 500; font-size: 1rem; letter-spacing: .22em; color: rgba(245, 245, 245, .85); }
+.marquee span::after { content: none; }
