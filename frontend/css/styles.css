@@ -913,7 +913,7 @@ html[lang="en"] .degree-title, html[lang="en"] .service-title, html[lang="en"] .
 .prow summary { border-radius: 14px !important; }
 
 /* diagonal marquee strip between hero and the first sheet */
-.marquee { position: relative; z-index: 8; overflow: hidden; background: #F5F5F5; color: #0B0B0B; transform: rotate(-1.3deg); margin: -1.6rem -3% -1.2rem; padding: .85rem 0; box-shadow: 0 12px 30px -12px rgba(0, 0, 0, .7); }
+.marquee { position: relative; z-index: 8; overflow: hidden; background: #F5F5F5; color: #0B0B0B; margin: -1.6rem 0 -1.2rem; padding: .85rem 0; box-shadow: 0 12px 30px -12px rgba(0, 0, 0, .7); }
 .marquee-track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
 .marquee span { padding-inline: 1.4rem; font-family: var(--f-sans); font-weight: 800; font-size: 1.05rem; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
 .marquee span::after { content: "\2726"; margin-inline-start: 2.8rem; opacity: .5; }
@@ -924,9 +924,7 @@ html[lang="en"] .degree-title, html[lang="en"] .service-title, html[lang="en"] .
 .spot .spot-art { min-height: 0; padding: clamp(1rem, 3vw, 2.2rem); border-radius: 30px !important; box-shadow: none; align-items: center; justify-content: center; }
 .spot .spot-art.has-shot { background: radial-gradient(120% 120% at 20% 10%, #8d8d89 0%, #4a4a47 45%, #1d1d1c 100%); color: #fff; }
 .spot:nth-of-type(even) .spot-art.has-shot { background: radial-gradient(120% 120% at 80% 10%, #d6d6d2 0%, #77776f 45%, #2a2a28 100%); }
-.frame { width: 100%; background: #fff; border-radius: 14px !important; overflow: hidden; box-shadow: 0 34px 60px -24px rgba(0, 0, 0, .75); transform: rotate(-1.6deg); transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
-.spot:nth-of-type(even) .frame { transform: rotate(1.4deg); }
-.spot:hover .frame { transform: rotate(0) scale(1.02); }
+.frame { width: 100%; background: #fff; border-radius: 14px !important; overflow: hidden; box-shadow: 0 34px 60px -24px rgba(0, 0, 0, .75); }
 .frame-bar { display: flex; gap: 6px; padding: 9px 12px; background: #E9E9E6; }
 .frame-bar i { width: 9px; height: 9px; border-radius: 50% !important; background: #C4C4C0; }
 .frame img { display: block; width: 100%; height: auto; }
@@ -966,3 +964,6 @@ main { overflow-x: clip; }
   .marquee span { font-size: .9rem; }
 }
 @media (max-width: 640px) { .rail { grid-template-columns: minmax(0, 1fr); } }
+
+/* the strip keeps moving even when the OS asks for reduced motion (slow, horizontal only) */
+.marquee-track { animation: marquee 45s linear infinite !important; }
