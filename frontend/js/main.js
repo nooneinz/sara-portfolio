@@ -302,46 +302,34 @@
   const tagsOf = (p) => `<ul class="tags" lang="en" dir="ltr">${(p.tags || []).map((x) => `<li>${escHtml(x)}</li>`).join("")}</ul>`;
   const num = (i) => String(i + 1).padStart(2, "0");
 
-  /* visual for a lead project: a browser-framed screenshot, a pipeline, or a big number */
-  function art(p, i) {
-    if (p.image) {
-      return `<div class="spot-art has-shot" aria-hidden="true"><div class="frame"><div class="frame-bar"><i></i><i></i><i></i></div><img src="${escHtml(p.image)}" alt="" loading="lazy" /></div></div>`;
-    }
+  /* what the screen shows: the screenshot, a pipeline, or a big number */
+  function screenArt(p, i) {
+    if (p.image) return `<img src="${escHtml(p.image)}" alt="" loading="lazy" />`;
     if (p.flow) {
-      return `<div class="spot-art has-flow" aria-hidden="true" lang="en" dir="ltr"><ol>${p.flow.map((f) => `<li>${escHtml(f)}</li>`).join("")}</ol></div>`;
+      return `<div class="scr-art has-flow" lang="en" dir="ltr"><ol>${p.flow.map((f) => `<li>${escHtml(f)}</li>`).join("")}</ol></div>`;
     }
-    return `<div class="spot-art has-num" aria-hidden="true"><span lang="en" dir="ltr">${escHtml(p.metric || num(i))}</span>${p.metric ? `<small>${pick(p, "metric")}</small>` : ""}</div>`;
+    return `<div class="scr-art has-num"><span lang="en" dir="ltr">${escHtml(p.metric || num(i))}</span>${p.metric ? `<small>${pick(p, "metric")}</small>` : ""}</div>`;
   }
+  /* a grid of blocks over each screen that breaks apart as it comes into view */
+  const pixels = () => Array.from({ length: 96 }, () => `<i style="--d:${(Math.random() * 0.55).toFixed(2)}s"></i>`).join("");
 
-  /* the lead projects: large alternating rows */
-  function spotlight(p, i) {
-    const metric = p.metric && !p.image
-      ? ""
-      : p.metric ? `<p class="spot-metric"><strong lang="en" dir="ltr">${escHtml(p.metric)}</strong><span>${pick(p, "metric")}</span></p>` : "";
-    return `<article class="spot reveal">
-      ${art(p, i)}
-      <div class="spot-body">
-        <p class="spot-kind">${pick(p, "kind")}</p>
-        <h3 class="spot-title" lang="en">${escHtml(p.title)}</h3>
+  /* projects with a visual: one tilted screen per row, alternating sides */
+  function cine(p, i, total) {
+    const metric = p.metric && p.image
+      ? `<p class="spot-metric"><strong lang="en" dir="ltr">${escHtml(p.metric)}</strong><span>${pick(p, "metric")}</span></p>` : "";
+    const more = p.spotlight
+      ? `<p class="spot-solution">${pick(p, "solution")}</p>`
+      : `<details class="rail-more"><summary>${t("details")}</summary><p>${pick(p, "solution")}</p></details>`;
+    return `<article class="cine">
+      <div class="cine-stage" aria-hidden="true"><div class="screen">${screenArt(p, i)}<span class="px">${pixels()}</span></div></div>
+      <div class="cine-body">
+        <p class="cine-n"><span lang="en" dir="ltr">${num(i)} / ${String(total).padStart(2, "0")}</span><span>${pick(p, "kind")}</span></p>
+        <h3 class="cine-title" lang="en">${escHtml(p.title)}</h3>
         <p class="spot-problem">${pick(p, "problem")}</p>
         ${metric}
-        <p class="spot-solution">${pick(p, "solution")}</p>
+        ${more}
         ${tagsOf(p)}
-        <div class="project-links">${linksOf(p)}</div>
-      </div>
-    </article>`;
-  }
-
-  /* projects with a screenshot: a horizontal rail */
-  function railCard(p) {
-    return `<article class="rail-card">
-      <a class="rail-shot" href="${safeUrl((p.links || [])[0]?.url)}" target="_blank" rel="noopener" aria-label="${escHtml(p.title)}"><img src="${escHtml(p.image)}" alt="" loading="lazy" /></a>
-      <div class="rail-body">
-        <p class="spot-kind">${pick(p, "kind")}</p>
-        <h3 class="rail-title" lang="en">${escHtml(p.title)}</h3>
-        <p class="rail-problem">${pick(p, "problem")}</p>
-        <details class="rail-more"><summary>${t("details")}</summary><p>${pick(p, "solution")}</p></details>
-        ${tagsOf(p)}
+        ${(p.links || []).length ? `<div class="project-links">${linksOf(p)}</div>` : ""}
       </div>
     </article>`;
   }
@@ -374,10 +362,11 @@
       const lead = items.filter((p) => p.spotlight);
       const shots = items.filter((p) => !p.spotlight && p.image);
       const rest = items.filter((p) => !p.spotlight && !p.image);
-      grid.innerHTML = lead.map(spotlight).join("") +
-        `<h3 class="more-head">${t("systems")}</h3><div class="rail">${shots.map(railCard).join("")}</div>` +
+      const screens = [...lead, ...shots];
+      grid.innerHTML = `<div class="cines">${screens.map((p, i) => cine(p, i, screens.length)).join("")}</div>` +
         `<h3 class="more-head">${t("moreWork")}</h3><div class="prows">${rest.map((p, i) => row(p, i)).join("")}</div>`;
       grid.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+      window.__cine?.();
     } catch { /* keep empty */ }
   }
   /* ---------------- Count-up numbers ---------------- */
@@ -587,4 +576,69 @@
       setTimeout(() => { root.style.scrollBehavior = ""; cur.className = "curtain"; busy = false; }, 650);
     }, 520);
   });
+})();
+
+/* ---------- Cinema: hero lifts away, "step into the work" zoom, tilted project screens ---------- */
+(() => {
+  const soft = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const narrow = window.matchMedia("(max-width: 900px)");
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const ease = (k) => k * k * (3 - 2 * k);
+  const intro = document.getElementById("frame-intro");
+  const box = intro?.querySelector(".fi-screen");
+  const copy = intro?.querySelector(".fi-copy");
+  const rows = document.getElementsByClassName("cine");
+
+  /* pixel blocks clear when a screen is on view and come back when it leaves */
+  const pixIO = "IntersectionObserver" in window && !soft
+    ? new IntersectionObserver((entries) => entries.forEach((en) => en.target.classList.toggle("is-on", en.isIntersecting)), { threshold: 0.35 })
+    : null;
+  window.__cine = () => document.querySelectorAll(".cine .screen").forEach((s) => (pixIO ? pixIO.observe(s) : s.classList.add("is-on")));
+  window.__cine();
+
+  if (soft) { intro?.classList.add("is-static"); return; }
+
+  const frame = () => {
+    const vw = document.documentElement.clientWidth, vh = innerHeight;
+
+    if (box && copy) {
+      const r = intro.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < vh) {
+        const p = clamp(-r.top / (r.height - vh));
+        const k = ease(clamp((p - 0.08) / 0.72));
+        const w0 = Math.min(vw * (narrow.matches ? 0.86 : 0.46), 700), h0 = (w0 * 10) / 16;
+        const y0 = vh * 0.74 - h0 / 2;
+        const w = w0 + (vw - w0) * k, h = h0 + (vh - h0) * k;
+        Object.assign(box.style, {
+          width: `${w}px`, height: `${h}px`, left: `${(vw - w) / 2}px`, top: `${y0 * (1 - k)}px`,
+          transform: `rotateX(${(1 - k) * 16}deg)`, borderRadius: `${(1 - k) * 16}px`,
+        });
+        box.style.setProperty("--dim", (clamp((p - 0.7) / 0.3) * 0.6).toFixed(3));
+        const c = clamp((p - 0.1) / 0.4);
+        copy.style.opacity = (1 - c).toFixed(3);
+        copy.style.transform = `translate3d(0, ${-c * 12}vh, 0) scale(${1 + c * 0.5})`;
+      }
+    }
+
+    for (const row of rows) {
+      const r = row.getBoundingClientRect();
+      if (r.bottom < -50 || r.top > vh + 50) continue;
+      const c = clamp((r.top + r.height / 2 - vh / 2) / vh, -1, 1); // 0 when the row is centred
+      const scr = row.querySelector(".screen");
+      row.style.setProperty("--c", c.toFixed(3));
+      if (narrow.matches) {
+        scr.style.transform = `rotateX(${c * 18}deg) scale(${1 - Math.abs(c) * 0.08})`;
+        continue;
+      }
+      const st = scr.parentElement.getBoundingClientRect();
+      const side = st.left + st.width / 2 < vw / 2 ? 1 : -1; // turn the screen towards the text
+      scr.style.transform = `translate3d(0, ${c * 40}px, 0) rotateY(${side * (9 + Math.abs(c) * 22)}deg) rotateX(${c * 6}deg) scale(${1 - Math.abs(c) * 0.1})`;
+    }
+  };
+  let ticking = false;
+  const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; frame(); }); } };
+  addEventListener("scroll", req, { passive: true });
+  addEventListener("resize", req);
+  new MutationObserver(req).observe(document.getElementById("projects-grid") || document.body, { childList: true });
+  frame();
 })();

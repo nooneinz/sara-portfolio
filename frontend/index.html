@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600;700&family=Cairo:wght@700;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=20261043" />
+  <link rel="stylesheet" href="css/styles.css?v=20261044" />
 </head>
 <body>
   <div class="dune-bg" aria-hidden="true"><i class="on" style="--img:url(/img/dune-full.jpg)"></i></div>
@@ -181,14 +181,19 @@
 
     <!-- ================= PROJECTS ================= -->
     <section id="projects" class="section section-projects blue-card soft">
-      <div class="container">
-        <header class="section-head has-watermark">
-          <span class="watermark" lang="en" aria-hidden="true">Projects</span>
-          <span class="section-num" lang="en">01 — Selected Work</span>
-          <h2 class="section-title" data-en="Projects">المشاريع</h2>
-          <p class="section-lead" data-en="Selected work in AI and software engineering.">مختارات من أعمالي في الذكاء الاصطناعي وهندسة البرمجيات.</p>
-        </header>
+      <!-- "enter the work": the title zooms away while a screen grows to fill the view -->
+      <div class="frame-intro" id="frame-intro">
+        <div class="fi-stick">
+          <div class="fi-screen" aria-hidden="true"><img src="img/projects/baseera.webp" alt="" /></div>
+          <div class="fi-copy">
+            <span class="section-num" lang="en">01 — Selected Work</span>
+            <h2 class="section-title" data-en="Step into<br />the work">ادخل إلى<br />أعمالي</h2>
+            <p class="section-lead" data-en="Selected work in AI and software engineering.">مختارات من أعمالي في الذكاء الاصطناعي وهندسة البرمجيات.</p>
+          </div>
+        </div>
+      </div>
 
+      <div class="container">
         <div id="projects-grid" class="projects-grid" aria-live="polite"></div>
       </div>
     </section>
@@ -279,7 +284,7 @@
     </div>
   </footer>
 
-  <script src="js/config.js?v=20261043"></script>
-  <script src="js/main.js?v=20261043"></script>
+  <script src="js/config.js?v=20261044"></script>
+  <script src="js/main.js?v=20261044"></script>
 </body>
 </html>

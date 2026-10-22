@@ -971,3 +971,73 @@ main { overflow-x: clip; }
 .marquee { background: rgba(11, 11, 11, .55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: var(--text); border-block: 1px solid rgba(255, 255, 255, .22); box-shadow: none; padding: 1rem 0; margin: 0; }
 .marquee span { padding-inline: 2.2rem; font-weight: 500; font-size: 1rem; letter-spacing: .22em; color: rgba(245, 245, 245, .85); }
 .marquee span::after { content: none; }
+
+
+/* =========================================================
+   Round 11: cinematic scroll
+   - hero copy lifts away faster than the page
+   - "step into the work": title zooms off while a screen grows to fill the view
+   - projects as tilted screens, alternating sides, breaking into pixels between rows
+   ========================================================= */
+
+/* hero: `translate` composes with the reveal transforms already on these elements */
+.js-anim:not(.soft) #top .meta-strip { translate: 0 calc(var(--hp, 0) * -30vh); }
+.js-anim:not(.soft) #top .hero-copy { translate: 0 calc(var(--hp, 0) * -22vh); opacity: calc(1 - var(--hp, 0) * 1.3); }
+.js-anim:not(.soft) #top .chat-stage { translate: 0 calc(var(--hp, 0) * -8vh); }
+
+/* sticky needs the section to stop clipping */
+#projects { overflow: visible !important; padding-top: 0 !important; }
+.frame-intro { position: relative; height: 260vh; }
+.fi-stick { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; perspective: 1200px; }
+.fi-screen {
+  position: absolute; left: 50%; bottom: 8vh; width: min(46vw, 700px); aspect-ratio: 16 / 10; transform: translateX(-50%);
+  overflow: hidden; border-radius: 16px !important; background: #141413; border: 1px solid rgba(255, 255, 255, .18);
+  box-shadow: 0 60px 120px -40px rgba(0, 0, 0, .95); transform-origin: 50% 100%; will-change: transform, width, height;
+}
+.fi-screen img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.fi-screen::after { content: ""; position: absolute; inset: 0; background: #0B0B0B; opacity: var(--dim, 0); }
+.fi-copy { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 14vh var(--gutter) 0; will-change: transform, opacity; }
+.fi-copy .section-title { font-size: clamp(2.8rem, 7vw, 5.6rem) !important; line-height: 1.05; text-shadow: 0 6px 40px rgba(0, 0, 0, .6); }
+html[lang="en"] .fi-copy .section-title { text-transform: uppercase; letter-spacing: -.02em; }
+.fi-copy .section-lead { margin-inline: auto; }
+.frame-intro.is-static { height: auto; }
+.frame-intro.is-static .fi-stick { position: relative; height: auto; padding-bottom: 46vh; }
+
+/* tilted screens */
+#projects .container { max-width: 1280px; }
+.cine {
+  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center;
+  min-height: 82vh; padding-block: clamp(2rem, 6vh, 4rem);
+}
+.cine:nth-child(even) .cine-stage { order: 2; }
+.cine-stage { perspective: 1400px; }
+.screen {
+  position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 12px !important; background: #141413;
+  border: 1px solid rgba(255, 255, 255, .18); box-shadow: 0 50px 90px -40px rgba(0, 0, 0, .9);
+  transform: rotateY(12deg); will-change: transform;
+}
+.cine:nth-child(even) .screen { transform: rotateY(-12deg); }
+.screen > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.screen::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(115deg, rgba(255, 255, 255, .14), transparent 38%); }
+.scr-art { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: clamp(1rem, 3vw, 2rem); color: #fff; background: radial-gradient(120% 120% at 20% 10%, #5c5c58 0%, #2a2a28 45%, #121211 100%); }
+.scr-art.has-num { align-items: flex-start; justify-content: flex-end; }
+.px { position: absolute; inset: 0; z-index: 3; display: grid; grid-template-columns: repeat(12, 1fr); grid-template-rows: repeat(8, 1fr); pointer-events: none; }
+.px i { background: #0B0B0B; transition: opacity 0s linear var(--d, 0s); }
+.px i:nth-child(5n) { background: #1c1c1b; }
+.px i:nth-child(7n + 3) { background: #2b2b29; }
+.screen.is-on .px i { opacity: 0; }
+.cine-body { display: flex; flex-direction: column; gap: .9rem; translate: 0 calc(var(--c, 0) * -24px); }
+.cine-n { display: flex; gap: 1rem; flex-wrap: wrap; font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.cine-n [lang="en"] { font-family: var(--f-mono); color: #fff; }
+.cine-title { font-family: var(--f-sans); font-weight: 800; font-size: clamp(2.2rem, 4.4vw, 3.6rem); line-height: 1.02; letter-spacing: -.02em; text-transform: uppercase; color: #fff; overflow-wrap: anywhere; }
+.cine .project-links { margin-top: .2rem; padding-top: 0; }
+.cines + .more-head { margin-top: clamp(1rem, 3vw, 2rem); }
+
+@media (max-width: 900px) {
+  .cine { grid-template-columns: minmax(0, 1fr); min-height: 0; gap: 1.6rem; padding-block: 2.6rem; }
+  .cine:nth-child(even) .cine-stage { order: 0; }
+  .screen, .cine:nth-child(even) .screen { transform: none; }
+  .cine-body { translate: none; }
+}
+.soft .screen, .soft .cine:nth-child(even) .screen { transform: none; }
+.soft .cine-body { translate: none; }
