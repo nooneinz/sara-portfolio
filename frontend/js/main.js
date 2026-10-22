@@ -310,8 +310,6 @@
     }
     return `<div class="scr-art has-num"><span lang="en" dir="ltr">${escHtml(p.metric || num(i))}</span>${p.metric ? `<small>${pick(p, "metric")}</small>` : ""}</div>`;
   }
-  /* a grid of blocks over each screen that breaks apart as it comes into view */
-  const pixels = () => Array.from({ length: 96 }, () => `<i style="--d:${(Math.random() * 0.55).toFixed(2)}s"></i>`).join("");
 
   /* projects with a visual: one tilted screen per row, alternating sides */
   function cine(p, i, total) {
@@ -321,7 +319,7 @@
       ? `<p class="spot-solution">${pick(p, "solution")}</p>`
       : `<details class="rail-more"><summary>${t("details")}</summary><p>${pick(p, "solution")}</p></details>`;
     return `<article class="cine">
-      <div class="cine-stage" aria-hidden="true"><div class="screen">${screenArt(p, i)}<span class="px">${pixels()}</span></div></div>
+      <div class="cine-stage" aria-hidden="true"><div class="screen">${screenArt(p, i)}</div></div>
       <div class="cine-body">
         <p class="cine-n"><span lang="en" dir="ltr">${num(i)} / ${String(total).padStart(2, "0")}</span><span>${pick(p, "kind")}</span></p>
         <h3 class="cine-title" lang="en">${escHtml(p.title)}</h3>
@@ -366,7 +364,6 @@
       grid.innerHTML = `<div class="cines">${screens.map((p, i) => cine(p, i, screens.length)).join("")}</div>` +
         `<h3 class="more-head">${t("moreWork")}</h3><div class="prows">${rest.map((p, i) => row(p, i)).join("")}</div>`;
       grid.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
-      window.__cine?.();
     } catch { /* keep empty */ }
   }
   /* ---------------- Count-up numbers ---------------- */
@@ -588,13 +585,6 @@
   const box = intro?.querySelector(".fi-screen");
   const copy = intro?.querySelector(".fi-copy");
   const rows = document.getElementsByClassName("cine");
-
-  /* pixel blocks clear when a screen is on view and come back when it leaves */
-  const pixIO = "IntersectionObserver" in window && !soft
-    ? new IntersectionObserver((entries) => entries.forEach((en) => en.target.classList.toggle("is-on", en.isIntersecting)), { threshold: 0.35 })
-    : null;
-  window.__cine = () => document.querySelectorAll(".cine .screen").forEach((s) => (pixIO ? pixIO.observe(s) : s.classList.add("is-on")));
-  window.__cine();
 
   if (soft) { intro?.classList.add("is-static"); return; }
 
