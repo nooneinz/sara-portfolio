@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>سارة الحربي | Sara Alharbi — Software Engineer</title>
   <meta name="description" content="سارة الحربي — مهندسة برمجيات، خريجة علوم الحاسوب والذكاء الاصطناعي بمرتبة الشرف الأولى. تطوير الويب وواجهات REST API ودمج Agentic AI في منصات B2B." />
-  <meta name="theme-color" content="#0B0B0B" />
+  <meta name="theme-color" content="#050506" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="icon" href="/favicon.ico" sizes="48x48" />
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
@@ -27,151 +27,170 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600;700&family=Cairo:wght@700;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic&family=El+Messiri:wght@500;600&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=20261045" />
+  <link rel="stylesheet" href="css/styles.css?v=20261103" />
 </head>
 <body>
-  <div class="dune-bg" aria-hidden="true"><i class="on" style="--img:url(/img/dune-full.jpg)"></i></div>
-  
-  <div class="intro" id="intro" aria-hidden="true">
-    <div class="intro-inner" dir="ltr">
-      <div class="intro-art"><img class="intro-logo" src="img/logo-letters-white.png" alt="" /></div>
-      <p class="intro-name" lang="en">Sara Alharbi</p>
-      <p class="intro-meta" lang="en"><span>Artificial Intelligence</span><span>Est. 2026</span></p>
-    </div>
+  <!-- Opening counter: 00 → 100, skipped for returning visitors and reduced motion -->
+  <div class="opening" id="opening" aria-hidden="true">
+    <span class="opening-n" id="opening-n" lang="en" dir="ltr">00</span>
+    <span class="opening-name" lang="en" dir="ltr">Sara Alharbi — Folio</span>
   </div>
+
   <a class="skip-link" href="#main" data-en="Skip to content">تخطَّ إلى المحتوى</a>
 
   <!-- ================= HEADER ================= -->
   <header class="site-header">
     <div class="container header-inner">
-      <a href="#top" class="logo" id="logo" aria-label="سارة الحربي — الصفحة الرئيسية" aria-controls="site-nav" aria-expanded="false">
-        <img class="logo-img" src="img/logo-letters-white.png" alt="" width="56" height="46" />
+      <a href="#top" class="logo roll-trigger" aria-label="سارة الحربي — الصفحة الرئيسية">
+        <img class="logo-img" src="img/logo-letters-white.png" alt="" width="44" height="36" />
       </a>
 
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">القائمة</button>
-
       <nav id="site-nav" class="site-nav" aria-label="التنقل الرئيسي">
-        <a href="#projects" data-en="Projects">المشاريع</a>
-        <a href="#achievements" data-en="Credentials">الإنجازات</a>
-        <a href="#ask" data-en="Ask Sara">اسأل سارة</a>
-        <a href="#contact" data-en="Contact">التواصل</a>
+        <a href="#projects" class="roll-trigger" data-roll data-en="Works">الأعمال</a>
+        <a href="#achievements" class="roll-trigger" data-roll data-en="Credentials">الإنجازات</a>
+        <a href="#ask" class="roll-trigger" data-roll data-en="Ask Sara">اسأل سارة</a>
+        <a href="#contact" class="roll-trigger" data-roll data-en="Contact">التواصل</a>
       </nav>
 
-      <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language to English">EN</button>
+      <div class="header-end">
+        <button class="lang-toggle roll-trigger" id="lang-toggle" type="button" aria-label="Switch language to English">EN</button>
+        <button class="nav-toggle roll-trigger" type="button" aria-expanded="false" aria-controls="site-nav">القائمة</button>
+      </div>
     </div>
   </header>
 
   <main id="main">
-    <!-- ================= HERO + CHAT (Deep Olive) ================= -->
-    <section id="top" class="hero blue-card">
+    <!-- ================= HERO + CHAT ================= -->
+    <section id="top" class="hero">
       <div class="container">
         <div class="meta-strip" lang="en" dir="ltr">
-          <span>Portfolio<br />Edition 2026</span>
-          <span>Software Engineer<br />Full-Stack &amp; AI</span>
-          <span>Muscat, Oman<br />Open to work</span>
+          <span>Portfolio — Edition 2026</span>
+          <span>Software Engineer · Full-Stack &amp; AI</span>
+          <span>Muscat, Oman · Open to work</span>
         </div>
 
         <div class="hero-grid">
           <div class="hero-copy">
-            <h1 class="hero-title" data-en="Turning data<br />into decisions">أحوّل البيانات<br />إلى قرارات</h1>
-            <p class="hero-tagline" lang="en" dir="ltr">Software Engineer&nbsp;&nbsp;·&nbsp;&nbsp;Full-Stack &amp; AI</p>
-            <div class="hero-est" lang="en" dir="ltr"><span>EST</span><span>2026</span></div>
+            <h1 class="display hero-title" data-en="Turning data<br />into decisions">أحوّل البيانات<br />إلى قرارات</h1>
             <p class="hero-subtitle" data-en="Software engineer and Computer Science &amp; AI graduate with First Class Honors (GPA 3.9). I build web apps and REST APIs, and bring AI into production-ready B2B platforms.">
               مهندسة برمجيات، خريجة علوم الحاسوب والذكاء الاصطناعي بمرتبة الشرف الأولى (3.9).
               أبني تطبيقات ويب وواجهات REST API، وأدمج الذكاء الاصطناعي في منصات B2B جاهزة للإنتاج.
             </p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#projects" data-en="View projects">شاهد المشاريع</a>
-              <a class="btn btn-ghost" href="#contact" data-en="Contact me">تواصل معي</a>
+              <a class="pill" href="#projects" data-en="View works">شاهد الأعمال</a>
+              <a class="pill pill-ghost" href="#contact" data-en="Contact me">تواصل معي</a>
             </div>
           </div>
 
-          <div class="chat-stage">
-            <span class="chat-block" aria-hidden="true"></span>
-            <div id="ask" class="chat" aria-label="المساعد الذكي">
-              <div class="chat-head">
-                <span class="chat-label" data-en="Ask Sara">اسأل سارة</span>
-                <span class="chat-status" id="chat-status" data-en="Online">متصل</span>
-              </div>
-
-              <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-relevant="additions">
-                <div class="msg msg-bot">
-                  <span class="msg-who" data-en="Assistant">المساعد</span>
-                  <p class="msg-text" data-en="Welcome. Ask me about Sara’s projects, skills, or how to reach her — in Arabic or English.">أهلاً بك. اسألني عن مشاريع سارة، مهاراتها، أو طريقة التواصل معها — بالعربية أو بالإنجليزية.</p>
-                </div>
-              </div>
-
-              <div class="chat-suggestions" id="chat-suggestions">
-                <button type="button" class="chip" data-en="What are Sara's top projects?">ما هي أبرز مشاريع سارة؟</button>
-                <button type="button" class="chip" data-en="What is Baseera?">ما هو مشروع Baseera؟</button>
-                <button type="button" class="chip" data-en="What are Sara's skills?">ما هي مهارات وتخصص سارة؟</button>
-                <button type="button" class="chip" data-en="How can I contact Sara?">كيف أتواصل مع سارة؟</button>
-              </div>
-
-              <form class="chat-form" id="chat-form" autocomplete="off">
-                <label for="chat-input" class="visually-hidden">اكتب سؤالك</label>
-                <input id="chat-input" name="question" type="text" maxlength="600" placeholder="اكتب سؤالك هنا…" data-en-ph="Type your question…" required />
-                <button type="submit" class="btn btn-primary" id="chat-send" data-en="Send">إرسال</button>
-              </form>
+          <div id="ask" class="chat" aria-label="المساعد الذكي">
+            <div class="chat-head">
+              <span class="meta" data-en="Ask Sara">اسأل سارة</span>
+              <span class="chat-status" id="chat-status" data-en="Online">متصل</span>
             </div>
+
+            <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-relevant="additions">
+              <div class="msg msg-bot">
+                <span class="msg-who" data-en="Assistant">المساعد</span>
+                <p class="msg-text" data-en="Welcome. Ask me about Sara’s projects, skills, or how to reach her — in Arabic or English.">أهلاً بك. اسألني عن مشاريع سارة، مهاراتها، أو طريقة التواصل معها — بالعربية أو بالإنجليزية.</p>
+              </div>
+            </div>
+
+            <div class="chat-suggestions" id="chat-suggestions">
+              <button type="button" class="chip" data-en="What are Sara's top projects?">ما هي أبرز مشاريع سارة؟</button>
+              <button type="button" class="chip" data-en="What is Baseera?">ما هو مشروع Baseera؟</button>
+              <button type="button" class="chip" data-en="What are Sara's skills?">ما هي مهارات وتخصص سارة؟</button>
+              <button type="button" class="chip" data-en="How can I contact Sara?">كيف أتواصل مع سارة؟</button>
+            </div>
+
+            <form class="chat-form" id="chat-form" autocomplete="off">
+              <label for="chat-input" class="visually-hidden">اكتب سؤالك</label>
+              <input id="chat-input" name="question" type="text" maxlength="600" placeholder="اكتب سؤالك هنا…" data-en-ph="Type your question…" required />
+              <button type="submit" class="pill" id="chat-send" data-en="Send">إرسال</button>
+            </form>
           </div>
         </div>
       </div>
     </section>
 
-    <div class="marquee" aria-hidden="true" lang="en" dir="ltr"><div class="marquee-track"><span>Python</span><span>FastAPI</span><span>Django</span><span>React</span><span>Agentic AI</span><span>RAG</span><span>PostgreSQL</span><span>Docker</span><span>TensorFlow</span><span>REST APIs</span><span>Arabic RTL</span><span>ChromaDB</span><span>CI/CD</span><span>Python</span><span>FastAPI</span><span>Django</span><span>React</span><span>Agentic AI</span><span>RAG</span><span>PostgreSQL</span><span>Docker</span><span>TensorFlow</span><span>REST APIs</span><span>Arabic RTL</span><span>ChromaDB</span><span>CI/CD</span></div></div>
+    <!-- ================= WORKS ================= -->
+    <section id="projects" class="works">
+      <header class="container works-head">
+        <span class="meta muted" lang="en" dir="ltr">01 — Selected Work</span>
+        <h2 class="display works-title"><span data-en="Works">الأعمال</span><sup class="works-count" id="works-count" lang="en" dir="ltr"></sup></h2>
+        <p class="works-lead" data-en="Selected work in AI and software engineering. Scroll to move through the stack.">مختارات من أعمالي في الذكاء الاصطناعي وهندسة البرمجيات. مرّر للتنقل بين المشاريع.</p>
+      </header>
 
-    <!-- ================= INSIGHT: headline + stat tiles ================= -->
-    <section class="insight blue-card soft" aria-label="أرقام">
-      <div class="container insight-grid">
-        <div class="insight-copy">
-          <div>
-            <span class="pill" lang="en">Profile</span>
-            <h2 class="insight-title" data-en="Think clear. <em>Build better.</em>">أفكّر بوضوح، <em>وأبني بإتقان.</em></h2>
-          </div>
-          <p class="insight-note" data-en="Intelligence, built with care.">ذكاء اصطناعي، مبني بعناية.</p>
+      <!-- Diagonal gallery: the stage is sticky, scrolling the section steps through the projects -->
+      <div class="gallery" id="gallery">
+        <div class="stage">
+          <ul class="stack" id="stack" dir="ltr" aria-label="Projects"></ul>
+          <div class="stage-caption" id="stage-caption" aria-live="polite"></div>
         </div>
-        <div class="stats-grid">
-        <p class="stat"><strong lang="en" dir="ltr" data-count="3.9" data-decimals="1">3.9</strong><span data-en="GPA · First Class Honors">المعدل · مرتبة الشرف الأولى</span></p>
-        <p class="stat"><strong lang="en" dir="ltr" data-count="94.5" data-decimals="1" data-suffix="%">94.5%</strong><span data-en="Dropout prediction accuracy">دقة التنبؤ بتسرّب الطلاب</span></p>
-        <p class="stat"><strong lang="en" dir="ltr" data-count="15" data-suffix="+">15+</strong><span data-en="Projects built">مشروعاً منجزاً</span></p>
-        <p class="stat"><strong lang="en" dir="ltr" data-count="30" data-suffix="+">30+</strong><span data-en="Professional certificates">شهادة احترافية</span></p>
       </div>
+
+      <div class="container works-list" id="works-list" hidden>
+        <ul class="rows" id="rows"></ul>
       </div>
-      <div class="container insight-services">
-        <h3 class="sub-head" data-en="What I build, and with what">ما أبنيه، وبماذا</h3>
-        <ol class="stack">
-          <li class="stack-row">
-            <span class="stack-n" lang="en">01</span>
-            <div class="stack-main">
-              <h3 class="stack-title" data-en="AI &amp; Agentic AI">الذكاء الاصطناعي والـ Agentic AI</h3>
-              <p class="stack-desc" data-en="Agents and ML models that turn data into decisions.">وكلاء ونماذج تعلّم آلي تحوّل البيانات إلى قرارات.</p>
+
+      <div class="view-switch" id="view-switch" role="group" aria-label="Choose view">
+        <span class="view-thumb" aria-hidden="true"></span>
+        <button type="button" data-view="gallery" aria-label="Gallery view" aria-pressed="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="1" y="1" width="6" height="6"/><rect x="9" y="1" width="6" height="6"/><rect x="1" y="9" width="6" height="6"/><rect x="9" y="9" width="6" height="6"/></svg>
+        </button>
+        <button type="button" data-view="list" aria-label="List view" aria-pressed="false">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="1" y="2" width="14" height="2"/><rect x="1" y="7" width="14" height="2"/><rect x="1" y="12" width="14" height="2"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= PROFILE: numbers + what I build ================= -->
+    <section class="profile" aria-label="أرقام">
+      <div class="container">
+        <header class="section-head">
+          <span class="meta muted" lang="en" dir="ltr">02 — Profile</span>
+          <h2 class="display section-title" data-en="Think clear. Build better.">أفكّر بوضوح، وأبني بإتقان.</h2>
+        </header>
+
+        <div class="stats">
+          <p class="stat"><strong lang="en" dir="ltr" data-count="3.9" data-decimals="1">3.9</strong><span data-en="GPA · First Class Honors">المعدل · مرتبة الشرف الأولى</span></p>
+          <p class="stat"><strong lang="en" dir="ltr" data-count="94.5" data-decimals="1" data-suffix="%">94.5%</strong><span data-en="Dropout prediction accuracy">دقة التنبؤ بتسرّب الطلاب</span></p>
+          <p class="stat"><strong lang="en" dir="ltr" data-count="15" data-suffix="+">15+</strong><span data-en="Projects built">مشروعاً منجزاً</span></p>
+          <p class="stat"><strong lang="en" dir="ltr" data-count="30" data-suffix="+">30+</strong><span data-en="Professional certificates">شهادة احترافية</span></p>
+        </div>
+
+        <h3 class="meta muted sub-head" data-en="What I build, and with what">ما أبنيه، وبماذا</h3>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-n" lang="en">01</span>
+            <div>
+              <h4 class="step-title" data-en="AI &amp; Agentic AI">الذكاء الاصطناعي والـ Agentic AI</h4>
+              <p class="step-desc" data-en="Agents and ML models that turn data into decisions.">وكلاء ونماذج تعلّم آلي تحوّل البيانات إلى قرارات.</p>
             </div>
             <ul class="tags" lang="en" dir="ltr"><li>Agentic AI</li><li>RAG</li><li>TensorFlow</li><li>CNN-LSTM</li><li>Scikit-Learn</li></ul>
           </li>
-          <li class="stack-row">
-            <span class="stack-n" lang="en">02</span>
-            <div class="stack-main">
-              <h3 class="stack-title" data-en="Web Apps &amp; REST APIs">تطبيقات الويب والـ REST APIs</h3>
-              <p class="stack-desc" data-en="Clean MVC back ends and React front ends, shipped with CI/CD.">واجهات خلفية بمعمارية MVC نظيفة وواجهات React، مع CI/CD.</p>
+          <li class="step">
+            <span class="step-n" lang="en">02</span>
+            <div>
+              <h4 class="step-title" data-en="Web Apps &amp; REST APIs">تطبيقات الويب والـ REST APIs</h4>
+              <p class="step-desc" data-en="Clean MVC back ends and React front ends, shipped with CI/CD.">واجهات خلفية بمعمارية MVC نظيفة وواجهات React، مع CI/CD.</p>
             </div>
             <ul class="tags" lang="en" dir="ltr"><li>Python</li><li>Django</li><li>FastAPI</li><li>ASP.NET Core</li><li>React</li><li>JavaScript</li></ul>
           </li>
-          <li class="stack-row">
-            <span class="stack-n" lang="en">03</span>
-            <div class="stack-main">
-              <h3 class="stack-title" data-en="Data &amp; Databases">البيانات وقواعد البيانات</h3>
-              <p class="stack-desc" data-en="From exploration to schema design and index tuning.">من استكشاف البيانات إلى تصميم المخططات وتحسين الفهارس.</p>
+          <li class="step">
+            <span class="step-n" lang="en">03</span>
+            <div>
+              <h4 class="step-title" data-en="Data &amp; Databases">البيانات وقواعد البيانات</h4>
+              <p class="step-desc" data-en="From exploration to schema design and index tuning.">من استكشاف البيانات إلى تصميم المخططات وتحسين الفهارس.</p>
             </div>
             <ul class="tags" lang="en" dir="ltr"><li>PostgreSQL</li><li>MySQL</li><li>SQL Indexing</li><li>Pandas</li></ul>
           </li>
-          <li class="stack-row">
-            <span class="stack-n" lang="en">04</span>
-            <div class="stack-main">
-              <h3 class="stack-title" data-en="DevOps &amp; Architecture">DevOps والمعمارية</h3>
-              <p class="stack-desc" data-en="Containers, deployment and access-control design.">الحاويات والنشر وتصميم الصلاحيات.</p>
+          <li class="step">
+            <span class="step-n" lang="en">04</span>
+            <div>
+              <h4 class="step-title" data-en="DevOps &amp; Architecture">DevOps والمعمارية</h4>
+              <p class="step-desc" data-en="Containers, deployment and access-control design.">الحاويات والنشر وتصميم الصلاحيات.</p>
             </div>
             <ul class="tags" lang="en" dir="ltr"><li>Docker</li><li>Git</li><li>CI/CD</li><li>Render</li><li>Nginx</li><li>RBAC</li><li>C4 Models</li></ul>
           </li>
@@ -179,45 +198,23 @@
       </div>
     </section>
 
-    <!-- ================= PROJECTS ================= -->
-    <section id="projects" class="section section-projects blue-card soft">
-      <!-- "enter the work": the title zooms away while a screen grows to fill the view -->
-      <div class="frame-intro" id="frame-intro">
-        <div class="fi-stick">
-          <div class="fi-screen" aria-hidden="true"><img src="img/projects/baseera.webp" alt="" /></div>
-          <div class="fi-copy">
-            <span class="section-num" lang="en">01 — Selected Work</span>
-            <h2 class="section-title" data-en="Step into<br />the work">ادخل إلى<br />أعمالي</h2>
-            <p class="section-lead" data-en="Selected work in AI and software engineering.">مختارات من أعمالي في الذكاء الاصطناعي وهندسة البرمجيات.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="container">
-        <div id="projects-grid" class="projects-grid" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <!-- ================= ACHIEVEMENTS ================= -->
-    <section id="achievements" class="section section-blush blue-card soft">
+    <!-- ================= CREDENTIALS ================= -->
+    <section id="achievements" class="credentials">
       <div class="container">
         <header class="section-head">
-          <span class="section-num" lang="en">02 — Credentials</span>
-          <h2 class="section-title" data-en="Education &amp; Certificates">التعليم والشهادات</h2>
+          <span class="meta muted" lang="en" dir="ltr">03 — Credentials</span>
+          <h2 class="display section-title" data-en="Education &amp; Certificates">التعليم والشهادات</h2>
           <p class="section-lead" data-en="Academic foundation and continuous learning.">الأساس الأكاديمي والتعلّم المستمر.</p>
         </header>
 
         <div class="degree">
-          <span class="degree-square" aria-hidden="true"></span>
-          <div class="degree-text">
-            <p class="degree-years" lang="en" dir="ltr">2021 — 2026</p>
-            <h3 class="degree-title" data-en="B.Sc. in Computer Science &amp; Artificial Intelligence">بكالوريوس علوم الحاسوب والذكاء الاصطناعي</h3>
-            <p class="degree-school" data-en="Gulf College — Cardiff Metropolitan University">كلية الخليج — جامعة كارديف متروبوليتان</p>
-          </div>
-          <p class="degree-honor"><span lang="en">First Class</span><span lang="en">Honors</span><small data-en="GPA 3.9">المعدل 3.9</small></p>
+          <p class="meta muted" lang="en" dir="ltr">2021 — 2026</p>
+          <h3 class="degree-title" data-en="B.Sc. in Computer Science &amp; Artificial Intelligence">بكالوريوس علوم الحاسوب والذكاء الاصطناعي</h3>
+          <p class="degree-school" data-en="Gulf College — Cardiff Metropolitan University">كلية الخليج — جامعة كارديف متروبوليتان</p>
+          <p class="degree-honor"><span lang="en" dir="ltr">First Class Honors</span><small data-en="GPA 3.9">المعدل 3.9</small></p>
         </div>
 
-        <h3 class="cert-group-title"><span data-en="Artificial Intelligence &amp; Machine Learning">الذكاء الاصطناعي وتعلّم الآلة</span><span lang="en">21</span></h3>
+        <h3 class="cert-group-title"><span data-en="Artificial Intelligence &amp; Machine Learning">الذكاء الاصطناعي وتعلّم الآلة</span><span class="muted" lang="en">[21]</span></h3>
         <ul class="certs">
             <li class="cert-row"><h4 class="cert-issuer" lang="en">IBM · Agentic AI</h4><p class="cert-items" lang="en" dir="ltr">Build AI Agents using MCP · Agentic AI with LangGraph, CrewAI, AutoGen and BeeAI · Agentic AI with LangChain and LangGraph</p><span class="cert-count" data-en="3 certificates">3 شهادات</span></li>
             <li class="cert-row"><h4 class="cert-issuer" lang="en">IBM · AI Agents</h4><p class="cert-items" lang="en" dir="ltr">Fundamentals of Building AI Agents · Make Agentic AI Work for You</p><span class="cert-count" data-en="2 certificates">شهادتان</span></li>
@@ -230,7 +227,7 @@
             <li class="cert-row"><h4 class="cert-issuer" lang="en">Oman Ministry of Transport, Communications &amp; IT</h4><p class="cert-items" lang="en" dir="ltr">تكنولوجيا المعلومات والذكاء الاصطناعي</p><span class="cert-count" data-en="1 certificate">شهادة واحدة</span></li>
         </ul>
 
-        <h3 class="cert-group-title"><span data-en="Data, Programming &amp; Security">تحليل البيانات والبرمجة والأمن</span><span lang="en">12</span></h3>
+        <h3 class="cert-group-title"><span data-en="Data, Programming &amp; Security">تحليل البيانات والبرمجة والأمن</span><span class="muted" lang="en">[12]</span></h3>
         <ul class="certs">
             <li class="cert-row"><h4 class="cert-issuer" lang="en">IBM · Data &amp; Software</h4><p class="cert-items" lang="en" dir="ltr">Data Analysis with Python · Python for Data Science · Back-End APIs · Cybersecurity Fundamentals</p><span class="cert-count" data-en="4 certificates">4 شهادات</span></li>
             <li class="cert-row"><h4 class="cert-issuer" lang="en">University of Michigan</h4><p class="cert-items" lang="en" dir="ltr">Python Data Structures · Programming for Everybody (Getting Started with Python)</p><span class="cert-count" data-en="2 certificates">شهادتان</span></li>
@@ -239,52 +236,63 @@
         </ul>
 
         <p class="cta-row">
-          <a class="btn btn-primary" href="https://www.linkedin.com/in/sara-alharbi-1b53263a2" target="_blank" rel="noopener" data-en="See my full career and experience on LinkedIn">اطّلع على مسيرتي المهنية وتجاربي كاملة على LinkedIn</a>
+          <a class="pill" href="https://www.linkedin.com/in/sara-alharbi-1b53263a2" target="_blank" rel="noopener"><span data-en="See my full career and experience on LinkedIn">اطّلع على مسيرتي المهنية وتجاربي كاملة على LinkedIn</span> <span aria-hidden="true">↗</span></a>
         </p>
       </div>
     </section>
+  </main>
 
-    <!-- ================= CONTACT + FOOTER ================= -->
+  <!-- ================= CONTACT + FOOTER ================= -->
   <footer id="contact" class="site-end">
     <div class="container">
       <div class="end-cta">
-        <h2 class="end-title" data-en="Let’s build something clear, together.">لنبنِ شيئاً واضحاً معاً.</h2>
-        <a class="btn btn-primary end-btn" href="mailto:Saraalharbi0031@gmail.com" data-en="Email me">راسلني</a>
+        <span class="meta muted" lang="en" dir="ltr">04 — Contact</span>
+        <h2 class="display end-title" data-en="Good things start with a question.">الأشياء الجميلة تبدأ بسؤال.</h2>
+        <a class="pill" href="mailto:Saraalharbi0031@gmail.com"><span data-en="Email me">راسلني</span> <span aria-hidden="true">↗</span></a>
       </div>
 
       <div class="end-grid">
         <div class="end-brand">
           <img class="footer-mark" src="img/logo-letters-white.png" alt="سارة الحربي" />
-          <p data-en="Intelligence, built with care.">ذكاء اصطناعي، مبني بعناية.</p>
+          <p class="muted" data-en="Intelligence, built with care.">ذكاء اصطناعي، مبني بعناية.</p>
         </div>
         <nav class="end-col" aria-label="روابط">
-          <h3 data-en="Navigate">التنقل</h3>
-          <a href="#projects" data-en="Projects">المشاريع</a>
+          <h3 class="meta muted" data-en="Navigate">التنقل</h3>
+          <a href="#projects" data-en="Works">الأعمال</a>
           <a href="#achievements" data-en="Credentials">الإنجازات</a>
           <a href="#ask" data-en="Ask Sara">اسأل سارة</a>
           <a href="#top" data-en="Back to top">للأعلى</a>
         </nav>
         <div class="end-col">
-          <h3 data-en="Contact">تواصل</h3>
+          <h3 class="meta muted" data-en="Contact">تواصل</h3>
           <a lang="en" dir="ltr" href="mailto:Saraalharbi0031@gmail.com">Email</a>
           <a lang="en" dir="ltr" href="https://www.linkedin.com/in/sara-alharbi-1b53263a2" target="_blank" rel="noopener">LinkedIn</a>
           <a lang="en" dir="ltr" href="https://github.com/nooneinz" target="_blank" rel="noopener">GitHub</a>
         </div>
         <div class="end-col">
-          <h3 data-en="Based in">الموقع</h3>
+          <h3 class="meta muted" data-en="Based in">الموقع</h3>
           <p data-en="Muscat, Oman">مسقط، عُمان</p>
           <p class="end-status"><i aria-hidden="true"></i><span data-en="Open to work">متاح للعمل</span></p>
         </div>
       </div>
 
-      <div class="end-bar">
-        <span lang="en" dir="ltr">© <span id="year">2026</span> Sara Alharbi. All rights reserved.</span>
-        <span lang="en" dir="ltr">Software Engineer · Full-Stack & AI</span>
+      <div class="end-bar meta muted">
+        <span lang="en" dir="ltr">© <span id="year">2026</span> Sara Alharbi</span>
+        <span lang="en" dir="ltr">Software Engineer · Full-Stack &amp; AI</span>
       </div>
     </div>
   </footer>
 
-  <script src="js/config.js?v=20261045"></script>
-  <script src="js/main.js?v=20261045"></script>
+  <!-- ================= PROJECT PAGE (opened by #work/<id>) ================= -->
+  <div class="work-page" id="work-page" hidden>
+    <div class="container work-bar">
+      <a href="#projects" class="meta work-back" id="work-back"><span class="arrow" aria-hidden="true">←</span> <span data-en="All work">كل الأعمال</span></a>
+      <span class="meta muted" lang="en" dir="ltr">Selected work / Folio</span>
+    </div>
+    <article class="container work-body" id="work-body" tabindex="-1"></article>
+  </div>
+
+  <script src="js/config.js?v=20261103"></script>
+  <script src="js/main.js?v=20261103"></script>
 </body>
 </html>
