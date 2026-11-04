@@ -131,29 +131,24 @@ html[lang="ar"] .meta:not([lang="en"]) { font-family: var(--sans); font-size: 14
 .logo { position: relative; z-index: 2; display: inline-flex; }
 .logo-img { height: 40px; width: auto; filter: brightness(0) saturate(100%); transition: filter 0.3s; }
 
-/* ---------- Dunes: the black-and-white desert photos, tinted into the palette ---------- */
-.dunes { position: absolute; pointer-events: none; background-repeat: no-repeat; background-size: cover; }
-/* Works: moonlit ridges glowing cobalt on the ink stage */
-.dunes-stage {
-  z-index: 0;
+/* ---------- Sunlight: window light and leaf shadows, the hero's room carried through the page ---------- */
+.sunlight {
+  position: absolute;
   inset: 0;
-  isolation: isolate;
-  background-image: url("../img/dune-full.jpg");
-  background-position: center 65%;
-  mix-blend-mode: screen;
+  z-index: 0;
+  pointer-events: none;
+  background: url("../img/sunlight.svg") center / cover no-repeat;
+  mix-blend-mode: multiply;
   opacity: 0.22;
 }
-.dunes-stage::after { content: ""; position: absolute; inset: 0; background: var(--cobalt-light); mix-blend-mode: multiply; }
-/* Footer: dunes printed in deep cobalt */
-.dunes-end {
-  z-index: 0;
-  inset: auto 0 0 0;
-  height: 70%;
-  background-image: linear-gradient(to bottom, var(--cobalt), rgba(43, 74, 203, 0) 45%), url("../img/dune-a.jpg");
-  background-position: center, center bottom;
-  mix-blend-mode: multiply;
-  opacity: 0.75;
-}
+/* On the warm wall: bright panes and soft leaf shadows, as in the hero */
+.sunlight:not(.sunlight-dark) { background-image: url("../img/sunlight-light.svg"); mix-blend-mode: normal; opacity: 1; }
+.wall { background: linear-gradient(to bottom, #ece8e0, #e3ded3); }
+.sunlight-flip { transform: scaleX(-1); }
+.sunlight-low { background-position: center 80%; }
+/* On ink and cobalt the panes read as soft light falling into the room */
+.sunlight-dark { mix-blend-mode: soft-light; opacity: 0.45; }
+.sunlight-stage { z-index: 0; }
 
 /* Drifting sand: one canvas over the page; difference blending makes the grains
    dark on paper, light on ink and sand-gold on cobalt. */
@@ -374,17 +369,7 @@ html[dir="rtl"] .pill:hover .pill-dot { transform: scaleX(-1) rotate(-45deg); }
   align-items: center;
   min-height: calc(100svh - var(--header-h) - 150px);
 }
-.hero-kicker {
-  display: inline-block;
-  padding: 6px 12px;
-  border-radius: 6px;
-  background: var(--cobalt-wash);
-  color: var(--cobalt);
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 500;
-}
-.hero-title { margin-top: 22px; font-size: clamp(46px, 7vw, 112px); color: var(--ink); overflow-wrap: break-word; }
+.hero-title { font-size: clamp(46px, 7vw, 112px); color: var(--ink); overflow-wrap: break-word; }
 .hero-subtitle { margin-top: 26px; max-width: 32em; font-size: 19px; color: var(--slate); }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 36px; }
 
@@ -609,8 +594,6 @@ html[dir="rtl"] .msg-user .msg-text { border-radius: 4px 14px 14px 14px; }
 
 /* ---------- Works (ink) ---------- */
 .works { position: relative; padding-top: 112px; background: var(--ink); color: var(--paper); }
-.works-dots { top: 72px; inset-inline-end: var(--gutter); --dot: var(--cobalt-light); }
-.works-square { top: 132px; inset-inline-end: calc(var(--gutter) + 130px); width: 48px; height: 48px; --sq: var(--cobalt); }
 .works-head { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
 .works-head .tag-label { background: var(--ink-2); color: var(--cobalt-light); }
 .works-title { font-size: clamp(60px, 10vw, 150px); color: var(--paper); }
@@ -865,13 +848,7 @@ html[dir="rtl"] .stage-panel .tags { justify-content: flex-end; }
 .view-switch[data-view="list"] .view-thumb { transform: translateX(48px); }
 
 /* ---------- Profile ---------- */
-.profile { position: relative; overflow: hidden; padding: 128px 0 112px; background: var(--paper); }
-.profile-orbs { top: 96px; inset-inline-end: var(--gutter); }
-.profile-orbs i:first-child { background: var(--ink); }
-.profile-orbs i:last-child { background: var(--cobalt-light); mix-blend-mode: multiply; }
-.profile-squares { bottom: 0; inset-inline-end: 0; }
-.profile-squares i:first-child { grid-column: 2; background: var(--cobalt); }
-.profile-squares i:last-child { grid-column: 1; background: var(--cobalt-wash); }
+.profile { position: relative; overflow: hidden; padding: 128px 0 112px; }
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .stat {
   display: flex;
@@ -918,10 +895,7 @@ html[dir="rtl"] .step .tags { justify-content: flex-end; }
 }
 
 /* ---------- Credentials (white) ---------- */
-.credentials { position: relative; overflow: hidden; padding: 128px 0 112px; background: var(--white); border-top: 1px solid var(--line); }
-.cred-tri { top: 0; inset-inline-end: 0; width: 0; height: 0; border-style: solid; border-width: 0 0 160px 160px; border-color: transparent transparent var(--cobalt-wash) transparent; transform: rotate(-90deg); }
-html[dir="rtl"] .cred-tri { transform: none; }
-.cred-dots { top: 120px; inset-inline-end: 200px; }
+.credentials { position: relative; overflow: hidden; padding: 128px 0 112px; border-top: 1px solid var(--line); }
 .degree {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -994,13 +968,6 @@ html[dir="rtl"] .cred-tri { transform: none; }
 
 /* ---------- Contact / footer (cobalt) ---------- */
 .site-end { position: relative; overflow: hidden; padding: 136px 0 32px; background: var(--cobalt); color: var(--white); scroll-margin-top: 0; }
-.end-dots { top: 72px; inset-inline-end: var(--gutter); --dot: var(--white); }
-.end-orbs { top: 160px; inset-inline-end: calc(var(--gutter) + 40px); }
-.end-orbs i:first-child { background: var(--ink); }
-.end-orbs i:last-child { background: var(--cobalt-light); }
-.end-squares { bottom: 0; inset-inline-start: 0; }
-.end-squares i:first-child { background: var(--ink); }
-.end-squares i:last-child { grid-column: 2; grid-row: 2; background: var(--cobalt-light); }
 .end-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
 .end-cta .tag-label { background: rgba(255, 255, 255, 0.16); color: var(--white); }
 .end-cta .pill-accent { background: var(--paper); color: var(--ink); }
