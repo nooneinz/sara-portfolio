@@ -104,7 +104,14 @@
   const header = document.querySelector(".site-header");
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.getElementById("site-nav");
-  const syncHeader = () => header.classList.toggle("is-solid", window.scrollY > 40);
+  // Solid once scrolled; dark variant while it sits over the dark works section.
+  const worksSection = document.getElementById("projects");
+  const syncHeader = () => {
+    header.classList.toggle("is-solid", window.scrollY > 40);
+    const r = worksSection.getBoundingClientRect();
+    const mid = header.offsetHeight / 2;
+    header.classList.toggle("on-dark", r.top <= mid && r.bottom >= mid);
+  };
   window.addEventListener("scroll", syncHeader, { passive: true });
   syncHeader();
 
@@ -308,12 +315,12 @@
   const pad = (n, len = 2) => String(n).padStart(len, "0");
   // Poster colourways from the brand palette: background, text, accent shape.
   const THEMES = [
-    ["#f3876a", "#221f2b", "#fbf4e8"],
-    ["#d9f27e", "#221f2b", "#b79ae8"],
-    ["#fbf4e8", "#221f2b", "#f3876a"],
-    ["#b79ae8", "#221f2b", "#d9f27e"],
-    ["#1f4a4c", "#fbf4e8", "#f3876a"],
-    ["#221f2b", "#d9f27e", "#7a4bbe"],
+    ["#f6f5f1", "#121826", "#dce3f7"],
+    ["#2b4acb", "#ffffff", "#22399e"],
+    ["#dce3f7", "#121826", "#9db0f5"],
+    ["#e4e2da", "#121826", "#ffffff"],
+    ["#9db0f5", "#121826", "#dce3f7"],
+    ["#ffffff", "#121826", "#2b4acb"],
   ];
   const theme = (i) => THEMES[i % THEMES.length];
 
@@ -394,7 +401,7 @@
       <p class="panel-problem" style="--k:3">${pick(p, "problem")}</p>
       ${metric}
       <ul class="tags" style="--k:4" lang="en" dir="ltr">${(p.tags || []).map((x) => `<li>${escHtml(x)}</li>`).join("")}</ul>
-      <a class="pill pill-lime panel-cta" style="--k:5" href="#work/${escHtml(p.id)}">${t("open")} <span aria-hidden="true">↗</span></a>`;
+      <a class="pill pill-accent panel-cta" style="--k:5" href="#work/${escHtml(p.id)}">${t("open")} <span aria-hidden="true">↗</span></a>`;
 
     // Glow from the screenshot when there is one, otherwise from the poster's colour.
     const src = p.image || theme(active)[0];
@@ -647,4 +654,53 @@
 
   if (lang === "en") applyLang("en");
   else { buildRolls(); if (langBtn) setRoll(langBtn, "EN"); if (toggle) setRoll(toggle, t("menu")); }
+})();
+
+/* ---------- Drifting sand: wind to the side, gusting on scroll, blown away by the cursor ---------- */
+(() => {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const cv = document.createElement("canvas");
+  cv.className = "dust";
+  cv.setAttribute("aria-hidden", "true");
+  document.body.appendChild(cv);
+  const ctx = cv.getContext("2d");
+  let W = 0, H = 0, dpr = 1;
+  const size = () => { dpr = Math.min(window.devicePixelRatio || 1, 1.5); W = cv.width = innerWidth * dpr; H = cv.height = innerHeight * dpr; };
+  size();
+  window.addEventListener("resize", size);
+
+  const wind = document.documentElement.dir === "rtl" ? -1 : 1; // drift with the reading direction
+  const P = Array.from({ length: innerWidth < 700 ? 40 : 80 }, () => ({
+    x: Math.random(), y: Math.random(), z: 0.3 + Math.random() * 0.9, s: 0.6 + Math.random() * 1.6,
+    a: 0.12 + Math.random() * 0.35, ph: Math.random() * 6.28, vx: 0, vy: 0,
+  }));
+  const mouse = { x: -999, y: -999, moved: 0 };
+  window.addEventListener("pointermove", (e) => {
+    mouse.moved = Math.hypot(e.clientX - mouse.x, e.clientY - mouse.y);
+    mouse.x = e.clientX; mouse.y = e.clientY;
+  }, { passive: true });
+
+  let lastY = scrollY, t0 = performance.now();
+  const frame = (t) => {
+    const dt = Math.min(50, t - t0) / 16.7; t0 = t; mouse.moved *= 0.9;
+    const dy = (scrollY - lastY) / innerHeight; lastY = scrollY;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = "#ffffff";
+    for (const p of P) {
+      p.x += wind * (0.0008 * p.z + Math.abs(dy) * 0.05) * dt;
+      p.y += Math.sin(t / 1600 + p.ph) * 0.0003 * dt - dy * 0.35 * p.z;
+      const ddx = p.x * innerWidth - mouse.x, ddy = p.y * innerHeight - mouse.y, d2 = ddx * ddx + ddy * ddy;
+      if (d2 < 22500) { // within ~150px of the cursor
+        const d = Math.sqrt(d2) + 1, f = (1 - d / 150) * Math.min(1, 0.25 + mouse.moved / 40) * 0.0045;
+        p.vx += (ddx / d) * f; p.vy += (ddy / d) * f;
+      }
+      p.x += p.vx * dt; p.y += p.vy * dt; p.vx *= 0.96; p.vy *= 0.96;
+      if (p.x > 1.02) p.x = -0.02; else if (p.x < -0.02) p.x = 1.02;
+      if (p.y > 1.02) p.y = -0.02; else if (p.y < -0.02) p.y = 1.02;
+      ctx.globalAlpha = p.a;
+      ctx.fillRect(p.x * W, p.y * H, p.s * dpr * p.z * 1.4, p.s * dpr * p.z * 0.9);
+    }
+    requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
 })();

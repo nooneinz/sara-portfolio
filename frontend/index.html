@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>سارة الحربي | Sara Alharbi — Software Engineer</title>
   <meta name="description" content="سارة الحربي — مهندسة برمجيات، خريجة علوم الحاسوب والذكاء الاصطناعي بمرتبة الشرف الأولى. تطوير الويب وواجهات REST API ودمج Agentic AI في منصات B2B." />
-  <meta name="theme-color" content="#7A4BBE" />
+  <meta name="theme-color" content="#F6F5F1" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="icon" href="/favicon.ico" sizes="48x48" />
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
@@ -27,9 +27,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@500;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=Alexandria:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=20261105" />
+  <link rel="stylesheet" href="css/styles.css?v=20261107" />
 </head>
 <body>
   <!-- Opening counter: 00 → 100, skipped for returning visitors and reduced motion -->
@@ -66,11 +66,12 @@
     <section id="top" class="hero">
       <span class="deco dots hero-dots-a" aria-hidden="true"></span>
       <span class="deco dots hero-dots-b" aria-hidden="true"></span>
-      <span class="deco tris" aria-hidden="true"></span>
+      <span class="deco grid-paper" aria-hidden="true"></span>
+      <span class="dunes dunes-hero" aria-hidden="true"></span>
 
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="hero-kicker" lang="en" dir="ltr">Software Engineer · Full-Stack &amp; AI</p>
+          <p class="hero-kicker" lang="en" dir="ltr">// AI &amp; software engineer · Muscat</p>
           <h1 class="display hero-title" data-en="Turning data<br />into decisions">أحوّل البيانات<br />إلى قرارات</h1>
           <p class="hero-subtitle" data-en="Software engineer and Computer Science &amp; AI graduate with First Class Honors (GPA 3.9). I build web apps and REST APIs, and bring AI into production-ready B2B platforms.">
             مهندسة برمجيات، خريجة علوم الحاسوب والذكاء الاصطناعي بمرتبة الشرف الأولى (3.9).
@@ -78,7 +79,7 @@
           </p>
           <div class="hero-actions">
             <a class="pill pill-ink" href="#projects"><span data-en="View my work — 2026">شاهد أعمالي — 2026</span><span class="pill-dot" aria-hidden="true">→</span></a>
-            <a class="pill pill-white" href="#contact" data-en="Contact me">تواصل معي</a>
+            <a class="pill pill-ghost" href="#contact" data-en="Contact me">تواصل معي</a>
           </div>
           <div class="hero-blocks" aria-hidden="true">
             <i class="blk blk-lilac"></i><i class="blk blk-cream"></i><i class="blk blk-lime"></i>
@@ -122,21 +123,16 @@
               <form class="chat-form" id="chat-form" autocomplete="off">
                 <label for="chat-input" class="visually-hidden">اكتب سؤالك</label>
                 <input id="chat-input" name="question" type="text" maxlength="600" placeholder="اكتب سؤالك هنا…" data-en-ph="Type your question…" required />
-                <button type="submit" class="pill pill-lime" id="chat-send" data-en="Send">إرسال</button>
+                <button type="submit" class="pill pill-accent" id="chat-send" data-en="Send">إرسال</button>
               </form>
             </div>
             <span class="monitor-stand" aria-hidden="true"></span>
           </div>
 
-          <svg class="scene-plant float-c" viewBox="0 0 120 150" aria-hidden="true">
-            <path d="M56 22c0-9 13-9 13 0v72H56z" fill="#9BB46A"/>
-            <path d="M44 52c-8 0-10 6-10 12v14h10z M81 40c8 0 10 6 10 12v20H81z" fill="#9BB46A"/>
-            <path d="M34 66h10v12H34z M81 52h10v8H81z" fill="#8AA35B"/>
-            <path d="M60 30v60 M65 30v60" stroke="#7C9450" stroke-width="2"/>
-            <circle cx="62" cy="20" r="5" fill="#F3876A"/>
-            <path d="M28 92h68l-8 52H36z" fill="#1F4A4C"/>
-            <path d="M24 88h76v10H24z" fill="#2A5C5E"/>
-          </svg>
+          <div class="scene-chart float-c" aria-hidden="true">
+            <span class="chart-label" lang="en" dir="ltr">accuracy</span>
+            <span class="chart-bars"><i style="--h:38%"></i><i style="--h:55%"></i><i style="--h:47%"></i><i style="--h:72%"></i><i style="--h:94%"></i></span>
+          </div>
           <span class="scene-badge" aria-hidden="true" lang="en">AI</span>
         </div>
       </div>
@@ -155,6 +151,7 @@
       <!-- Diagonal gallery: the stage is sticky, scrolling the section steps through the projects -->
       <div class="gallery" id="gallery">
         <div class="stage">
+          <div class="dunes dunes-stage" aria-hidden="true"></div>
           <div class="stage-glow" aria-hidden="true"><i></i><i></i></div>
           <ul class="stack" id="stack" dir="ltr" aria-label="Projects"></ul>
           <div class="stage-panel" id="stage-panel" aria-live="polite"></div>
@@ -280,6 +277,7 @@
 
   <!-- ================= CONTACT + FOOTER ================= -->
   <footer id="contact" class="site-end">
+    <span class="dunes dunes-end" aria-hidden="true"></span>
     <span class="deco dots end-dots" aria-hidden="true"></span>
     <span class="deco orbs end-orbs" aria-hidden="true"><i></i><i></i></span>
     <span class="deco squares end-squares" aria-hidden="true"><i></i><i></i></span>
@@ -287,7 +285,7 @@
       <div class="end-cta">
         <span class="tag-label" lang="en" dir="ltr">04 — Contact</span>
         <h2 class="display end-title" data-en="Good things start with a question.">الأشياء الجميلة تبدأ بسؤال.</h2>
-        <a class="pill pill-lime" href="mailto:Saraalharbi0031@gmail.com"><span data-en="Email me">راسلني</span> <span aria-hidden="true">↗</span></a>
+        <a class="pill pill-accent" href="mailto:Saraalharbi0031@gmail.com"><span data-en="Email me">راسلني</span> <span aria-hidden="true">↗</span></a>
       </div>
 
       <div class="end-grid">
@@ -331,7 +329,7 @@
     <article class="container work-body" id="work-body" tabindex="-1"></article>
   </div>
 
-  <script src="js/config.js?v=20261105"></script>
-  <script src="js/main.js?v=20261105"></script>
+  <script src="js/config.js?v=20261107"></script>
+  <script src="js/main.js?v=20261107"></script>
 </body>
 </html>
