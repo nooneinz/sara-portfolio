@@ -306,18 +306,26 @@
   const safeUrl = (u) => (/^https?:\/\//.test(u) ? escHtml(u) : "#");
   const pick = (p, k) => escHtml(lang === "en" ? p[k + "_en"] : p[k + "_ar"]);
   const pad = (n, len = 2) => String(n).padStart(len, "0");
-  const TEXTURES = ["dune-c", "dune-d", "dune-full", "dunes-1", "dunes-2", "dune-hero", "dune-a", "dune-e"];
-
-  const texUrl = (i) => `/img/textures/${TEXTURES[i % TEXTURES.length]}.webp`;
+  // Poster colourways from the brand palette: background, text, accent shape.
+  const THEMES = [
+    ["#f3876a", "#221f2b", "#fbf4e8"],
+    ["#d9f27e", "#221f2b", "#b79ae8"],
+    ["#fbf4e8", "#221f2b", "#f3876a"],
+    ["#b79ae8", "#221f2b", "#d9f27e"],
+    ["#1f4a4c", "#fbf4e8", "#f3876a"],
+    ["#221f2b", "#d9f27e", "#7a4bbe"],
+  ];
+  const theme = (i) => THEMES[i % THEMES.length];
 
   let items = [];
   let active = 0;
 
-  /* Portrait cover: dune texture, title and the project's strongest visual. */
+  /* Portrait cover in a brand colourway: number, title and the project's strongest visual. */
   function poster(p, i, lazy = true) {
     let foot;
+    const [bg, fg, shape] = theme(i);
     if (p.image) {
-      foot = `<img src="${escHtml(p.image)}" alt="" ${lazy ? 'loading="lazy"' : ""} decoding="async" />`;
+      foot = `<div class="poster-win"><b><i></i><i></i><i></i></b><img src="${escHtml(p.image)}" alt="" ${lazy ? 'loading="lazy"' : ""} decoding="async" /></div>`;
     } else if (p.metric) {
       foot = `<p class="poster-num" lang="en" dir="ltr">${escHtml(p.metric)}</p><p class="poster-cap">${pick(p, "metric")}</p>`;
     } else if (p.flow) {
@@ -325,8 +333,7 @@
     } else {
       foot = `<ul class="poster-tags" lang="en" dir="ltr">${(p.tags || []).map((x) => `<li>${escHtml(x)}</li>`).join("")}</ul>`;
     }
-    return `<div class="poster" style="--tex:url(${texUrl(i)})">
-      <div class="poster-bg"></div>
+    return `<div class="poster" style="--p-bg:${bg};--p-fg:${fg};--p-shape:${shape}">
       <div class="poster-in">
         <div class="poster-top"><span lang="en" dir="ltr">${pad(i + 1)}</span><span>${pick(p, "kind")}</span></div>
         <p class="poster-title" lang="en" dir="ltr">${escHtml(p.title)}</p>
@@ -382,18 +389,19 @@
     const metric = p.metric
       ? `<p class="panel-metric" style="--k:4"><strong lang="en" dir="ltr">${escHtml(p.metric)}</strong><span>${pick(p, "metric")}</span></p>` : "";
     panel.innerHTML = `<p class="panel-num" lang="en" dir="ltr"><span>${pad(active + 1)}</span><small>/ ${pad(items.length)}</small></p>
-      <p class="meta muted" style="--k:1">${pick(p, "kind")}</p>
+      <div style="--k:1"><span class="meta kind">${pick(p, "kind")}</span></div>
       <h3 class="display panel-title" style="--k:2" lang="en" dir="ltr">${escHtml(p.title)}</h3>
       <p class="panel-problem" style="--k:3">${pick(p, "problem")}</p>
       ${metric}
       <ul class="tags" style="--k:4" lang="en" dir="ltr">${(p.tags || []).map((x) => `<li>${escHtml(x)}</li>`).join("")}</ul>
-      <a class="pill panel-cta" style="--k:5" href="#work/${escHtml(p.id)}">${t("open")} <span aria-hidden="true">↗</span></a>`;
+      <a class="pill pill-lime panel-cta" style="--k:5" href="#work/${escHtml(p.id)}">${t("open")} <span aria-hidden="true">↗</span></a>`;
 
-    const src = p.image || texUrl(active);
+    // Glow from the screenshot when there is one, otherwise from the poster's colour.
+    const src = p.image || theme(active)[0];
     if (glows[glowAt].dataset.src === src) return;
     const next = glows[1 - glowAt];
     next.dataset.src = src;
-    next.style.backgroundImage = `url("${src}")`;
+    next.style.background = p.image ? `center / cover no-repeat url("${src}")` : src;
     next.classList.add("on");
     glows[glowAt].classList.remove("on");
     glowAt = 1 - glowAt;
