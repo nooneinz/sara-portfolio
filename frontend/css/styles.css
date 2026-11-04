@@ -50,6 +50,17 @@ body {
 }
 
 img { max-width: 100%; display: block; }
+
+/* Fine film grain over everything: breaks the flat black without costing contrast. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
 h1, h2, h3, h4, p, ul, ol { margin: 0; }
@@ -328,7 +339,7 @@ ul, ol { padding: 0; list-style: none; }
   height: 100svh;
   overflow: hidden;
 }
-.stack { position: absolute; left: var(--gutter); bottom: calc(150px + 4vh); }
+.stack { position: absolute; left: var(--gutter); bottom: 18vh; }
 .card {
   position: absolute;
   left: 0;
@@ -356,15 +367,99 @@ ul, ol { padding: 0; list-style: none; }
 .card-link:focus-visible .card-label { opacity: 1; }
 .card.is-active .card-label { display: none; }
 
-.stage-caption { position: absolute; bottom: 100px; inset-inline-start: var(--gutter); max-width: 70vw; pointer-events: none; }
-.stage-caption .t { margin-top: 8px; font-family: var(--display); font-size: clamp(24px, 2.6vw, 36px); line-height: 1.1; }
-.stage-caption .meta { display: block; }
-.stage-caption .meta + .meta { margin-top: 6px; }
-[dir="rtl"] .stage-caption { inset-inline-start: auto; left: var(--gutter); text-align: left; }
+/* Glow: the active project's own image, blurred huge behind the stage. */
+.stage-glow { position: absolute; inset: -12%; z-index: 0; pointer-events: none; }
+.stage-glow i {
+  position: absolute;
+  inset: 0;
+  background: center / cover no-repeat;
+  filter: blur(72px) saturate(1.35);
+  opacity: 0;
+  transform: scale(1.1);
+  transition: opacity calc(1.1s * var(--motion-speed)) var(--ease);
+}
+.stage-glow i.on { opacity: 0.42; }
+.stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, var(--bg), transparent 18%, transparent 82%, var(--bg)),
+    radial-gradient(ellipse 70% 80% at 30% 60%, transparent, rgba(5, 5, 6, 0.65));
+}
+.stack { z-index: 2; }
 
-@media (max-width: 639px) {
-  .stack { bottom: calc(200px + 2vh); }
-  .stage-caption { bottom: 96px; }
+/* Story panel beside the stack */
+.stage-panel {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  right: var(--gutter);
+  width: min(480px, 38vw);
+  transform: translateY(-48%);
+}
+.stage-panel > * { animation: panel-in calc(0.6s * var(--motion-speed)) var(--ease) both; animation-delay: calc(var(--k, 0) * 45ms); }
+.stage-panel.is-static > * { animation: none; }
+@keyframes panel-in { from { opacity: 0; transform: translateY(var(--from, 16px)); } }
+.panel-num {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+  font-family: var(--display);
+  font-size: clamp(96px, 11vw, 184px);
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+  font-variant-numeric: tabular-nums;
+}
+.panel-num small { font-family: var(--sans); font-size: 14px; color: var(--muted); -webkit-text-stroke: 0; }
+.panel-title { margin-top: 10px; font-size: clamp(34px, 3.6vw, 60px); }
+.panel-problem {
+  margin-top: 18px;
+  max-width: 40ch;
+  color: rgba(255, 255, 255, 0.72);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.panel-metric { display: flex; align-items: baseline; gap: 12px; margin-top: 18px; }
+.panel-metric strong { font-family: var(--display); font-weight: 400; font-size: 40px; line-height: 1; }
+.panel-metric span { font-size: 13px; color: var(--muted); }
+.stage-panel .tags { margin-top: 20px; }
+/* On the Arabic page keep the English title, number and tags on the same right edge as the text. */
+[dir="rtl"] .stage-panel [dir="ltr"] { text-align: right; }
+[dir="rtl"] .panel-num,
+[dir="rtl"] .stage-panel .tags { justify-content: flex-end; }
+.panel-cta { margin-top: 28px; }
+
+/* Progress rail: one tick per project, the active one long and white */
+.stage-rail {
+  position: absolute;
+  z-index: 3;
+  right: var(--gutter);
+  bottom: 36px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.stage-rail button { width: 14px; height: 28px; display: grid; align-items: center; transition: width calc(0.4s * var(--motion-speed)) var(--ease); }
+.stage-rail button::before { content: ""; height: 2px; background: rgba(255, 255, 255, 0.25); transition: background 0.3s; }
+.stage-rail button:hover::before { background: rgba(255, 255, 255, 0.6); }
+.stage-rail button[aria-current] { width: 40px; }
+.stage-rail button[aria-current]::before { background: var(--fg); }
+
+@media (max-width: 760px) {
+  .stage-panel { top: calc(var(--header-h) + 12px); left: var(--gutter); right: var(--gutter); width: auto; transform: none; }
+  .panel-num { font-size: 64px; margin-bottom: 8px; }
+  .panel-title { font-size: 30px; }
+  .panel-problem, .stage-panel .tags, .panel-metric { display: none; }
+  .panel-cta { margin-top: 16px; }
+  .stage-rail { display: none; }
+  .stack { bottom: 110px; }
 }
 
 /* Poster: a project's portrait cover. Sized in container units so it works at any width. */

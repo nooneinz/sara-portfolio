@@ -308,6 +308,8 @@
   const pad = (n, len = 2) => String(n).padStart(len, "0");
   const TEXTURES = ["dune-c", "dune-d", "dune-full", "dunes-1", "dunes-2", "dune-hero", "dune-a", "dune-e"];
 
+  const texUrl = (i) => `/img/textures/${TEXTURES[i % TEXTURES.length]}.webp`;
+
   let items = [];
   let active = 0;
 
@@ -323,7 +325,7 @@
     } else {
       foot = `<ul class="poster-tags" lang="en" dir="ltr">${(p.tags || []).map((x) => `<li>${escHtml(x)}</li>`).join("")}</ul>`;
     }
-    return `<div class="poster" style="--tex:url(/img/textures/${TEXTURES[i % TEXTURES.length]}.webp)">
+    return `<div class="poster" style="--tex:url(${texUrl(i)})">
       <div class="poster-bg"></div>
       <div class="poster-in">
         <div class="poster-top"><span lang="en" dir="ltr">${pad(i + 1)}</span><span>${pick(p, "kind")}</span></div>
@@ -339,7 +341,10 @@
   const SCALE = 0.88, STEP_X = 0.6, STEP_Y = 0.26, SKEW = 14;
   const gallery = document.getElementById("gallery");
   const stack = document.getElementById("stack");
-  const caption = document.getElementById("stage-caption");
+  const panel = document.getElementById("stage-panel");
+  const rail = document.getElementById("stage-rail");
+  const glows = [...document.querySelectorAll(".stage-glow i")];
+  let glowAt = 0;
   const visibleCount = () => (window.matchMedia("(max-width: 639px)").matches ? 6 : 9);
 
   function place(d) {
@@ -366,9 +371,32 @@
       a.toggleAttribute("aria-hidden", !shown);
       a.setAttribute("aria-label", `${d === 0 ? t("open") : t("show")}: ${items[i].title}`);
     });
+    [...rail.children].forEach((b, i) => b.toggleAttribute("aria-current", i === active));
+  }
+
+  /* The active project's story beside the stack, and its colours glowing behind it. */
+  function showActive(dir = 0) {
     const p = items[active];
-    caption.innerHTML = `<span class="meta muted" lang="en" dir="ltr">${pad(active + 1)} / ${pad(items.length)}</span>
-      <p class="t" lang="en" dir="ltr">${escHtml(p.title)}</p><span class="meta muted">${pick(p, "kind")}</span>`;
+    panel.style.setProperty("--from", `${dir * 18}px`);
+    panel.classList.toggle("is-static", dir === 0);
+    const metric = p.metric
+      ? `<p class="panel-metric" style="--k:4"><strong lang="en" dir="ltr">${escHtml(p.metric)}</strong><span>${pick(p, "metric")}</span></p>` : "";
+    panel.innerHTML = `<p class="panel-num" lang="en" dir="ltr"><span>${pad(active + 1)}</span><small>/ ${pad(items.length)}</small></p>
+      <p class="meta muted" style="--k:1">${pick(p, "kind")}</p>
+      <h3 class="display panel-title" style="--k:2" lang="en" dir="ltr">${escHtml(p.title)}</h3>
+      <p class="panel-problem" style="--k:3">${pick(p, "problem")}</p>
+      ${metric}
+      <ul class="tags" style="--k:4" lang="en" dir="ltr">${(p.tags || []).map((x) => `<li>${escHtml(x)}</li>`).join("")}</ul>
+      <a class="pill panel-cta" style="--k:5" href="#work/${escHtml(p.id)}">${t("open")} <span aria-hidden="true">↗</span></a>`;
+
+    const src = p.image || texUrl(active);
+    if (glows[glowAt].dataset.src === src) return;
+    const next = glows[1 - glowAt];
+    next.dataset.src = src;
+    next.style.backgroundImage = `url("${src}")`;
+    next.classList.add("on");
+    glows[glowAt].classList.remove("on");
+    glowAt = 1 - glowAt;
   }
 
   // Scrolling the (tall) gallery section moves through the projects.
@@ -377,7 +405,11 @@
     if (!items.length || gallery.hidden) return;
     const r = gallery.getBoundingClientRect();
     const idx = Math.round(clamp(-r.top / scrollRange()) * (items.length - 1));
-    if (idx !== active) { active = idx; layoutStack(); }
+    if (idx === active) return;
+    const dir = idx > active ? 1 : -1;
+    active = idx;
+    layoutStack();
+    showActive(dir);
   }
   function scrollToCard(i) {
     const top = gallery.getBoundingClientRect().top + window.scrollY + (i / (items.length - 1)) * scrollRange();
@@ -416,9 +448,15 @@
           <span class="card-label" aria-hidden="true" lang="en" dir="ltr">${pad(i + 1)} — ${escHtml(p.title)}</span>
         </a>
       </li>`).join("");
+    rail.innerHTML = items.map((p, i) => `<button type="button" data-i="${i}" aria-label="${pad(i + 1)} — ${escHtml(p.title)}"></button>`).join("");
     layoutStack();
+    showActive();
     syncFromScroll();
   }
+  rail.addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-i]");
+    if (b) scrollToCard(Number(b.dataset.i));
+  });
 
   /* ---------- List view ---------- */
   const list = document.getElementById("works-list");
@@ -532,6 +570,7 @@
       const top = gallery.getBoundingClientRect().top + window.scrollY + (i / (items.length - 1)) * scrollRange();
       window.scrollTo({ top: Math.round(top), behavior: "auto" });
       layoutStack();
+      showActive();
     }
   }
   function closeWork() {

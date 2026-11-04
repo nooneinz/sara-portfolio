@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic&family=El+Messiri:wght@500;600&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=20261103" />
+  <link rel="stylesheet" href="css/styles.css?v=20261104" />
 </head>
 <body>
   <!-- Opening counter: 00 → 100, skipped for returning visitors and reduced motion -->
@@ -125,8 +125,10 @@
       <!-- Diagonal gallery: the stage is sticky, scrolling the section steps through the projects -->
       <div class="gallery" id="gallery">
         <div class="stage">
+          <div class="stage-glow" aria-hidden="true"><i></i><i></i></div>
           <ul class="stack" id="stack" dir="ltr" aria-label="Projects"></ul>
-          <div class="stage-caption" id="stage-caption" aria-live="polite"></div>
+          <div class="stage-panel" id="stage-panel" aria-live="polite"></div>
+          <div class="stage-rail" id="stage-rail" dir="ltr"></div>
         </div>
       </div>
 
@@ -292,7 +294,7 @@
     <article class="container work-body" id="work-body" tabindex="-1"></article>
   </div>
 
-  <script src="js/config.js?v=20261103"></script>
-  <script src="js/main.js?v=20261103"></script>
+  <script src="js/config.js?v=20261104"></script>
+  <script src="js/main.js?v=20261104"></script>
 </body>
 </html>
