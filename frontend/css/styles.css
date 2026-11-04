@@ -133,16 +133,6 @@ html[lang="ar"] .meta:not([lang="en"]) { font-family: var(--sans); font-size: 14
 
 /* ---------- Dunes: the black-and-white desert photos, tinted into the palette ---------- */
 .dunes { position: absolute; pointer-events: none; background-repeat: no-repeat; background-size: cover; }
-/* Hero: a graphite print of the dunes fading up into the paper */
-.dunes-hero {
-  z-index: 0;
-  inset: auto 0 0 0;
-  height: 58%;
-  background-image: linear-gradient(to bottom, var(--paper), rgba(246, 245, 241, 0) 62%), url("../img/dune-hero.jpg");
-  background-position: center, center 70%;
-  mix-blend-mode: multiply;
-  opacity: 0.38;
-}
 /* Works: moonlit ridges glowing cobalt on the ink stage */
 .dunes-stage {
   z-index: 0;
@@ -232,17 +222,6 @@ html[dir="rtl"] .pill:hover .pill-dot { transform: scaleX(-1) rotate(-45deg); }
 .orbs i { width: 68px; height: 68px; border-radius: 50%; }
 .orbs i + i { margin-inline-start: -24px; }
 .squares { display: grid; grid-template-columns: repeat(2, 60px); grid-auto-rows: 60px; }
-/* Engineering grid paper behind the hero */
-.grid-paper {
-  inset: 0;
-  background:
-    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 40px 40px,
-    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 40px 40px;
-  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 70% 45%, #000 30%, transparent 75%);
-  mask-image: radial-gradient(ellipse 70% 70% at 70% 45%, #000 30%, transparent 75%);
-  opacity: 0.6;
-}
-
 .float-a { animation: bob 6s ease-in-out infinite; }
 .float-b { animation: bob 7s ease-in-out -2s infinite; }
 .float-c { animation: bob 8s ease-in-out -4s infinite; }
@@ -360,9 +339,34 @@ html[dir="rtl"] .pill:hover .pill-dot { transform: scaleX(-1) rotate(-45deg); }
 }
 
 /* ---------- Hero ---------- */
-.hero { position: relative; overflow: hidden; padding: calc(var(--header-h) + 56px) 0 96px; }
-.hero-dots-a { top: calc(var(--header-h) + 12px); inset-inline-end: var(--gutter); }
-.hero-dots-b { bottom: 72px; left: 46%; }
+.hero {
+  --desk-h: 100px;
+  position: relative;
+  overflow: hidden;
+  padding: calc(var(--header-h) + 56px) 0 96px;
+  background: linear-gradient(to bottom, #ece8e0, #e3ded3);
+}
+
+/* The room: warm window light on the wall, leaf shadows, and a wooden desk */
+.room { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.room-light { position: absolute; inset: 0 0 var(--desk-h) 0; width: 100%; height: calc(100% - var(--desk-h)); }
+.sun-panes rect { fill: #fffbf2; opacity: 0.9; }
+.leaf-shadow { fill: #3b3a36; stroke: #3b3a36; stroke-width: 0; opacity: 0.13; mix-blend-mode: multiply; }
+.leaf-shadow .stem { fill: none; stroke-width: 6; }
+.leaf-shadow-a { transform-origin: 120px 0; animation: sway calc(9s * var(--motion-speed)) ease-in-out infinite; }
+.leaf-shadow-b { transform-origin: 1440px 40px; animation: sway calc(11s * var(--motion-speed)) ease-in-out -3s infinite; }
+@keyframes sway { 50% { transform: rotate(2.4deg); } }
+.desk {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: var(--desk-h);
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 3px),
+    repeating-linear-gradient(90deg, rgba(120, 88, 52, 0) 0 46px, rgba(120, 88, 52, 0.05) 46px 48px, rgba(120, 88, 52, 0) 48px 131px),
+    linear-gradient(to bottom, #e3d4bb, #d6c3a3 calc(100% - 22px), #b9a280 calc(100% - 22px), #a88f6c);
+  box-shadow: 0 -18px 30px -18px rgba(18, 24, 38, 0.18);
+}
+
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
@@ -383,15 +387,6 @@ html[dir="rtl"] .pill:hover .pill-dot { transform: scaleX(-1) rotate(-45deg); }
 .hero-title { margin-top: 22px; font-size: clamp(46px, 7vw, 112px); color: var(--ink); overflow-wrap: break-word; }
 .hero-subtitle { margin-top: 26px; max-width: 32em; font-size: 19px; color: var(--slate); }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 36px; }
-.hero-blocks { position: relative; height: 140px; margin-top: 40px; }
-.blk { position: absolute; width: 64px; height: 64px; }
-.blk-lilac { left: 46%; top: -6px; background: var(--cobalt-wash); }
-.blk-cream { left: calc(46% - 64px); top: 58px; background: var(--cobalt); }
-.blk-lime { left: calc(46% - 128px); top: 122px; width: 64px; height: 18px; background: var(--ink); }
-.orb { position: absolute; top: 50px; width: 60px; height: 60px; border-radius: 50%; }
-.orb-a { left: 0; background: var(--ink); }
-.orb-b { left: 32px; background: var(--cobalt-light); mix-blend-mode: multiply; }
-html[dir="rtl"] .hero-blocks { transform: scaleX(-1); }
 
 /* The scene: a desk illustration whose monitor is the live "Ask Sara" chat */
 .hero-scene { position: relative; padding: 104px 40px 40px 72px; }
@@ -402,6 +397,18 @@ html[dir="rtl"] .hero-blocks { transform: scaleX(-1); }
   border-radius: var(--r-lg);
   background: var(--ink);
   box-shadow: 0 34px 60px -28px rgba(18, 24, 38, 0.65);
+}
+.monitor-stand::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  width: 190px;
+  height: 18px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(40, 28, 12, 0.35), rgba(40, 28, 12, 0));
+  z-index: -1;
 }
 .monitor-stand {
   position: absolute;
@@ -539,11 +546,27 @@ html[dir="rtl"] .msg-user .msg-text { border-radius: 4px 14px 14px 14px; }
 .chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 54px; margin-top: 8px; border-bottom: 1px solid var(--line); }
 .chart-bars i { flex: 1; height: var(--h); border-radius: 3px 3px 0 0; background: var(--cobalt-wash); }
 .chart-bars i:last-child { background: var(--cobalt); }
+.scene-plant {
+  position: absolute;
+  z-index: 3;
+  right: -18px;
+  bottom: -34px;
+  width: 150px;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 10px 8px rgba(40, 28, 12, 0.22));
+}
+.plant-leaves { transform-origin: 70px 120px; transform-box: view-box; animation: sway calc(7s * var(--motion-speed)) ease-in-out infinite; }
+.pl-stem { fill: none; stroke: #4f7a52; stroke-width: 3; stroke-linecap: round; }
+.pl-leaf { fill: #5f9466; }
+.pl-leaf-dark { fill: #44744c; }
+.pl-pot { fill: var(--paper); stroke: var(--line); }
+.pl-rim { fill: var(--cobalt); }
 .scene-badge {
   position: absolute;
   z-index: 3;
   bottom: -18px;
-  right: 8px;
+  left: 150px;
   display: grid;
   place-items: center;
   width: 60px;
@@ -559,13 +582,14 @@ html[dir="rtl"] .msg-user .msg-text { border-radius: 4px 14px 14px 14px; }
 
 @media (max-width: 960px) {
   .hero-grid { grid-template-columns: minmax(0, 1fr); min-height: 0; }
-  .hero-blocks,
-  .hero-dots-b { display: none; }
   .hero-scene { padding: 92px 8px 64px 8px; }
   .scene-phone { width: 66px; left: -4px; top: 0; }
   .scene-note { width: 124px; right: -4px; top: 6px; }
   .scene-note strong { font-size: 28px; }
   .scene-chart { width: 112px; left: 4px; }
+  .scene-plant { width: 100px; right: -2px; bottom: -10px; }
+  .scene-badge { left: 126px; }
+  .hero { --desk-h: 124px; }
 }
 
 /* ---------- Section heads ---------- */

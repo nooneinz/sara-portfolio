@@ -64,10 +64,46 @@
   <main id="main">
     <!-- ================= HERO: copy + illustrated desk with the live chat as the screen ================= -->
     <section id="top" class="hero">
-      <span class="deco dots hero-dots-a" aria-hidden="true"></span>
-      <span class="deco dots hero-dots-b" aria-hidden="true"></span>
-      <span class="deco grid-paper" aria-hidden="true"></span>
-      <span class="dunes dunes-hero" aria-hidden="true"></span>
+      <!-- The room: a sunlit wall (window panes and leaf shadows) and the desk the monitor stands on -->
+      <div class="room" aria-hidden="true">
+        <svg class="room-light" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <filter id="sun-soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="7" /></filter>
+            <filter id="leaf-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5" /></filter>
+            <radialGradient id="sun-glow" cx="38%" cy="40%" r="55%">
+              <stop offset="0" stop-color="#fff6e3" stop-opacity="0.9" />
+              <stop offset="1" stop-color="#fff6e3" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <rect width="1440" height="900" fill="url(#sun-glow)" />
+          <!-- Sunlight through a four-pane window, falling at an angle across the wall -->
+          <g class="sun-panes" filter="url(#sun-soft)" transform="translate(330 70) skewX(-16)">
+            <rect x="0" y="0" width="250" height="300" />
+            <rect x="268" y="0" width="250" height="300" />
+            <rect x="0" y="318" width="250" height="300" />
+            <rect x="268" y="318" width="250" height="300" />
+          </g>
+          <!-- Leaf shadows from a plant by the window -->
+          <g class="leaf-shadow leaf-shadow-a" filter="url(#leaf-soft)">
+            <path class="stem" d="M120 -20 C 210 120, 300 200, 470 260" />
+            <ellipse cx="190" cy="70" rx="56" ry="20" transform="rotate(38 190 70)" />
+            <ellipse cx="245" cy="105" rx="60" ry="21" transform="rotate(-24 245 105)" />
+            <ellipse cx="268" cy="168" rx="62" ry="22" transform="rotate(52 268 168)" />
+            <ellipse cx="340" cy="190" rx="64" ry="22" transform="rotate(-10 340 190)" />
+            <ellipse cx="372" cy="250" rx="58" ry="20" transform="rotate(40 372 250)" />
+            <ellipse cx="450" cy="236" rx="54" ry="19" transform="rotate(-30 450 236)" />
+          </g>
+          <g class="leaf-shadow leaf-shadow-b" filter="url(#leaf-soft)">
+            <path class="stem" d="M1500 40 C 1380 90, 1300 160, 1210 300" />
+            <ellipse cx="1420" cy="60" rx="58" ry="20" transform="rotate(-28 1420 60)" />
+            <ellipse cx="1370" cy="128" rx="62" ry="21" transform="rotate(30 1370 128)" />
+            <ellipse cx="1300" cy="150" rx="60" ry="21" transform="rotate(-48 1300 150)" />
+            <ellipse cx="1280" cy="226" rx="56" ry="19" transform="rotate(20 1280 226)" />
+            <ellipse cx="1215" cy="262" rx="50" ry="18" transform="rotate(-60 1215 262)" />
+          </g>
+        </svg>
+        <div class="desk"></div>
+      </div>
 
       <div class="container hero-grid">
         <div class="hero-copy">
@@ -80,10 +116,6 @@
           <div class="hero-actions">
             <a class="pill pill-ink" href="#projects"><span data-en="View my work — 2026">شاهد أعمالي — 2026</span><span class="pill-dot" aria-hidden="true">→</span></a>
             <a class="pill pill-ghost" href="#contact" data-en="Contact me">تواصل معي</a>
-          </div>
-          <div class="hero-blocks" aria-hidden="true">
-            <i class="blk blk-lilac"></i><i class="blk blk-cream"></i><i class="blk blk-lime"></i>
-            <i class="orb orb-a"></i><i class="orb orb-b"></i>
           </div>
         </div>
 
@@ -133,6 +165,20 @@
             <span class="chart-label" lang="en" dir="ltr">accuracy</span>
             <span class="chart-bars"><i style="--h:38%"></i><i style="--h:55%"></i><i style="--h:47%"></i><i style="--h:72%"></i><i style="--h:94%"></i></span>
           </div>
+          <svg class="scene-plant" viewBox="0 0 140 190" aria-hidden="true">
+            <g class="plant-leaves">
+              <path d="M70 120 C 66 90, 58 66, 34 44" class="pl-stem" />
+              <path d="M70 120 C 74 86, 84 58, 108 34" class="pl-stem" />
+              <path d="M70 120 C 70 92, 70 64, 70 20" class="pl-stem" />
+              <path d="M70 18 C 54 30, 54 58, 70 72 C 86 58, 86 30, 70 18 Z" class="pl-leaf" />
+              <path d="M30 40 C 16 58, 26 84, 48 88 C 56 68, 50 46, 30 40 Z" class="pl-leaf pl-leaf-dark" />
+              <path d="M112 30 C 90 34, 82 60, 92 80 C 112 74, 122 52, 112 30 Z" class="pl-leaf" />
+              <path d="M18 92 C 22 112, 44 120, 62 110 C 52 94, 36 86, 18 92 Z" class="pl-leaf" />
+              <path d="M124 86 C 104 82, 86 94, 80 112 C 100 118, 118 108, 124 86 Z" class="pl-leaf pl-leaf-dark" />
+            </g>
+            <path d="M36 116 H104 L96 184 H44 Z" class="pl-pot" />
+            <path d="M32 112 H108 V126 H32 Z" class="pl-rim" />
+          </svg>
           <span class="scene-badge" aria-hidden="true" lang="en">AI</span>
         </div>
       </div>
