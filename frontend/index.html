@@ -3,9 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>سارة الحربي | Sara Alharbi — Software Engineer</title>
+  <title>سارة الحربي | Sara Alharbi — AI Engineer</title>
   <meta name="description" content="سارة الحربي — مهندسة برمجيات، خريجة علوم الحاسوب والذكاء الاصطناعي بمرتبة الشرف الأولى. تطوير الويب وواجهات REST API ودمج Agentic AI في منصات B2B." />
-  <meta name="theme-color" content="#F6F5F1" />
+  <meta name="theme-color" content="#E9E6E1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0E0E0F" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light dark" />
+  <script>
+    /* Day or night before first paint: the visitor's saved choice, else the device setting. */
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("sa-theme"); } catch (e) {}
+      if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="icon" href="/favicon.ico" sizes="48x48" />
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
@@ -19,32 +30,39 @@
   <meta property="og:description" content="مهندسة برمجيات — تطوير ويب وواجهات REST API ودمج الذكاء الاصطناعي في منصات B2B. اسأل المساعد عن مشاريعي ومهاراتي." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://saraai.site/" />
-  <meta property="og:image" content="https://saraai.site/img/og-image.png?v=8" />
+  <meta property="og:image" content="https://saraai.site/img/og-image.jpg?v=9" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://saraai.site/img/og-image.png?v=8" />
+  <meta name="twitter:image" content="https://saraai.site/img/og-image.jpg?v=9" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=20261107" />
+  <link rel="stylesheet" href="css/styles.css?v=20261116" />
 </head>
 <body>
-  <!-- Opening counter: 00 → 100, skipped for returning visitors and reduced motion -->
-  <div class="opening" id="opening" aria-hidden="true">
-    <span class="opening-n" id="opening-n" lang="en" dir="ltr">00</span>
-    <span class="opening-name" lang="en" dir="ltr">Sara Alharbi — Folio</span>
-  </div>
-
   <a class="skip-link" href="#main" data-en="Skip to content">تخطَّ إلى المحتوى</a>
+
+  <!-- ================= DESERT: fixed photographic backdrop ================= -->
+  <!-- Each scene is a diptych of two dune photographs feathered into one panorama (one photo on phones).
+       Day and night use different photographs; the scene follows the section on screen. -->
+  <div class="desert" aria-hidden="true">
+    <div class="scene scene-a is-on"><i class="pane pane-1"></i><i class="pane pane-2"></i></div>
+    <div class="scene scene-b"><i class="pane pane-1"></i><i class="pane pane-2"></i></div>
+    <div class="scene scene-c"><i class="pane pane-1"></i><i class="pane pane-2"></i></div>
+    <div class="scene scene-d"><i class="pane pane-1"></i><i class="pane pane-2"></i></div>
+    <div class="veil"></div>
+    <div class="grain"></div>
+  </div>
 
   <!-- ================= HEADER ================= -->
   <header class="site-header">
     <div class="container header-inner">
       <a href="#top" class="logo" aria-label="سارة الحربي — الصفحة الرئيسية">
-        <img class="logo-img" src="img/logo-letters-white.png" alt="" width="44" height="36" />
+        <img class="logo-img only-light" src="img/logo-block-black.png" alt="" width="37" height="44" />
+        <img class="logo-img only-dark" src="img/logo-block-white.png" alt="" width="37" height="44" />
       </a>
 
       <nav id="site-nav" class="site-nav" aria-label="التنقل الرئيسي">
@@ -55,6 +73,10 @@
       </nav>
 
       <div class="header-end">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="الوضع الليلي" data-label-dark="الوضع الليلي" data-label-light="الوضع النهاري">
+          <svg class="ico-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a6.8 6.8 0 0 0 10.7 10.7Z"/></svg>
+          <svg class="ico-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+        </button>
         <button class="lang-toggle roll-trigger" id="lang-toggle" type="button" aria-label="Switch language to English">EN</button>
         <button class="nav-toggle roll-trigger" type="button" aria-expanded="false" aria-controls="site-nav">القائمة</button>
       </div>
@@ -62,130 +84,68 @@
   </header>
 
   <main id="main">
-    <!-- ================= HERO: copy + illustrated desk with the live chat as the screen ================= -->
-    <section id="top" class="hero">
-      <!-- The room: a sunlit wall (window panes and leaf shadows) and the desk the monitor stands on -->
-      <div class="room" aria-hidden="true">
-        <svg class="room-light" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <filter id="sun-soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="7" /></filter>
-            <filter id="leaf-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5" /></filter>
-            <radialGradient id="sun-glow" cx="38%" cy="40%" r="55%">
-              <stop offset="0" stop-color="#fff6e3" stop-opacity="0.9" />
-              <stop offset="1" stop-color="#fff6e3" stop-opacity="0" />
-            </radialGradient>
-          </defs>
-          <rect width="1440" height="900" fill="url(#sun-glow)" />
-          <!-- Sunlight through a four-pane window, falling at an angle across the wall -->
-          <g class="sun-panes" filter="url(#sun-soft)" transform="translate(330 70) skewX(-16)">
-            <rect x="0" y="0" width="250" height="300" />
-            <rect x="268" y="0" width="250" height="300" />
-            <rect x="0" y="318" width="250" height="300" />
-            <rect x="268" y="318" width="250" height="300" />
-          </g>
-          <!-- Leaf shadows from a plant by the window -->
-          <g class="leaf-shadow leaf-shadow-a" filter="url(#leaf-soft)">
-            <path class="stem" d="M120 -20 C 210 120, 300 200, 470 260" />
-            <ellipse cx="190" cy="70" rx="56" ry="20" transform="rotate(38 190 70)" />
-            <ellipse cx="245" cy="105" rx="60" ry="21" transform="rotate(-24 245 105)" />
-            <ellipse cx="268" cy="168" rx="62" ry="22" transform="rotate(52 268 168)" />
-            <ellipse cx="340" cy="190" rx="64" ry="22" transform="rotate(-10 340 190)" />
-            <ellipse cx="372" cy="250" rx="58" ry="20" transform="rotate(40 372 250)" />
-            <ellipse cx="450" cy="236" rx="54" ry="19" transform="rotate(-30 450 236)" />
-          </g>
-          <g class="leaf-shadow leaf-shadow-b" filter="url(#leaf-soft)">
-            <path class="stem" d="M1500 40 C 1380 90, 1300 160, 1210 300" />
-            <ellipse cx="1420" cy="60" rx="58" ry="20" transform="rotate(-28 1420 60)" />
-            <ellipse cx="1370" cy="128" rx="62" ry="21" transform="rotate(30 1370 128)" />
-            <ellipse cx="1300" cy="150" rx="60" ry="21" transform="rotate(-48 1300 150)" />
-            <ellipse cx="1280" cy="226" rx="56" ry="19" transform="rotate(20 1280 226)" />
-            <ellipse cx="1215" cy="262" rx="50" ry="18" transform="rotate(-60 1215 262)" />
-          </g>
-        </svg>
-        <div class="desk"></div>
+    <!-- ================= HERO: the logo over the dunes ================= -->
+    <section id="top" class="hero" data-scene="a" data-veil="low">
+      <div class="lockup">
+        <span class="mark" id="hero-mark">
+          <img class="only-light" src="img/logo-block-black.png" alt="" width="608" height="723" />
+          <img class="only-dark" src="img/logo-block-white.png" alt="" width="608" height="723" />
+        </span>
+        <p class="lockup-name" lang="en" dir="ltr"><span class="visually-hidden">سارة الحربي — </span>Sara Alharbi</p>
+        <p class="lockup-role" lang="en" dir="ltr">AI Engineer</p>
       </div>
+      <a class="scroll-cue" href="#intro"><span data-en="Scroll">مرّر للأسفل</span><i aria-hidden="true"></i></a>
+    </section>
 
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <h1 class="display hero-title" data-en="Turning data<br />into decisions">أحوّل البيانات<br />إلى قرارات</h1>
-          <p class="hero-subtitle" data-en="Software engineer and Computer Science &amp; AI graduate with First Class Honors (GPA 3.9). I build web apps and REST APIs, and bring AI into production-ready B2B platforms.">
+    <!-- ================= INTRO: headline + the live assistant ================= -->
+    <section id="intro" class="intro" data-scene="a" data-veil="mid">
+      <div class="container intro-grid">
+        <div class="intro-copy">
+          <h1 class="display intro-title" data-en="Turning data<br />into decisions">أحوّل البيانات<br />إلى قرارات</h1>
+          <p class="intro-subtitle" data-en="Software engineer and Computer Science &amp; AI graduate with First Class Honors (GPA 3.9). I build web apps and REST APIs, and bring AI into production-ready B2B platforms.">
             مهندسة برمجيات، خريجة علوم الحاسوب والذكاء الاصطناعي بمرتبة الشرف الأولى (3.9).
             أبني تطبيقات ويب وواجهات REST API، وأدمج الذكاء الاصطناعي في منصات B2B جاهزة للإنتاج.
           </p>
-          <div class="hero-actions">
+          <div class="intro-actions">
             <a class="pill pill-ink" href="#projects"><span data-en="View my work — 2026">شاهد أعمالي — 2026</span><span class="pill-dot" aria-hidden="true">→</span></a>
             <a class="pill pill-ghost" href="#contact" data-en="Contact me">تواصل معي</a>
           </div>
         </div>
 
-        <div class="hero-scene">
-          <div class="scene-phone float-a" aria-hidden="true">
-            <i class="ph-bar"></i><i class="ph-line"></i><i class="ph-line s"></i><i class="ph-card"></i><i class="ph-line"></i><i class="ph-line s"></i>
-          </div>
-          <div class="scene-note float-b" aria-hidden="true">
-            <i class="tape"></i>
-            <strong lang="en" dir="ltr">94.5%</strong>
-            <span data-en="prediction accuracy">دقة التنبؤ</span>
-            <i class="scribble"></i><i class="scribble s"></i>
+        <div class="intro-chat glass">
+        <div id="ask" class="chat" aria-label="المساعد الذكي">
+          <div class="chat-head">
+            <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="chat-label" data-en="Ask Sara">اسأل سارة</span>
+            <span class="chat-status" id="chat-status" data-en="Online">متصل</span>
           </div>
 
-          <div class="monitor">
-            <div id="ask" class="chat" aria-label="المساعد الذكي">
-              <div class="chat-head">
-                <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                <span class="chat-label" data-en="Ask Sara">اسأل سارة</span>
-                <span class="chat-status" id="chat-status" data-en="Online">متصل</span>
-              </div>
-
-              <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-relevant="additions">
-                <div class="msg msg-bot">
-                  <span class="msg-who" data-en="Assistant">المساعد</span>
-                  <p class="msg-text" data-en="Welcome. Ask me about Sara’s projects, skills, or how to reach her — in Arabic or English.">أهلاً بك. اسألني عن مشاريع سارة، مهاراتها، أو طريقة التواصل معها — بالعربية أو بالإنجليزية.</p>
-                </div>
-              </div>
-
-              <div class="chat-suggestions" id="chat-suggestions">
-                <button type="button" class="chip" data-en="What are Sara's top projects?">ما هي أبرز مشاريع سارة؟</button>
-                <button type="button" class="chip" data-en="What is Baseera?">ما هو مشروع Baseera؟</button>
-                <button type="button" class="chip" data-en="What are Sara's skills?">ما هي مهارات وتخصص سارة؟</button>
-                <button type="button" class="chip" data-en="How can I contact Sara?">كيف أتواصل مع سارة؟</button>
-              </div>
-
-              <form class="chat-form" id="chat-form" autocomplete="off">
-                <label for="chat-input" class="visually-hidden">اكتب سؤالك</label>
-                <input id="chat-input" name="question" type="text" maxlength="600" placeholder="اكتب سؤالك هنا…" data-en-ph="Type your question…" required />
-                <button type="submit" class="pill pill-accent" id="chat-send" data-en="Send">إرسال</button>
-              </form>
+          <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-relevant="additions">
+            <div class="msg msg-bot">
+              <span class="msg-who" data-en="Assistant">المساعد</span>
+              <p class="msg-text" data-en="Welcome. Ask me about Sara’s projects, skills, or how to reach her — in Arabic or English.">أهلاً بك. اسألني عن مشاريع سارة، مهاراتها، أو طريقة التواصل معها — بالعربية أو بالإنجليزية.</p>
             </div>
-            <span class="monitor-stand" aria-hidden="true"></span>
           </div>
 
-          <div class="scene-chart float-c" aria-hidden="true">
-            <span class="chart-label" lang="en" dir="ltr">accuracy</span>
-            <span class="chart-bars"><i style="--h:38%"></i><i style="--h:55%"></i><i style="--h:47%"></i><i style="--h:72%"></i><i style="--h:94%"></i></span>
+          <div class="chat-suggestions" id="chat-suggestions">
+            <button type="button" class="chip" data-en="What are Sara's top projects?">ما هي أبرز مشاريع سارة؟</button>
+            <button type="button" class="chip" data-en="What is Baseera?">ما هو مشروع Baseera؟</button>
+            <button type="button" class="chip" data-en="What are Sara's skills?">ما هي مهارات وتخصص سارة؟</button>
+            <button type="button" class="chip" data-en="How can I contact Sara?">كيف أتواصل مع سارة؟</button>
           </div>
-          <svg class="scene-plant" viewBox="0 0 140 190" aria-hidden="true">
-            <g class="plant-leaves">
-              <path d="M70 120 C 66 90, 58 66, 34 44" class="pl-stem" />
-              <path d="M70 120 C 74 86, 84 58, 108 34" class="pl-stem" />
-              <path d="M70 120 C 70 92, 70 64, 70 20" class="pl-stem" />
-              <path d="M70 18 C 54 30, 54 58, 70 72 C 86 58, 86 30, 70 18 Z" class="pl-leaf" />
-              <path d="M30 40 C 16 58, 26 84, 48 88 C 56 68, 50 46, 30 40 Z" class="pl-leaf pl-leaf-dark" />
-              <path d="M112 30 C 90 34, 82 60, 92 80 C 112 74, 122 52, 112 30 Z" class="pl-leaf" />
-              <path d="M18 92 C 22 112, 44 120, 62 110 C 52 94, 36 86, 18 92 Z" class="pl-leaf" />
-              <path d="M124 86 C 104 82, 86 94, 80 112 C 100 118, 118 108, 124 86 Z" class="pl-leaf pl-leaf-dark" />
-            </g>
-            <path d="M36 116 H104 L96 184 H44 Z" class="pl-pot" />
-            <path d="M32 112 H108 V126 H32 Z" class="pl-rim" />
-          </svg>
-          <span class="scene-badge" aria-hidden="true" lang="en">AI</span>
+
+          <form class="chat-form" id="chat-form" autocomplete="off">
+            <label for="chat-input" class="visually-hidden">اكتب سؤالك</label>
+            <input id="chat-input" name="question" type="text" maxlength="600" placeholder="اكتب سؤالك هنا…" data-en-ph="Type your question…" required />
+            <button type="submit" class="pill pill-accent" id="chat-send" data-en="Send">إرسال</button>
+          </form>
+        </div>
         </div>
       </div>
     </section>
 
     <!-- ================= WORKS ================= -->
-    <section id="projects" class="works">
-      <span class="sunlight sunlight-dark" aria-hidden="true"></span>
+    <section id="projects" class="works" data-scene="b" data-veil="high">
       <header class="container works-head">
         <span class="tag-label" lang="en" dir="ltr">01 — Selected Work</span>
         <h2 class="display works-title"><span data-en="Works">الأعمال</span><sup class="works-count" id="works-count" lang="en" dir="ltr"></sup></h2>
@@ -195,7 +155,6 @@
       <!-- Diagonal gallery: the stage is sticky, scrolling the section steps through the projects -->
       <div class="gallery" id="gallery">
         <div class="stage">
-          <div class="sunlight sunlight-dark sunlight-stage" aria-hidden="true"></div>
           <div class="stage-glow" aria-hidden="true"><i></i><i></i></div>
           <ul class="stack" id="stack" dir="ltr" aria-label="Projects"></ul>
           <div class="stage-panel" id="stage-panel" aria-live="polite"></div>
@@ -219,8 +178,7 @@
     </section>
 
     <!-- ================= PROFILE: numbers + what I build ================= -->
-    <section class="profile wall" aria-label="أرقام">
-      <span class="sunlight sunlight-flip" aria-hidden="true"></span>
+    <section class="profile" aria-label="أرقام" data-scene="c" data-veil="high">
       <div class="container">
         <header class="section-head">
           <span class="tag-label" lang="en" dir="ltr">02 — Profile</span>
@@ -273,8 +231,7 @@
     </section>
 
     <!-- ================= CREDENTIALS ================= -->
-    <section id="achievements" class="credentials wall">
-      <span class="sunlight sunlight-low" aria-hidden="true"></span>
+    <section id="achievements" class="credentials" data-scene="c" data-veil="high">
       <div class="container">
         <header class="section-head">
           <span class="tag-label" lang="en" dir="ltr">03 — Credentials</span>
@@ -318,8 +275,7 @@
   </main>
 
   <!-- ================= CONTACT + FOOTER ================= -->
-  <footer id="contact" class="site-end">
-    <span class="sunlight sunlight-dark sunlight-flip" aria-hidden="true"></span>
+  <footer id="contact" class="site-end" data-scene="d" data-veil="mid">
     <div class="container">
       <div class="end-cta">
         <span class="tag-label" lang="en" dir="ltr">04 — Contact</span>
@@ -327,9 +283,10 @@
         <a class="pill pill-accent" href="mailto:Saraalharbi0031@gmail.com"><span data-en="Email me">راسلني</span> <span aria-hidden="true">↗</span></a>
       </div>
 
-      <div class="end-grid">
+      <div class="end-grid glass">
         <div class="end-brand">
-          <img class="footer-mark" src="img/logo-letters-white.png" alt="سارة الحربي" />
+          <img class="footer-mark only-light" src="img/logo-block-black.png" alt="سارة الحربي" width="608" height="723" loading="lazy" />
+          <img class="footer-mark only-dark" src="img/logo-block-white.png" alt="سارة الحربي" width="608" height="723" loading="lazy" />
           <p class="muted" data-en="Intelligence, built with care.">ذكاء اصطناعي، مبني بعناية.</p>
         </div>
         <nav class="end-col" aria-label="روابط">
@@ -354,7 +311,7 @@
 
       <div class="end-bar meta muted">
         <span lang="en" dir="ltr">© <span id="year">2026</span> Sara Alharbi</span>
-        <span lang="en" dir="ltr">Software Engineer · Full-Stack &amp; AI</span>
+        <span lang="en" dir="ltr">AI Engineer · Dune photograph: Nour Alhamaly</span>
       </div>
     </div>
   </footer>
@@ -368,7 +325,7 @@
     <article class="container work-body" id="work-body" tabindex="-1"></article>
   </div>
 
-  <script src="js/config.js?v=20261107"></script>
-  <script src="js/main.js?v=20261107"></script>
+  <script src="js/config.js?v=20261116"></script>
+  <script src="js/main.js?v=20261116"></script>
 </body>
 </html>

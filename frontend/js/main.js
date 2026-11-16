@@ -64,37 +64,66 @@
     if (toggle) setRoll(toggle, nav.classList.contains("is-open") ? t("close") : t("menu"));
     document.querySelectorAll(".msg-user .msg-who").forEach((el) => (el.textContent = t("you")));
     if (!busy) status.textContent = status.classList.contains("is-error") ? t("offline") : t("online");
-    document.title = l === "en" ? "Sara Alharbi — Software Engineer" : arTitle;
+    document.title = l === "en" ? "Sara Alharbi — AI Engineer" : arTitle;
+    syncThemeBtn();
     store.set("sa-lang", l);
     renderWorks();
   }
   langBtn?.addEventListener("click", () => applyLang(lang === "en" ? "ar" : "en"));
 
-  /* ---------------- Opening counter (00 → 100) ---------------- */
-  const opening = document.getElementById("opening");
-  if (opening) {
-    if (store.get("sa-intro", sessionStorage) === "1" || reduceMotion) {
-      opening.classList.add("is-skipped");
-    } else {
-      const n = document.getElementById("opening-n");
-      root.style.overflow = "hidden";
-      const start = performance.now();
-      const done = () => {
-        if (opening.classList.contains("is-done")) return;
-        opening.classList.add("is-done");
-        root.style.overflow = "";
-        store.set("sa-intro", "1", sessionStorage);
-        setTimeout(() => opening.classList.add("is-skipped"), 900);
-      };
-      const tick = (now) => {
-        const k = Math.min(1, (now - start) / 1200);
-        n.textContent = String(Math.round(100 * (1 - Math.pow(1 - k, 3)))).padStart(2, "0");
-        if (k < 1) requestAnimationFrame(tick); else setTimeout(done, 200);
-      };
-      requestAnimationFrame(tick);
-      opening.addEventListener("click", done);
-    }
-  }
+  /* ---------------- Day / night ----------------
+     The head script already applied the saved choice or the device setting.
+     The switch grows the new theme as a circle out of the button. */
+  const themeBtn = document.getElementById("theme-toggle");
+  const syncThemeBtn = () => {
+    if (!themeBtn) return;
+    const dark = root.dataset.theme === "dark";
+    const label = lang === "en" ? (dark ? "Day mode" : "Night mode") : (dark ? themeBtn.dataset.labelLight : themeBtn.dataset.labelDark);
+    themeBtn.setAttribute("aria-label", label);
+    themeBtn.title = label;
+    themeBtn.setAttribute("aria-pressed", String(dark));
+  };
+  const setTheme = (next, from) => {
+    const apply = () => { root.dataset.theme = next; syncThemeBtn(); };
+    if (reduceMotion || !document.startViewTransition || !from) return apply();
+    const r = from.getBoundingClientRect();
+    const x = r.left + r.width / 2, y = r.top + r.height / 2;
+    const end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    document.startViewTransition(apply).ready.then(() => {
+      root.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${end}px at ${x}px ${y}px)`] },
+        { duration: 750, easing: "cubic-bezier(0.65, 0, 0.2, 1)", pseudoElement: "::view-transition-new(root)" }
+      );
+    }).catch(() => {});
+  };
+  themeBtn?.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    store.set("sa-theme", next);
+    setTheme(next, themeBtn);
+  });
+  // Follow the device while the visitor hasn't picked one.
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", (e) => {
+    const saved = store.get("sa-theme");
+    if (saved !== "light" && saved !== "dark") setTheme(e.matches ? "dark" : "light");
+  });
+  syncThemeBtn();
+
+  /* ---------------- Desert scenes ----------------
+     Each section names a scene (which photographs) and a veil (how much they recede).
+     The section crossing the middle of the screen decides. */
+  const scenes = { a: 0, b: 1, c: 2, d: 3 };
+  const sceneEls = [...document.querySelectorAll(".desert .scene")];
+  const setScene = (sec) => {
+    const s = scenes[sec.dataset.scene] ?? 0;
+    sceneEls.forEach((el, i) => el.classList.toggle("is-on", i === s));
+    root.dataset.veil = sec.dataset.veil || "high";
+  };
+  const sceneIO = new IntersectionObserver(
+    (entries) => entries.forEach((e) => e.isIntersecting && setScene(e.target)),
+    { rootMargin: "-50% 0px -50% 0px" }
+  );
+  document.querySelectorAll("[data-scene]").forEach((sec) => sceneIO.observe(sec));
+  root.dataset.veil = "low";
 
   /* ---------------- Footer year ---------------- */
   const yearEl = document.getElementById("year");
@@ -104,16 +133,50 @@
   const header = document.querySelector(".site-header");
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.getElementById("site-nav");
-  // Solid once scrolled; dark variant while it sits over the dark works section.
-  const worksSection = document.getElementById("projects");
-  const syncHeader = () => {
-    header.classList.toggle("is-solid", window.scrollY > 40);
-    const r = worksSection.getBoundingClientRect();
-    const mid = header.offsetHeight / 2;
-    header.classList.toggle("on-dark", r.top <= mid && r.bottom >= mid);
-  };
+  // Frosted once scrolled past the hero's top.
+  const syncHeader = () => header.classList.toggle("is-solid", window.scrollY > 40);
   window.addEventListener("scroll", syncHeader, { passive: true });
   syncHeader();
+
+  /* ---------------- The logo flies home ----------------
+     The big mark in the hero travels and shrinks into the header's logo as the visitor
+     scrolls; the name and role fade with it. Reduced motion: the header logo just stays. */
+  const heroEl = document.getElementById("top");
+  const mark = document.getElementById("hero-mark");
+  const heroFade = [...document.querySelectorAll(".lockup-name, .lockup-role, .scroll-cue")];
+  const headerLogo = document.querySelector(".site-header .logo");
+  if (heroEl && mark && headerLogo && !reduceMotion) {
+    let from = null;
+    const measure = () => {
+      mark.style.transform = "";
+      const r = mark.getBoundingClientRect();
+      from = { x: r.left, y: r.top + window.scrollY, w: r.width };
+      flyLogo();
+    };
+    const ease = (k) => (k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
+    function flyLogo() {
+      if (!from) return;
+      const to = [...headerLogo.querySelectorAll(".logo-img")].map((el) => el.getBoundingClientRect()).find((r) => r.width) || headerLogo.getBoundingClientRect();
+      const span = Math.max(1, heroEl.offsetHeight * 0.62);
+      const k = clamp(window.scrollY / span);
+      const e = ease(k);
+      const s = 1 + (to.width / from.w - 1) * (1 - Math.pow(1 - k, 3)); // shrinks a little ahead of the travel
+      const x = from.x + (to.left - from.x) * e;
+      const y = from.y - window.scrollY + (to.top - (from.y - window.scrollY)) * e;
+      mark.style.transform = `translate(${x - from.x}px, ${y - (from.y - window.scrollY)}px) scale(${s})`;
+      mark.style.visibility = k >= 1 ? "hidden" : "";
+      root.classList.toggle("flying", k < 1);
+      const f = clamp(1 - k * 2.2);
+      heroFade.forEach((el) => { el.style.opacity = String(f); el.style.transform = `translateY(${(1 - f) * -16}px)`; });
+    }
+    let raf = 0;
+    window.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; flyLogo(); }); }, { passive: true });
+    window.addEventListener("resize", measure);
+    // Measure once the entrance animation has settled (it moves the mark).
+    const start = () => setTimeout(measure, 1400 * (parseFloat(getComputedStyle(root).getPropertyValue("--motion-speed")) || 1));
+    root.classList.add("flying");
+    if (document.readyState === "complete") start(); else window.addEventListener("load", start);
+  }
 
   const setMenu = (open) => {
     nav.classList.toggle("is-open", open);
@@ -145,7 +208,7 @@
     { rootMargin: "0px 0px -8% 0px" }
   );
   const observeReveals = (scope = document) => scope.querySelectorAll(".reveal:not(.is-in)").forEach((el) => revealIO.observe(el));
-  document.querySelectorAll(".section-head, .stat, .step, .degree, .cert-row, .end-cta, .end-grid").forEach((el) => {
+  document.querySelectorAll(".intro-copy, .intro-chat, .works-head, .section-head, .stat, .step, .degree, .cert-row, .cert-group-title, .end-cta, .end-grid").forEach((el) => {
     el.classList.add("reveal");
     const sibs = [...el.parentElement.children];
     el.style.setProperty("--d", `${Math.min(sibs.indexOf(el), 4) * 70}ms`);
@@ -314,13 +377,14 @@
   const pick = (p, k) => escHtml(lang === "en" ? p[k + "_en"] : p[k + "_ar"]);
   const pad = (n, len = 2) => String(n).padStart(len, "0");
   // Poster colourways from the brand palette: background, text, accent shape.
+  // Desert tones: sand white, charcoal, dune grey, night, haze, stone.
   const THEMES = [
-    ["#f6f5f1", "#121826", "#dce3f7"],
-    ["#2b4acb", "#ffffff", "#22399e"],
-    ["#dce3f7", "#121826", "#9db0f5"],
-    ["#e4e2da", "#121826", "#ffffff"],
-    ["#9db0f5", "#121826", "#dce3f7"],
-    ["#ffffff", "#121826", "#2b4acb"],
+    ["#f2f0ec", "#121212", "#dcd7cf"],
+    ["#161616", "#ece9e4", "#2a2928"],
+    ["#c9c3b9", "#121212", "#b3ac9f"],
+    ["#2b2a28", "#ece9e4", "#3d3b38"],
+    ["#e6e2db", "#121212", "#f7f5f1"],
+    ["#77726a", "#ffffff", "#8a857c"],
   ];
   const theme = (i) => THEMES[i % THEMES.length];
 
