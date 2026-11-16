@@ -85,7 +85,13 @@
   };
   const setTheme = (next, from) => {
     const apply = () => { root.dataset.theme = next; syncThemeBtn(); };
-    if (reduceMotion || !document.startViewTransition || !from) return apply();
+    if (reduceMotion) return apply();
+    if (!document.startViewTransition || !from) {
+      root.classList.add("theme-fade");
+      apply();
+      setTimeout(() => root.classList.remove("theme-fade"), 600);
+      return;
+    }
     const r = from.getBoundingClientRect();
     const x = r.left + r.width / 2, y = r.top + r.height / 2;
     const end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
@@ -162,7 +168,8 @@
       const e = ease(k);
       const s = 1 + (to.width / from.w - 1) * (1 - Math.pow(1 - k, 3)); // shrinks a little ahead of the travel
       const x = from.x + (to.left - from.x) * e;
-      const y = from.y - window.scrollY + (to.top - (from.y - window.scrollY)) * e;
+      // Glide on screen from where the mark first stood to the header slot.
+      const y = from.y + (to.top - from.y) * e;
       mark.style.transform = `translate(${x - from.x}px, ${y - (from.y - window.scrollY)}px) scale(${s})`;
       mark.style.visibility = k >= 1 ? "hidden" : "";
       root.classList.toggle("flying", k < 1);
@@ -172,10 +179,13 @@
     let raf = 0;
     window.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; flyLogo(); }); }, { passive: true });
     window.addEventListener("resize", measure);
-    // Measure once the entrance animation has settled (it moves the mark).
-    const start = () => setTimeout(measure, 1400 * (parseFloat(getComputedStyle(root).getPropertyValue("--motion-speed")) || 1));
+    // Measure right away so an early scroll already flies, then again once the entrance
+    // animation (which moves the mark) and the web fonts (which move the lockup) settle.
     root.classList.add("flying");
-    if (document.readyState === "complete") start(); else window.addEventListener("load", start);
+    measure();
+    mark.addEventListener("animationend", measure, { once: true });
+    document.fonts?.ready.then(measure);
+    window.addEventListener("load", measure, { once: true });
   }
 
   const setMenu = (open) => {

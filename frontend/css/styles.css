@@ -218,7 +218,6 @@ html[lang="ar"] .meta:not([lang="en"]) { font-family: var(--sans); font-size: 14
   inset: -4%;
   opacity: 0;
   transition: opacity calc(1.6s * var(--motion-speed)) var(--ease);
-  translate: 0 var(--drift, 0px);
 }
 .scene.is-on { opacity: 1; }
 .pane {
@@ -229,6 +228,11 @@ html[lang="ar"] .meta:not([lang="en"]) { font-family: var(--sans); font-size: 14
   background: var(--bg) var(--img-day) center 55% / cover no-repeat;
   filter: var(--photo-filter);
   transition: filter 0.6s;
+  will-change: transform; /* keep the slow drift on the GPU */
+  /* Every pane drifts, but only the visible scene's panes move. Pausing (rather than
+     removing the animation) keeps a fading-out photo where it is instead of snapping back. */
+  animation: drift calc(48s * var(--motion-speed)) ease-in-out infinite alternate;
+  animation-play-state: paused;
 }
 :root[data-theme="dark"] .pane { background-image: var(--img-night); }
 .pane-1 { left: 0; }
@@ -238,8 +242,8 @@ html[lang="ar"] .meta:not([lang="en"]) { font-family: var(--sans); font-size: 14
   -webkit-mask-image: linear-gradient(to right, transparent, #000 34%);
   mask-image: linear-gradient(to right, transparent, #000 34%);
 }
-.scene.is-on .pane { animation: drift calc(48s * var(--motion-speed)) ease-in-out infinite alternate; }
-.scene.is-on .pane-2 { animation-delay: -12s; }
+.scene.is-on .pane { animation-play-state: running; }
+.pane-2 { animation-delay: -12s; }
 @keyframes drift {
   from { transform: scale(1.02); }
   to { transform: scale(1.1) translate3d(-1.2%, -0.8%, 0); }
@@ -290,7 +294,13 @@ html[lang="ar"] .meta:not([lang="en"]) { font-family: var(--sans); font-size: 14
 /* Drifting sand: difference blending makes the grains dark by day, light by night. */
 .dust { position: fixed; inset: 0; z-index: 60; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: difference; }
 
-/* Theme switch: a circle of the new theme grows out of the button (View Transitions). */
+/* Theme switch: a circle of the new theme grows out of the button (View Transitions).
+   Browsers without them get a short cross-fade of colours instead of a hard cut. */
+.theme-fade *,
+.theme-fade *::before,
+.theme-fade *::after {
+  transition: background-color 0.5s var(--ease), color 0.5s var(--ease), border-color 0.5s var(--ease), box-shadow 0.5s var(--ease), filter 0.5s var(--ease) !important;
+}
 ::view-transition-old(root),
 ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
 ::view-transition-new(root) { z-index: 2; }
@@ -1182,6 +1192,10 @@ html[lang="en"] .pill, html[lang="en"] .nav-cta, html[lang="en"] .chip, html[lan
   transition-delay: var(--d, 0ms);
 }
 .js .reveal-lg { transform: translateY(40px); }
+/* A filter on a frosted panel switches its backdrop blur off, so glass rises without the haze. */
+.js .reveal.glass { filter: none; }
+/* The big hero mark sits above the header while it flies; keep it under an open phone menu. */
+.site-header:has(.site-nav.is-open) ~ main .mark { opacity: 0; transition: opacity 0.2s; }
 .js .reveal.is-in { opacity: 1; transform: none; filter: none; }
 
 /* ---------- Reduced motion ---------- */
@@ -1196,5 +1210,5 @@ html[lang="en"] .pill, html[lang="en"] .nav-cta, html[lang="en"] .chip, html[lan
     transition-delay: 0ms !important;
   }
   .js .reveal { transform: none; filter: none; }
-  .scene.is-on .pane { animation: none; }
+  .pane { animation: none; }
 }
