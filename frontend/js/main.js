@@ -143,7 +143,7 @@
      scrolls; the name and role fade with it. Reduced motion: the header logo just stays. */
   const heroEl = document.getElementById("top");
   const mark = document.getElementById("hero-mark");
-  const heroFade = [...document.querySelectorAll(".lockup-name, .lockup-role, .scroll-cue")];
+  const heroFade = [...document.querySelectorAll(".lockup-name, .lockup-role, .lockup-est, .hero-meta")];
   const headerLogo = document.querySelector(".site-header .logo");
   if (heroEl && mark && headerLogo && !reduceMotion) {
     let from = null;
